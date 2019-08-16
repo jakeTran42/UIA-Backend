@@ -1,0 +1,19 @@
+{
+  "name": "uia-backend",
+  "version": "1.0.0",
+  "description": "back end server for the app Ulala Idle Adventure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakeTran42/UIA-Backend.git"
+  },
+  "author": "Artosh-jt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakeTran42/UIA-Backend/issues"
+  },
+  "homepage": "https://github.com/jakeTran42/UIA-Backend#readme"
+}
