@@ -1,0 +1,67 @@
+type Guide {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  title: String!
+  body: String!
+  owner: User! @relation(link: INLINE)
+}
+
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  handle: String! @unique
+  email: String! @unique
+  role: Role! @default(value: LOW)
+  password: String!
+  guides: [Guide!]!
+}
+
+type Skill {
+  id: ID! @id
+  name: String!
+  description: String!
+  found: String!
+  class: Class! @relation(link: INLINE)
+}
+
+type Class {
+  id: ID! @id
+  name: String!
+  description: String!
+  weapon: String!
+  skills: [Skill!]!
+}
+
+type Map {
+  id: ID! @id
+  name: String!
+  total_stage: Int!
+  bosses: [Boss!]!
+  previous_map: Map @relation(name: "LastMapRelation", link: INLINE)
+  next_map: Map @relation(name: "NextMapRelation", link: INLINE)
+  continent: Continent! @relation(link: INLINE)
+}
+
+type Continent {
+  id: ID! @id
+  name: String
+  maps: [Map!]!
+  next_continent: Continent @relation(name: "NextContinentRelation", link: INLINE)
+  previous_continent: Continent @relation(name: "LastContinentRelation", link: INLINE)
+}
+
+type Boss {
+  id: ID! @id
+  name: String!
+  HP: Int!
+  ATK: Int!
+  Armor: Int!
+  AtkSpd: Int!
+  skills: [Skill!]!
+}
+
+enum Role {
+  ADMIN
+  HIGH
+  LOW
+}

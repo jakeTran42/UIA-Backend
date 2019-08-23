@@ -1,0 +1,28 @@
+type Query {
+    info: String!
+    guideFeed: [Guide!]!
+}
+
+type Mutation {
+    postGuide(title: String!, body: String!): Guide!
+    signup(email: String!, password: String!, handle: String!): AuthPayload!
+    login(email: String, password: String!, handle: String): AuthPayload!
+}
+
+type Guide {
+    title: String!
+    body: String!
+    owner: User
+}
+
+type User {
+    # id: ID!
+    handle: String!
+    email: String!
+    guides: [Guide!]!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
