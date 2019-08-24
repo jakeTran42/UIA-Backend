@@ -945,6 +945,7 @@ type Map {
   previous_map: Map
   next_map: Map
   continent: Continent!
+  obtainable_skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill!]
 }
 
 type MapConnection {
@@ -961,6 +962,7 @@ input MapCreateInput {
   previous_map: MapCreateOneWithoutPrevious_mapInput
   next_map: MapCreateOneWithoutNext_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
+  obtainable_skills: SkillCreateManyWithoutLocationInput
 }
 
 input MapCreateManyWithoutContinentInput {
@@ -970,6 +972,11 @@ input MapCreateManyWithoutContinentInput {
 
 input MapCreateOneWithoutNext_mapInput {
   create: MapCreateWithoutNext_mapInput
+  connect: MapWhereUniqueInput
+}
+
+input MapCreateOneWithoutObtainable_skillsInput {
+  create: MapCreateWithoutObtainable_skillsInput
   connect: MapWhereUniqueInput
 }
 
@@ -985,6 +992,7 @@ input MapCreateWithoutContinentInput {
   bosses: BossCreateManyInput
   previous_map: MapCreateOneWithoutPrevious_mapInput
   next_map: MapCreateOneWithoutNext_mapInput
+  obtainable_skills: SkillCreateManyWithoutLocationInput
 }
 
 input MapCreateWithoutNext_mapInput {
@@ -993,6 +1001,17 @@ input MapCreateWithoutNext_mapInput {
   total_stage: Int!
   bosses: BossCreateManyInput
   previous_map: MapCreateOneWithoutPrevious_mapInput
+  continent: ContinentCreateOneWithoutMapsInput!
+  obtainable_skills: SkillCreateManyWithoutLocationInput
+}
+
+input MapCreateWithoutObtainable_skillsInput {
+  id: ID
+  name: String!
+  total_stage: Int!
+  bosses: BossCreateManyInput
+  previous_map: MapCreateOneWithoutPrevious_mapInput
+  next_map: MapCreateOneWithoutNext_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
 }
 
@@ -1003,6 +1022,7 @@ input MapCreateWithoutPrevious_mapInput {
   bosses: BossCreateManyInput
   next_map: MapCreateOneWithoutNext_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
+  obtainable_skills: SkillCreateManyWithoutLocationInput
 }
 
 type MapEdge {
@@ -1092,6 +1112,7 @@ input MapUpdateInput {
   previous_map: MapUpdateOneWithoutPrevious_mapInput
   next_map: MapUpdateOneWithoutNext_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
 }
 
 input MapUpdateManyDataInput {
@@ -1121,6 +1142,13 @@ input MapUpdateManyWithWhereNestedInput {
   data: MapUpdateManyDataInput!
 }
 
+input MapUpdateOneRequiredWithoutObtainable_skillsInput {
+  create: MapCreateWithoutObtainable_skillsInput
+  update: MapUpdateWithoutObtainable_skillsDataInput
+  upsert: MapUpsertWithoutObtainable_skillsInput
+  connect: MapWhereUniqueInput
+}
+
 input MapUpdateOneWithoutNext_mapInput {
   create: MapCreateWithoutNext_mapInput
   update: MapUpdateWithoutNext_mapDataInput
@@ -1145,6 +1173,7 @@ input MapUpdateWithoutContinentDataInput {
   bosses: BossUpdateManyInput
   previous_map: MapUpdateOneWithoutPrevious_mapInput
   next_map: MapUpdateOneWithoutNext_mapInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
 }
 
 input MapUpdateWithoutNext_mapDataInput {
@@ -1152,6 +1181,16 @@ input MapUpdateWithoutNext_mapDataInput {
   total_stage: Int
   bosses: BossUpdateManyInput
   previous_map: MapUpdateOneWithoutPrevious_mapInput
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
+}
+
+input MapUpdateWithoutObtainable_skillsDataInput {
+  name: String
+  total_stage: Int
+  bosses: BossUpdateManyInput
+  previous_map: MapUpdateOneWithoutPrevious_mapInput
+  next_map: MapUpdateOneWithoutNext_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
 }
 
@@ -1161,6 +1200,7 @@ input MapUpdateWithoutPrevious_mapDataInput {
   bosses: BossUpdateManyInput
   next_map: MapUpdateOneWithoutNext_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
 }
 
 input MapUpdateWithWhereUniqueWithoutContinentInput {
@@ -1171,6 +1211,11 @@ input MapUpdateWithWhereUniqueWithoutContinentInput {
 input MapUpsertWithoutNext_mapInput {
   update: MapUpdateWithoutNext_mapDataInput!
   create: MapCreateWithoutNext_mapInput!
+}
+
+input MapUpsertWithoutObtainable_skillsInput {
+  update: MapUpdateWithoutObtainable_skillsDataInput!
+  create: MapCreateWithoutObtainable_skillsInput!
 }
 
 input MapUpsertWithoutPrevious_mapInput {
@@ -1227,6 +1272,9 @@ input MapWhereInput {
   previous_map: MapWhereInput
   next_map: MapWhereInput
   continent: ContinentWhereInput
+  obtainable_skills_every: SkillWhereInput
+  obtainable_skills_some: SkillWhereInput
+  obtainable_skills_none: SkillWhereInput
   AND: [MapWhereInput!]
   OR: [MapWhereInput!]
   NOT: [MapWhereInput!]
@@ -1333,7 +1381,7 @@ type Skill {
   id: ID!
   name: String!
   description: String!
-  found: String!
+  location: Map!
   class: Class!
 }
 
@@ -1347,7 +1395,7 @@ input SkillCreateInput {
   id: ID
   name: String!
   description: String!
-  found: String!
+  location: MapCreateOneWithoutObtainable_skillsInput!
   class: ClassCreateOneWithoutSkillsInput!
 }
 
@@ -1361,11 +1409,23 @@ input SkillCreateManyWithoutClassInput {
   connect: [SkillWhereUniqueInput!]
 }
 
+input SkillCreateManyWithoutLocationInput {
+  create: [SkillCreateWithoutLocationInput!]
+  connect: [SkillWhereUniqueInput!]
+}
+
 input SkillCreateWithoutClassInput {
   id: ID
   name: String!
   description: String!
-  found: String!
+  location: MapCreateOneWithoutObtainable_skillsInput!
+}
+
+input SkillCreateWithoutLocationInput {
+  id: ID
+  name: String!
+  description: String!
+  class: ClassCreateOneWithoutSkillsInput!
 }
 
 type SkillEdge {
@@ -1380,15 +1440,12 @@ enum SkillOrderByInput {
   name_DESC
   description_ASC
   description_DESC
-  found_ASC
-  found_DESC
 }
 
 type SkillPreviousValues {
   id: ID!
   name: String!
   description: String!
-  found: String!
 }
 
 input SkillScalarWhereInput {
@@ -1434,20 +1491,6 @@ input SkillScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  found: String
-  found_not: String
-  found_in: [String!]
-  found_not_in: [String!]
-  found_lt: String
-  found_lte: String
-  found_gt: String
-  found_gte: String
-  found_contains: String
-  found_not_contains: String
-  found_starts_with: String
-  found_not_starts_with: String
-  found_ends_with: String
-  found_not_ends_with: String
   AND: [SkillScalarWhereInput!]
   OR: [SkillScalarWhereInput!]
   NOT: [SkillScalarWhereInput!]
@@ -1474,21 +1517,20 @@ input SkillSubscriptionWhereInput {
 input SkillUpdateDataInput {
   name: String
   description: String
-  found: String
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
   class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateInput {
   name: String
   description: String
-  found: String
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
   class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateManyDataInput {
   name: String
   description: String
-  found: String
 }
 
 input SkillUpdateManyInput {
@@ -1506,7 +1548,6 @@ input SkillUpdateManyInput {
 input SkillUpdateManyMutationInput {
   name: String
   description: String
-  found: String
 }
 
 input SkillUpdateManyWithoutClassInput {
@@ -1521,6 +1562,18 @@ input SkillUpdateManyWithoutClassInput {
   updateMany: [SkillUpdateManyWithWhereNestedInput!]
 }
 
+input SkillUpdateManyWithoutLocationInput {
+  create: [SkillCreateWithoutLocationInput!]
+  delete: [SkillWhereUniqueInput!]
+  connect: [SkillWhereUniqueInput!]
+  set: [SkillWhereUniqueInput!]
+  disconnect: [SkillWhereUniqueInput!]
+  update: [SkillUpdateWithWhereUniqueWithoutLocationInput!]
+  upsert: [SkillUpsertWithWhereUniqueWithoutLocationInput!]
+  deleteMany: [SkillScalarWhereInput!]
+  updateMany: [SkillUpdateManyWithWhereNestedInput!]
+}
+
 input SkillUpdateManyWithWhereNestedInput {
   where: SkillScalarWhereInput!
   data: SkillUpdateManyDataInput!
@@ -1529,7 +1582,13 @@ input SkillUpdateManyWithWhereNestedInput {
 input SkillUpdateWithoutClassDataInput {
   name: String
   description: String
-  found: String
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+}
+
+input SkillUpdateWithoutLocationDataInput {
+  name: String
+  description: String
+  class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateWithWhereUniqueNestedInput {
@@ -1542,6 +1601,11 @@ input SkillUpdateWithWhereUniqueWithoutClassInput {
   data: SkillUpdateWithoutClassDataInput!
 }
 
+input SkillUpdateWithWhereUniqueWithoutLocationInput {
+  where: SkillWhereUniqueInput!
+  data: SkillUpdateWithoutLocationDataInput!
+}
+
 input SkillUpsertWithWhereUniqueNestedInput {
   where: SkillWhereUniqueInput!
   update: SkillUpdateDataInput!
@@ -1552,6 +1616,12 @@ input SkillUpsertWithWhereUniqueWithoutClassInput {
   where: SkillWhereUniqueInput!
   update: SkillUpdateWithoutClassDataInput!
   create: SkillCreateWithoutClassInput!
+}
+
+input SkillUpsertWithWhereUniqueWithoutLocationInput {
+  where: SkillWhereUniqueInput!
+  update: SkillUpdateWithoutLocationDataInput!
+  create: SkillCreateWithoutLocationInput!
 }
 
 input SkillWhereInput {
@@ -1597,20 +1667,7 @@ input SkillWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  found: String
-  found_not: String
-  found_in: [String!]
-  found_not_in: [String!]
-  found_lt: String
-  found_lte: String
-  found_gt: String
-  found_gte: String
-  found_contains: String
-  found_not_contains: String
-  found_starts_with: String
-  found_not_starts_with: String
-  found_ends_with: String
-  found_not_ends_with: String
+  location: MapWhereInput
   class: ClassWhereInput
   AND: [SkillWhereInput!]
   OR: [SkillWhereInput!]

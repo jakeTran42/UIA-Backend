@@ -20,7 +20,7 @@ type Skill {
   id: ID! @id
   name: String!
   description: String!
-  found: String!
+  location: Map! @relation(link: INLINE)
   class: Class! @relation(link: INLINE)
 }
 
@@ -37,17 +37,18 @@ type Map {
   name: String!
   total_stage: Int!
   bosses: [Boss!]!
-  previous_map: Map @relation(name: "LastMapRelation", link: INLINE)
-  next_map: Map @relation(name: "NextMapRelation", link: INLINE)
+  previous_map: Map @relation(name: "LastMapRelation" link: INLINE)
+  next_map: Map @relation(name: "NextMapRelation" link: INLINE)
   continent: Continent! @relation(link: INLINE)
+  obtainable_skills: [Skill!]!
 }
 
 type Continent {
   id: ID! @id
   name: String
   maps: [Map!]!
-  next_continent: Continent @relation(name: "NextContinentRelation", link: INLINE)
-  previous_continent: Continent @relation(name: "LastContinentRelation", link: INLINE)
+  next_continent: Continent @relation(name: "NextContinentRelation" link: INLINE)
+  previous_continent: Continent @relation(name: "LastContinentRelation" link: INLINE)
 }
 
 type Boss {
