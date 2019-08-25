@@ -402,10 +402,12 @@ input ClassUpdateManyMutationInput {
   weapon: String
 }
 
-input ClassUpdateOneRequiredWithoutSkillsInput {
+input ClassUpdateOneWithoutSkillsInput {
   create: ClassCreateWithoutSkillsInput
   update: ClassUpdateWithoutSkillsDataInput
   upsert: ClassUpsertWithoutSkillsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: ClassWhereUniqueInput
 }
 
@@ -1142,17 +1144,19 @@ input MapUpdateManyWithWhereNestedInput {
   data: MapUpdateManyDataInput!
 }
 
-input MapUpdateOneRequiredWithoutObtainable_skillsInput {
-  create: MapCreateWithoutObtainable_skillsInput
-  update: MapUpdateWithoutObtainable_skillsDataInput
-  upsert: MapUpsertWithoutObtainable_skillsInput
-  connect: MapWhereUniqueInput
-}
-
 input MapUpdateOneWithoutNext_mapInput {
   create: MapCreateWithoutNext_mapInput
   update: MapUpdateWithoutNext_mapDataInput
   upsert: MapUpsertWithoutNext_mapInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: MapWhereUniqueInput
+}
+
+input MapUpdateOneWithoutObtainable_skillsInput {
+  create: MapCreateWithoutObtainable_skillsInput
+  update: MapUpdateWithoutObtainable_skillsDataInput
+  upsert: MapUpsertWithoutObtainable_skillsInput
   delete: Boolean
   disconnect: Boolean
   connect: MapWhereUniqueInput
@@ -1373,16 +1377,18 @@ type Query {
 
 enum Role {
   ADMIN
-  HIGH
-  LOW
+  MODERATOR
+  USER
 }
 
 type Skill {
   id: ID!
   name: String!
   description: String!
-  location: Map!
-  class: Class!
+  skill_type: [SkillType!]!
+  energy: Int!
+  location: Map
+  class: Class
 }
 
 type SkillConnection {
@@ -1395,8 +1401,10 @@ input SkillCreateInput {
   id: ID
   name: String!
   description: String!
-  location: MapCreateOneWithoutObtainable_skillsInput!
-  class: ClassCreateOneWithoutSkillsInput!
+  skill_type: SkillCreateskill_typeInput
+  energy: Int
+  location: MapCreateOneWithoutObtainable_skillsInput
+  class: ClassCreateOneWithoutSkillsInput
 }
 
 input SkillCreateManyInput {
@@ -1414,18 +1422,26 @@ input SkillCreateManyWithoutLocationInput {
   connect: [SkillWhereUniqueInput!]
 }
 
+input SkillCreateskill_typeInput {
+  set: [SkillType!]
+}
+
 input SkillCreateWithoutClassInput {
   id: ID
   name: String!
   description: String!
-  location: MapCreateOneWithoutObtainable_skillsInput!
+  skill_type: SkillCreateskill_typeInput
+  energy: Int
+  location: MapCreateOneWithoutObtainable_skillsInput
 }
 
 input SkillCreateWithoutLocationInput {
   id: ID
   name: String!
   description: String!
-  class: ClassCreateOneWithoutSkillsInput!
+  skill_type: SkillCreateskill_typeInput
+  energy: Int
+  class: ClassCreateOneWithoutSkillsInput
 }
 
 type SkillEdge {
@@ -1440,12 +1456,16 @@ enum SkillOrderByInput {
   name_DESC
   description_ASC
   description_DESC
+  energy_ASC
+  energy_DESC
 }
 
 type SkillPreviousValues {
   id: ID!
   name: String!
   description: String!
+  skill_type: [SkillType!]!
+  energy: Int!
 }
 
 input SkillScalarWhereInput {
@@ -1491,6 +1511,14 @@ input SkillScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  energy: Int
+  energy_not: Int
+  energy_in: [Int!]
+  energy_not_in: [Int!]
+  energy_lt: Int
+  energy_lte: Int
+  energy_gt: Int
+  energy_gte: Int
   AND: [SkillScalarWhereInput!]
   OR: [SkillScalarWhereInput!]
   NOT: [SkillScalarWhereInput!]
@@ -1514,23 +1542,46 @@ input SkillSubscriptionWhereInput {
   NOT: [SkillSubscriptionWhereInput!]
 }
 
+enum SkillType {
+  UNKNOWN
+  BUFF
+  BUFF_AOE
+  DAMAGE_TARGET
+  DAMAGE_AOE
+  DAMAGE_DOT
+  HEAL_TARGET
+  HEAL_AOE
+  HEAL_DOT
+  TAUNT
+  INTERUPT
+  KNOCKUP
+  SILENCE
+  SUMMON
+}
+
 input SkillUpdateDataInput {
   name: String
   description: String
-  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
-  class: ClassUpdateOneRequiredWithoutSkillsInput
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
+  location: MapUpdateOneWithoutObtainable_skillsInput
+  class: ClassUpdateOneWithoutSkillsInput
 }
 
 input SkillUpdateInput {
   name: String
   description: String
-  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
-  class: ClassUpdateOneRequiredWithoutSkillsInput
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
+  location: MapUpdateOneWithoutObtainable_skillsInput
+  class: ClassUpdateOneWithoutSkillsInput
 }
 
 input SkillUpdateManyDataInput {
   name: String
   description: String
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
 }
 
 input SkillUpdateManyInput {
@@ -1548,6 +1599,8 @@ input SkillUpdateManyInput {
 input SkillUpdateManyMutationInput {
   name: String
   description: String
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
 }
 
 input SkillUpdateManyWithoutClassInput {
@@ -1579,16 +1632,24 @@ input SkillUpdateManyWithWhereNestedInput {
   data: SkillUpdateManyDataInput!
 }
 
+input SkillUpdateskill_typeInput {
+  set: [SkillType!]
+}
+
 input SkillUpdateWithoutClassDataInput {
   name: String
   description: String
-  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
+  location: MapUpdateOneWithoutObtainable_skillsInput
 }
 
 input SkillUpdateWithoutLocationDataInput {
   name: String
   description: String
-  class: ClassUpdateOneRequiredWithoutSkillsInput
+  skill_type: SkillUpdateskill_typeInput
+  energy: Int
+  class: ClassUpdateOneWithoutSkillsInput
 }
 
 input SkillUpdateWithWhereUniqueNestedInput {
@@ -1667,6 +1728,14 @@ input SkillWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  energy: Int
+  energy_not: Int
+  energy_in: [Int!]
+  energy_not_in: [Int!]
+  energy_lt: Int
+  energy_lte: Int
+  energy_gt: Int
+  energy_gte: Int
   location: MapWhereInput
   class: ClassWhereInput
   AND: [SkillWhereInput!]

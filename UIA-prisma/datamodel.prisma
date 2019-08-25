@@ -11,7 +11,7 @@ type User {
   createdAt: DateTime! @createdAt
   handle: String! @unique
   email: String! @unique
-  role: Role! @default(value: LOW)
+  role: Role! @default(value: USER)
   password: String!
   guides: [Guide!]!
 }
@@ -20,8 +20,10 @@ type Skill {
   id: ID! @id
   name: String!
   description: String!
-  location: Map! @relation(link: INLINE)
-  class: Class! @relation(link: INLINE)
+  skill_type: [SkillType!]! @scalarList(strategy: RELATION)
+  energy: Int! @default(value: 0)
+  location: Map @relation(link: INLINE) 
+  class: Class @relation(link: INLINE)
 }
 
 type Class {
@@ -63,6 +65,23 @@ type Boss {
 
 enum Role {
   ADMIN
-  HIGH
-  LOW
+  MODERATOR
+  USER
+}
+
+enum SkillType {
+  UNKNOWN
+  BUFF
+  BUFF_AOE
+  DAMAGE_TARGET
+  DAMAGE_AOE
+  DAMAGE_DOT
+  HEAL_TARGET
+  HEAL_AOE
+  HEAL_DOT
+  TAUNT
+  INTERUPT
+  KNOCKUP
+  SILENCE
+  SUMMON
 }

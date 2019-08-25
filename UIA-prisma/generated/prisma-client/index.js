@@ -35,6 +35,10 @@ var models = [
   {
     name: "Role",
     embedded: false
+  },
+  {
+    name: "SkillType",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
