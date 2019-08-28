@@ -402,12 +402,10 @@ input ClassUpdateManyMutationInput {
   weapon: String
 }
 
-input ClassUpdateOneWithoutSkillsInput {
+input ClassUpdateOneRequiredWithoutSkillsInput {
   create: ClassCreateWithoutSkillsInput
   update: ClassUpdateWithoutSkillsDataInput
   upsert: ClassUpsertWithoutSkillsInput
-  delete: Boolean
-  disconnect: Boolean
   connect: ClassWhereUniqueInput
 }
 
@@ -489,6 +487,13 @@ input ClassWhereInput {
 
 input ClassWhereUniqueInput {
   id: ID
+}
+
+enum CombatType {
+  RANGE
+  MEELEE
+  SELF
+  TEAM
 }
 
 type Continent {
@@ -1144,19 +1149,17 @@ input MapUpdateManyWithWhereNestedInput {
   data: MapUpdateManyDataInput!
 }
 
+input MapUpdateOneRequiredWithoutObtainable_skillsInput {
+  create: MapCreateWithoutObtainable_skillsInput
+  update: MapUpdateWithoutObtainable_skillsDataInput
+  upsert: MapUpsertWithoutObtainable_skillsInput
+  connect: MapWhereUniqueInput
+}
+
 input MapUpdateOneWithoutNext_mapInput {
   create: MapCreateWithoutNext_mapInput
   update: MapUpdateWithoutNext_mapDataInput
   upsert: MapUpsertWithoutNext_mapInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: MapWhereUniqueInput
-}
-
-input MapUpdateOneWithoutObtainable_skillsInput {
-  create: MapCreateWithoutObtainable_skillsInput
-  update: MapUpdateWithoutObtainable_skillsDataInput
-  upsert: MapUpsertWithoutObtainable_skillsInput
   delete: Boolean
   disconnect: Boolean
   connect: MapWhereUniqueInput
@@ -1385,10 +1388,11 @@ type Skill {
   id: ID!
   name: String!
   description: String!
-  skill_type: [SkillType!]!
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int!
-  location: Map
-  class: Class
+  location: Map!
+  class: Class!
 }
 
 type SkillConnection {
@@ -1401,10 +1405,11 @@ input SkillCreateInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillCreateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  location: MapCreateOneWithoutObtainable_skillsInput
-  class: ClassCreateOneWithoutSkillsInput
+  location: MapCreateOneWithoutObtainable_skillsInput!
+  class: ClassCreateOneWithoutSkillsInput!
 }
 
 input SkillCreateManyInput {
@@ -1422,26 +1427,24 @@ input SkillCreateManyWithoutLocationInput {
   connect: [SkillWhereUniqueInput!]
 }
 
-input SkillCreateskill_typeInput {
-  set: [SkillType!]
-}
-
 input SkillCreateWithoutClassInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillCreateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  location: MapCreateOneWithoutObtainable_skillsInput
+  location: MapCreateOneWithoutObtainable_skillsInput!
 }
 
 input SkillCreateWithoutLocationInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillCreateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  class: ClassCreateOneWithoutSkillsInput
+  class: ClassCreateOneWithoutSkillsInput!
 }
 
 type SkillEdge {
@@ -1456,6 +1459,10 @@ enum SkillOrderByInput {
   name_DESC
   description_ASC
   description_DESC
+  skill_type_ASC
+  skill_type_DESC
+  combat_type_ASC
+  combat_type_DESC
   energy_ASC
   energy_DESC
 }
@@ -1464,7 +1471,8 @@ type SkillPreviousValues {
   id: ID!
   name: String!
   description: String!
-  skill_type: [SkillType!]!
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int!
 }
 
@@ -1511,6 +1519,14 @@ input SkillScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  skill_type: SkillType
+  skill_type_not: SkillType
+  skill_type_in: [SkillType!]
+  skill_type_not_in: [SkillType!]
+  combat_type: CombatType
+  combat_type_not: CombatType
+  combat_type_in: [CombatType!]
+  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]
@@ -1557,30 +1573,37 @@ enum SkillType {
   KNOCKUP
   SILENCE
   SUMMON
+  DEBUFF
+  DISPELL
+  ABSORB
+  STEALTH
 }
 
 input SkillUpdateDataInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  location: MapUpdateOneWithoutObtainable_skillsInput
-  class: ClassUpdateOneWithoutSkillsInput
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+  class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  location: MapUpdateOneWithoutObtainable_skillsInput
-  class: ClassUpdateOneWithoutSkillsInput
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+  class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateManyDataInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
 }
 
@@ -1599,7 +1622,8 @@ input SkillUpdateManyInput {
 input SkillUpdateManyMutationInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
 }
 
@@ -1632,24 +1656,22 @@ input SkillUpdateManyWithWhereNestedInput {
   data: SkillUpdateManyDataInput!
 }
 
-input SkillUpdateskill_typeInput {
-  set: [SkillType!]
-}
-
 input SkillUpdateWithoutClassDataInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  location: MapUpdateOneWithoutObtainable_skillsInput
+  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
 }
 
 input SkillUpdateWithoutLocationDataInput {
   name: String
   description: String
-  skill_type: SkillUpdateskill_typeInput
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int
-  class: ClassUpdateOneWithoutSkillsInput
+  class: ClassUpdateOneRequiredWithoutSkillsInput
 }
 
 input SkillUpdateWithWhereUniqueNestedInput {
@@ -1728,6 +1750,14 @@ input SkillWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  skill_type: SkillType
+  skill_type_not: SkillType
+  skill_type_in: [SkillType!]
+  skill_type_not_in: [SkillType!]
+  combat_type: CombatType
+  combat_type_not: CombatType
+  combat_type_in: [CombatType!]
+  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]

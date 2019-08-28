@@ -20,10 +20,21 @@ type Skill {
   id: ID! @id
   name: String!
   description: String!
-  skill_type: [SkillType!]! @scalarList(strategy: RELATION)
+  skill_type: SkillType
+  combat_type: CombatType
   energy: Int! @default(value: 0)
-  location: Map @relation(link: INLINE) 
+  location: Map! @relation(link: INLINE) 
   class: Class @relation(link: INLINE)
+  monster: Boss @relation(link: INLINE)
+}
+
+type MonsterSkill {
+  id: ID! @id
+  name: String!
+  description: String!
+  skill_type: SkillType
+  combat_type: CombatType
+  energy: Int! @default(value: 0)
 }
 
 type Class {
@@ -32,6 +43,22 @@ type Class {
   description: String!
   weapon: String!
   skills: [Skill!]!
+}
+
+type Boss {
+  id: ID! @id
+  name: String!
+  locations_found: [Map!]! @relation(link: INLINE)
+  continent_found: [Continent!]! @relation(link: INLINE)
+}
+
+type BossStruct {
+  monster_found: Boss!
+  HP: Int!
+  ATK: Int!
+  Armor: Int!
+  AtkSpd: Int!
+  skills: [MonsterSkill!]! @relation(link: INLINE)
 }
 
 type Map {
@@ -53,20 +80,17 @@ type Continent {
   previous_continent: Continent @relation(name: "LastContinentRelation" link: INLINE)
 }
 
-type Boss {
-  id: ID! @id
-  name: String!
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Int!
-  skills: [Skill!]!
-}
-
 enum Role {
   ADMIN
   MODERATOR
   USER
+}
+
+enum CombatType {
+  RANGE
+  MEELEE
+  SELF
+  TEAM
 }
 
 enum SkillType {
@@ -84,4 +108,9 @@ enum SkillType {
   KNOCKUP
   SILENCE
   SUMMON
+  DEBUFF
+  DISPELL
+  ABSORB
+  STEALTH
+  PASSIVE
 }

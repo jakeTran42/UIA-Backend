@@ -37,6 +37,10 @@ var models = [
     embedded: false
   },
   {
+    name: "CombatType",
+    embedded: false
+  },
+  {
     name: "SkillType",
     embedded: false
   }
