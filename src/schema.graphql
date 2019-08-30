@@ -12,7 +12,7 @@ type Mutation {
 type Guide {
     title: String!
     body: String!
-    owner: User
+    owner: User!
 }
 
 type User {

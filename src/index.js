@@ -7,6 +7,14 @@ const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Guide = require('./resolvers/Guide')
 
+function stageInsertion(parent, args, context, info) {
+  const mapId = "ck0qocxna6c2c0b40cgoqie55"
+  const totalMap = 20
+
+  for(i=1; i<totalMap+1; i++){
+  }
+}
+
 const resolvers = {
     Query,
     Mutation,

@@ -17,7 +17,23 @@ var models = [
     embedded: false
   },
   {
+    name: "MonsterSkill",
+    embedded: false
+  },
+  {
     name: "Class",
+    embedded: false
+  },
+  {
+    name: "Boss",
+    embedded: false
+  },
+  {
+    name: "BossStruct",
+    embedded: false
+  },
+  {
+    name: "StageStruct",
     embedded: false
   },
   {
@@ -29,7 +45,7 @@ var models = [
     embedded: false
   },
   {
-    name: "Boss",
+    name: "Element",
     embedded: false
   },
   {
@@ -38,6 +54,10 @@ var models = [
   },
   {
     name: "CombatType",
+    embedded: false
+  },
+  {
+    name: "ElementType",
     embedded: false
   },
   {

@@ -18,19 +18,18 @@ type User {
 
 type Skill {
   id: ID! @id
-  name: String!
+  name: String! @unique
   description: String!
   skill_type: SkillType
   combat_type: CombatType
   energy: Int! @default(value: 0)
   location: Map! @relation(link: INLINE) 
   class: Class @relation(link: INLINE)
-  monster: Boss @relation(link: INLINE)
 }
 
 type MonsterSkill {
   id: ID! @id
-  name: String!
+  name: String! @unique
   description: String!
   skill_type: SkillType
   combat_type: CombatType
@@ -47,37 +46,59 @@ type Class {
 
 type Boss {
   id: ID! @id
-  name: String!
-  locations_found: [Map!]! @relation(link: INLINE)
-  continent_found: [Continent!]! @relation(link: INLINE)
+  name: String! @unique
+  element_one: Element @relation(name: "ElementEffectivenessOne")
+  element_one_value: Int
+  element_two: Element @relation(name: "ElementEffectivenessTwo")
+  element_two_value: Int
+  locations_found: [Map!]! @relation(link: TABLE)
+  continent_found: [Continent!]! @relation(link: TABLE)
 }
 
 type BossStruct {
+  id: ID! @id
   monster_found: Boss!
+  minion_present: Boolean @default(value: false)
+  location: StageStruct!
   HP: Int!
   ATK: Int!
   Armor: Int!
-  AtkSpd: Int!
-  skills: [MonsterSkill!]! @relation(link: INLINE)
+  AtkSpd: Float!
+  skills: [MonsterSkill!]! @relation(link: TABLE)
+}
+
+type StageStruct {
+  id: ID! @id
+  stage_number: Int!
+  map: Map! @relation(link: INLINE)
 }
 
 type Map {
   id: ID! @id
-  name: String!
+  name: String! @unique
   total_stage: Int!
   bosses: [Boss!]!
   previous_map: Map @relation(name: "LastMapRelation" link: INLINE)
   next_map: Map @relation(name: "NextMapRelation" link: INLINE)
   continent: Continent! @relation(link: INLINE)
   obtainable_skills: [Skill!]!
+  stages: [BossStruct!]!
 }
 
 type Continent {
   id: ID! @id
-  name: String
+  name: String! @unique
+  bosses: [Boss!]!
   maps: [Map!]!
   next_continent: Continent @relation(name: "NextContinentRelation" link: INLINE)
   previous_continent: Continent @relation(name: "LastContinentRelation" link: INLINE)
+}
+
+type Element {
+  id: ID! @id
+  name: ElementType!
+  weakness: ElementType!
+  effective: ElementType!
 }
 
 enum Role {
@@ -91,6 +112,13 @@ enum CombatType {
   MEELEE
   SELF
   TEAM
+}
+
+enum ElementType {
+  FIRE
+  LIGHTNING
+  FROST
+  EARTH
 }
 
 enum SkillType {
