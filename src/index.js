@@ -1,31 +1,23 @@
 require('dotenv').config()
 const { GraphQLServer } = require('graphql-yoga');
 const { prisma } = require('../UIA-prisma/generated/prisma-client')
-const typeDefs = require('./typeDefs/index.ts')
 
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Guide = require('./resolvers/Guide')
-
-function stageInsertion(parent, args, context, info) {
-  const mapId = "ck0qocxna6c2c0b40cgoqie55"
-  const totalMap = 20
-
-  for(i=1; i<totalMap+1; i++){
-  }
-}
+const Map = require('./resolvers/Map')
 
 const resolvers = {
     Query,
     Mutation,
     User,
-    Guide
+    Guide,
+    Map
 }
 
 const server = new GraphQLServer({
-  // typeDefs: './src/schema.graphql',
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers,
   context: request => {
     return {

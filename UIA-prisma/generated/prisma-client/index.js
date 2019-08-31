@@ -41,15 +41,19 @@ var models = [
     embedded: false
   },
   {
+    name: "ConnectedMap",
+    embedded: false
+  },
+  {
     name: "Continent",
     embedded: false
   },
   {
-    name: "Element",
+    name: "ConnectContinent",
     embedded: false
   },
   {
-    name: "Role",
+    name: "Element",
     embedded: false
   },
   {
@@ -74,6 +78,10 @@ var models = [
   },
   {
     name: "Hero",
+    embedded: false
+  },
+  {
+    name: "Role",
     embedded: false
   }
 ];

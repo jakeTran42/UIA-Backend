@@ -15,6 +15,14 @@ type AggregateClass {
   count: Int!
 }
 
+type AggregateConnectContinent {
+  count: Int!
+}
+
+type AggregateConnectedMap {
+  count: Int!
+}
+
 type AggregateContinent {
   count: Int!
 }
@@ -75,7 +83,7 @@ input BossCreateInput {
   element_one_value: Int
   element_two: ElementCreateOneInput
   element_two_value: Int
-  locations_found: MapCreateManyWithoutBossesInput
+  locations_found: MapCreateManyWithoutNative_bossInput
   continent_found: ContinentCreateManyWithoutBossesInput
 }
 
@@ -101,7 +109,7 @@ input BossCreateWithoutContinent_foundInput {
   element_one_value: Int
   element_two: ElementCreateOneInput
   element_two_value: Int
-  locations_found: MapCreateManyWithoutBossesInput
+  locations_found: MapCreateManyWithoutNative_bossInput
 }
 
 input BossCreateWithoutLocations_foundInput {
@@ -536,7 +544,7 @@ input BossUpdateDataInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutBossesInput
+  locations_found: MapUpdateManyWithoutNative_bossInput
   continent_found: ContinentUpdateManyWithoutBossesInput
 }
 
@@ -546,7 +554,7 @@ input BossUpdateInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutBossesInput
+  locations_found: MapUpdateManyWithoutNative_bossInput
   continent_found: ContinentUpdateManyWithoutBossesInput
 }
 
@@ -604,7 +612,7 @@ input BossUpdateWithoutContinent_foundDataInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutBossesInput
+  locations_found: MapUpdateManyWithoutNative_bossInput
 }
 
 input BossUpdateWithoutLocations_foundDataInput {
@@ -882,13 +890,230 @@ enum CombatType {
   TEAM
 }
 
+type ConnectContinent {
+  id: ID!
+  next_continent: Continent
+  previous_continent: Continent
+}
+
+type ConnectContinentConnection {
+  pageInfo: PageInfo!
+  edges: [ConnectContinentEdge]!
+  aggregate: AggregateConnectContinent!
+}
+
+input ConnectContinentCreateInput {
+  id: ID
+  next_continent: ContinentCreateOneInput
+  previous_continent: ContinentCreateOneWithoutConnected_continentInput
+}
+
+input ConnectContinentCreateOneWithoutPrevious_continentInput {
+  create: ConnectContinentCreateWithoutPrevious_continentInput
+  connect: ConnectContinentWhereUniqueInput
+}
+
+input ConnectContinentCreateWithoutPrevious_continentInput {
+  id: ID
+  next_continent: ContinentCreateOneInput
+}
+
+type ConnectContinentEdge {
+  node: ConnectContinent!
+  cursor: String!
+}
+
+enum ConnectContinentOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type ConnectContinentPreviousValues {
+  id: ID!
+}
+
+type ConnectContinentSubscriptionPayload {
+  mutation: MutationType!
+  node: ConnectContinent
+  updatedFields: [String!]
+  previousValues: ConnectContinentPreviousValues
+}
+
+input ConnectContinentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ConnectContinentWhereInput
+  AND: [ConnectContinentSubscriptionWhereInput!]
+  OR: [ConnectContinentSubscriptionWhereInput!]
+  NOT: [ConnectContinentSubscriptionWhereInput!]
+}
+
+input ConnectContinentUpdateInput {
+  next_continent: ContinentUpdateOneInput
+  previous_continent: ContinentUpdateOneWithoutConnected_continentInput
+}
+
+input ConnectContinentUpdateOneWithoutPrevious_continentInput {
+  create: ConnectContinentCreateWithoutPrevious_continentInput
+  update: ConnectContinentUpdateWithoutPrevious_continentDataInput
+  upsert: ConnectContinentUpsertWithoutPrevious_continentInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ConnectContinentWhereUniqueInput
+}
+
+input ConnectContinentUpdateWithoutPrevious_continentDataInput {
+  next_continent: ContinentUpdateOneInput
+}
+
+input ConnectContinentUpsertWithoutPrevious_continentInput {
+  update: ConnectContinentUpdateWithoutPrevious_continentDataInput!
+  create: ConnectContinentCreateWithoutPrevious_continentInput!
+}
+
+input ConnectContinentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  next_continent: ContinentWhereInput
+  previous_continent: ContinentWhereInput
+  AND: [ConnectContinentWhereInput!]
+  OR: [ConnectContinentWhereInput!]
+  NOT: [ConnectContinentWhereInput!]
+}
+
+input ConnectContinentWhereUniqueInput {
+  id: ID
+}
+
+type ConnectedMap {
+  id: ID!
+  next_map: Map!
+  previous_map: Map!
+}
+
+type ConnectedMapConnection {
+  pageInfo: PageInfo!
+  edges: [ConnectedMapEdge]!
+  aggregate: AggregateConnectedMap!
+}
+
+input ConnectedMapCreateInput {
+  id: ID
+  next_map: MapCreateOneInput!
+  previous_map: MapCreateOneWithoutConnected_mapsInput!
+}
+
+input ConnectedMapCreateOneWithoutPrevious_mapInput {
+  create: ConnectedMapCreateWithoutPrevious_mapInput
+  connect: ConnectedMapWhereUniqueInput
+}
+
+input ConnectedMapCreateWithoutPrevious_mapInput {
+  id: ID
+  next_map: MapCreateOneInput!
+}
+
+type ConnectedMapEdge {
+  node: ConnectedMap!
+  cursor: String!
+}
+
+enum ConnectedMapOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type ConnectedMapPreviousValues {
+  id: ID!
+}
+
+type ConnectedMapSubscriptionPayload {
+  mutation: MutationType!
+  node: ConnectedMap
+  updatedFields: [String!]
+  previousValues: ConnectedMapPreviousValues
+}
+
+input ConnectedMapSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ConnectedMapWhereInput
+  AND: [ConnectedMapSubscriptionWhereInput!]
+  OR: [ConnectedMapSubscriptionWhereInput!]
+  NOT: [ConnectedMapSubscriptionWhereInput!]
+}
+
+input ConnectedMapUpdateInput {
+  next_map: MapUpdateOneRequiredInput
+  previous_map: MapUpdateOneRequiredWithoutConnected_mapsInput
+}
+
+input ConnectedMapUpdateOneWithoutPrevious_mapInput {
+  create: ConnectedMapCreateWithoutPrevious_mapInput
+  update: ConnectedMapUpdateWithoutPrevious_mapDataInput
+  upsert: ConnectedMapUpsertWithoutPrevious_mapInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ConnectedMapWhereUniqueInput
+}
+
+input ConnectedMapUpdateWithoutPrevious_mapDataInput {
+  next_map: MapUpdateOneRequiredInput
+}
+
+input ConnectedMapUpsertWithoutPrevious_mapInput {
+  update: ConnectedMapUpdateWithoutPrevious_mapDataInput!
+  create: ConnectedMapCreateWithoutPrevious_mapInput!
+}
+
+input ConnectedMapWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  next_map: MapWhereInput
+  previous_map: MapWhereInput
+  AND: [ConnectedMapWhereInput!]
+  OR: [ConnectedMapWhereInput!]
+  NOT: [ConnectedMapWhereInput!]
+}
+
+input ConnectedMapWhereUniqueInput {
+  id: ID
+}
+
 type Continent {
   id: ID!
   name: String!
   bosses(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss!]
   maps(where: MapWhereInput, orderBy: MapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Map!]
-  next_continent: Continent
-  previous_continent: Continent
+  connected_continent: ConnectContinent
 }
 
 type ContinentConnection {
@@ -902,8 +1127,7 @@ input ContinentCreateInput {
   name: String!
   bosses: BossCreateManyWithoutContinent_foundInput
   maps: MapCreateManyWithoutContinentInput
-  next_continent: ContinentCreateOneWithoutNext_continentInput
-  previous_continent: ContinentCreateOneWithoutPrevious_continentInput
+  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
 }
 
 input ContinentCreateManyWithoutBossesInput {
@@ -911,18 +1135,18 @@ input ContinentCreateManyWithoutBossesInput {
   connect: [ContinentWhereUniqueInput!]
 }
 
+input ContinentCreateOneInput {
+  create: ContinentCreateInput
+  connect: ContinentWhereUniqueInput
+}
+
+input ContinentCreateOneWithoutConnected_continentInput {
+  create: ContinentCreateWithoutConnected_continentInput
+  connect: ContinentWhereUniqueInput
+}
+
 input ContinentCreateOneWithoutMapsInput {
   create: ContinentCreateWithoutMapsInput
-  connect: ContinentWhereUniqueInput
-}
-
-input ContinentCreateOneWithoutNext_continentInput {
-  create: ContinentCreateWithoutNext_continentInput
-  connect: ContinentWhereUniqueInput
-}
-
-input ContinentCreateOneWithoutPrevious_continentInput {
-  create: ContinentCreateWithoutPrevious_continentInput
   connect: ContinentWhereUniqueInput
 }
 
@@ -930,32 +1154,21 @@ input ContinentCreateWithoutBossesInput {
   id: ID
   name: String!
   maps: MapCreateManyWithoutContinentInput
-  next_continent: ContinentCreateOneWithoutNext_continentInput
-  previous_continent: ContinentCreateOneWithoutPrevious_continentInput
+  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
+}
+
+input ContinentCreateWithoutConnected_continentInput {
+  id: ID
+  name: String!
+  bosses: BossCreateManyWithoutContinent_foundInput
+  maps: MapCreateManyWithoutContinentInput
 }
 
 input ContinentCreateWithoutMapsInput {
   id: ID
   name: String!
   bosses: BossCreateManyWithoutContinent_foundInput
-  next_continent: ContinentCreateOneWithoutNext_continentInput
-  previous_continent: ContinentCreateOneWithoutPrevious_continentInput
-}
-
-input ContinentCreateWithoutNext_continentInput {
-  id: ID
-  name: String!
-  bosses: BossCreateManyWithoutContinent_foundInput
-  maps: MapCreateManyWithoutContinentInput
-  previous_continent: ContinentCreateOneWithoutPrevious_continentInput
-}
-
-input ContinentCreateWithoutPrevious_continentInput {
-  id: ID
-  name: String!
-  bosses: BossCreateManyWithoutContinent_foundInput
-  maps: MapCreateManyWithoutContinentInput
-  next_continent: ContinentCreateOneWithoutNext_continentInput
+  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
 }
 
 type ContinentEdge {
@@ -1027,12 +1240,18 @@ input ContinentSubscriptionWhereInput {
   NOT: [ContinentSubscriptionWhereInput!]
 }
 
+input ContinentUpdateDataInput {
+  name: String
+  bosses: BossUpdateManyWithoutContinent_foundInput
+  maps: MapUpdateManyWithoutContinentInput
+  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
+}
+
 input ContinentUpdateInput {
   name: String
   bosses: BossUpdateManyWithoutContinent_foundInput
   maps: MapUpdateManyWithoutContinentInput
-  next_continent: ContinentUpdateOneWithoutNext_continentInput
-  previous_continent: ContinentUpdateOneWithoutPrevious_continentInput
+  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
 }
 
 input ContinentUpdateManyDataInput {
@@ -1060,6 +1279,15 @@ input ContinentUpdateManyWithWhereNestedInput {
   data: ContinentUpdateManyDataInput!
 }
 
+input ContinentUpdateOneInput {
+  create: ContinentCreateInput
+  update: ContinentUpdateDataInput
+  upsert: ContinentUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ContinentWhereUniqueInput
+}
+
 input ContinentUpdateOneRequiredWithoutMapsInput {
   create: ContinentCreateWithoutMapsInput
   update: ContinentUpdateWithoutMapsDataInput
@@ -1067,19 +1295,10 @@ input ContinentUpdateOneRequiredWithoutMapsInput {
   connect: ContinentWhereUniqueInput
 }
 
-input ContinentUpdateOneWithoutNext_continentInput {
-  create: ContinentCreateWithoutNext_continentInput
-  update: ContinentUpdateWithoutNext_continentDataInput
-  upsert: ContinentUpsertWithoutNext_continentInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ContinentWhereUniqueInput
-}
-
-input ContinentUpdateOneWithoutPrevious_continentInput {
-  create: ContinentCreateWithoutPrevious_continentInput
-  update: ContinentUpdateWithoutPrevious_continentDataInput
-  upsert: ContinentUpsertWithoutPrevious_continentInput
+input ContinentUpdateOneWithoutConnected_continentInput {
+  create: ContinentCreateWithoutConnected_continentInput
+  update: ContinentUpdateWithoutConnected_continentDataInput
+  upsert: ContinentUpsertWithoutConnected_continentInput
   delete: Boolean
   disconnect: Boolean
   connect: ContinentWhereUniqueInput
@@ -1088,29 +1307,19 @@ input ContinentUpdateOneWithoutPrevious_continentInput {
 input ContinentUpdateWithoutBossesDataInput {
   name: String
   maps: MapUpdateManyWithoutContinentInput
-  next_continent: ContinentUpdateOneWithoutNext_continentInput
-  previous_continent: ContinentUpdateOneWithoutPrevious_continentInput
+  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
+}
+
+input ContinentUpdateWithoutConnected_continentDataInput {
+  name: String
+  bosses: BossUpdateManyWithoutContinent_foundInput
+  maps: MapUpdateManyWithoutContinentInput
 }
 
 input ContinentUpdateWithoutMapsDataInput {
   name: String
   bosses: BossUpdateManyWithoutContinent_foundInput
-  next_continent: ContinentUpdateOneWithoutNext_continentInput
-  previous_continent: ContinentUpdateOneWithoutPrevious_continentInput
-}
-
-input ContinentUpdateWithoutNext_continentDataInput {
-  name: String
-  bosses: BossUpdateManyWithoutContinent_foundInput
-  maps: MapUpdateManyWithoutContinentInput
-  previous_continent: ContinentUpdateOneWithoutPrevious_continentInput
-}
-
-input ContinentUpdateWithoutPrevious_continentDataInput {
-  name: String
-  bosses: BossUpdateManyWithoutContinent_foundInput
-  maps: MapUpdateManyWithoutContinentInput
-  next_continent: ContinentUpdateOneWithoutNext_continentInput
+  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
 }
 
 input ContinentUpdateWithWhereUniqueWithoutBossesInput {
@@ -1118,19 +1327,19 @@ input ContinentUpdateWithWhereUniqueWithoutBossesInput {
   data: ContinentUpdateWithoutBossesDataInput!
 }
 
+input ContinentUpsertNestedInput {
+  update: ContinentUpdateDataInput!
+  create: ContinentCreateInput!
+}
+
+input ContinentUpsertWithoutConnected_continentInput {
+  update: ContinentUpdateWithoutConnected_continentDataInput!
+  create: ContinentCreateWithoutConnected_continentInput!
+}
+
 input ContinentUpsertWithoutMapsInput {
   update: ContinentUpdateWithoutMapsDataInput!
   create: ContinentCreateWithoutMapsInput!
-}
-
-input ContinentUpsertWithoutNext_continentInput {
-  update: ContinentUpdateWithoutNext_continentDataInput!
-  create: ContinentCreateWithoutNext_continentInput!
-}
-
-input ContinentUpsertWithoutPrevious_continentInput {
-  update: ContinentUpdateWithoutPrevious_continentDataInput!
-  create: ContinentCreateWithoutPrevious_continentInput!
 }
 
 input ContinentUpsertWithWhereUniqueWithoutBossesInput {
@@ -1174,8 +1383,7 @@ input ContinentWhereInput {
   maps_every: MapWhereInput
   maps_some: MapWhereInput
   maps_none: MapWhereInput
-  next_continent: ContinentWhereInput
-  previous_continent: ContinentWhereInput
+  connected_continent: ConnectContinentWhereInput
   AND: [ContinentWhereInput!]
   OR: [ContinentWhereInput!]
   NOT: [ContinentWhereInput!]
@@ -1191,8 +1399,8 @@ scalar DateTime
 type Element {
   id: ID!
   name: ElementType!
-  weakness: ElementType!
-  effective: ElementType!
+  weakness: ElementType
+  effective: ElementType
 }
 
 type ElementConnection {
@@ -1204,8 +1412,8 @@ type ElementConnection {
 input ElementCreateInput {
   id: ID
   name: ElementType!
-  weakness: ElementType!
-  effective: ElementType!
+  weakness: ElementType
+  effective: ElementType
 }
 
 input ElementCreateOneInput {
@@ -1232,8 +1440,8 @@ enum ElementOrderByInput {
 type ElementPreviousValues {
   id: ID!
   name: ElementType!
-  weakness: ElementType!
-  effective: ElementType!
+  weakness: ElementType
+  effective: ElementType
 }
 
 type ElementSubscriptionPayload {
@@ -1327,6 +1535,7 @@ input ElementWhereInput {
 
 input ElementWhereUniqueInput {
   id: ID
+  name: ElementType
 }
 
 type Guide {
@@ -1610,13 +1819,13 @@ scalar Long
 type Map {
   id: ID!
   name: String!
-  total_stage: Int!
-  bosses(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss!]
-  previous_map: Map
-  next_map: Map
+  total_stage: Int
+  native_boss(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss!]
+  connected_maps: ConnectedMap
   continent: Continent!
   obtainable_skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill!]
-  stages(where: BossStructWhereInput, orderBy: BossStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BossStruct!]
+  boss_stages(where: BossStructWhereInput, orderBy: BossStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BossStruct!]
+  field_stages(where: StageStructWhereInput, orderBy: StageStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StageStruct!]
 }
 
 type MapConnection {
@@ -1628,22 +1837,22 @@ type MapConnection {
 input MapCreateInput {
   id: ID
   name: String!
-  total_stage: Int!
-  bosses: BossCreateManyWithoutLocations_foundInput
-  previous_map: MapCreateOneWithoutPrevious_mapInput
-  next_map: MapCreateOneWithoutNext_mapInput
+  total_stage: Int
+  native_boss: BossCreateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  stages: BossStructCreateManyInput
-}
-
-input MapCreateManyWithoutBossesInput {
-  create: [MapCreateWithoutBossesInput!]
-  connect: [MapWhereUniqueInput!]
+  boss_stages: BossStructCreateManyInput
+  field_stages: StageStructCreateManyWithoutMapInput
 }
 
 input MapCreateManyWithoutContinentInput {
   create: [MapCreateWithoutContinentInput!]
+  connect: [MapWhereUniqueInput!]
+}
+
+input MapCreateManyWithoutNative_bossInput {
+  create: [MapCreateWithoutNative_bossInput!]
   connect: [MapWhereUniqueInput!]
 }
 
@@ -1652,8 +1861,13 @@ input MapCreateOneInput {
   connect: MapWhereUniqueInput
 }
 
-input MapCreateOneWithoutNext_mapInput {
-  create: MapCreateWithoutNext_mapInput
+input MapCreateOneWithoutConnected_mapsInput {
+  create: MapCreateWithoutConnected_mapsInput
+  connect: MapWhereUniqueInput
+}
+
+input MapCreateOneWithoutField_stagesInput {
+  create: MapCreateWithoutField_stagesInput
   connect: MapWhereUniqueInput
 }
 
@@ -1662,64 +1876,59 @@ input MapCreateOneWithoutObtainable_skillsInput {
   connect: MapWhereUniqueInput
 }
 
-input MapCreateOneWithoutPrevious_mapInput {
-  create: MapCreateWithoutPrevious_mapInput
-  connect: MapWhereUniqueInput
-}
-
-input MapCreateWithoutBossesInput {
+input MapCreateWithoutConnected_mapsInput {
   id: ID
   name: String!
-  total_stage: Int!
-  previous_map: MapCreateOneWithoutPrevious_mapInput
-  next_map: MapCreateOneWithoutNext_mapInput
+  total_stage: Int
+  native_boss: BossCreateManyWithoutLocations_foundInput
   continent: ContinentCreateOneWithoutMapsInput!
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  stages: BossStructCreateManyInput
+  boss_stages: BossStructCreateManyInput
+  field_stages: StageStructCreateManyWithoutMapInput
 }
 
 input MapCreateWithoutContinentInput {
   id: ID
   name: String!
-  total_stage: Int!
-  bosses: BossCreateManyWithoutLocations_foundInput
-  previous_map: MapCreateOneWithoutPrevious_mapInput
-  next_map: MapCreateOneWithoutNext_mapInput
+  total_stage: Int
+  native_boss: BossCreateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  stages: BossStructCreateManyInput
+  boss_stages: BossStructCreateManyInput
+  field_stages: StageStructCreateManyWithoutMapInput
 }
 
-input MapCreateWithoutNext_mapInput {
+input MapCreateWithoutField_stagesInput {
   id: ID
   name: String!
-  total_stage: Int!
-  bosses: BossCreateManyWithoutLocations_foundInput
-  previous_map: MapCreateOneWithoutPrevious_mapInput
+  total_stage: Int
+  native_boss: BossCreateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  stages: BossStructCreateManyInput
+  boss_stages: BossStructCreateManyInput
+}
+
+input MapCreateWithoutNative_bossInput {
+  id: ID
+  name: String!
+  total_stage: Int
+  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
+  continent: ContinentCreateOneWithoutMapsInput!
+  obtainable_skills: SkillCreateManyWithoutLocationInput
+  boss_stages: BossStructCreateManyInput
+  field_stages: StageStructCreateManyWithoutMapInput
 }
 
 input MapCreateWithoutObtainable_skillsInput {
   id: ID
   name: String!
-  total_stage: Int!
-  bosses: BossCreateManyWithoutLocations_foundInput
-  previous_map: MapCreateOneWithoutPrevious_mapInput
-  next_map: MapCreateOneWithoutNext_mapInput
+  total_stage: Int
+  native_boss: BossCreateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
   continent: ContinentCreateOneWithoutMapsInput!
-  stages: BossStructCreateManyInput
-}
-
-input MapCreateWithoutPrevious_mapInput {
-  id: ID
-  name: String!
-  total_stage: Int!
-  bosses: BossCreateManyWithoutLocations_foundInput
-  next_map: MapCreateOneWithoutNext_mapInput
-  continent: ContinentCreateOneWithoutMapsInput!
-  obtainable_skills: SkillCreateManyWithoutLocationInput
-  stages: BossStructCreateManyInput
+  boss_stages: BossStructCreateManyInput
+  field_stages: StageStructCreateManyWithoutMapInput
 }
 
 type MapEdge {
@@ -1739,7 +1948,7 @@ enum MapOrderByInput {
 type MapPreviousValues {
   id: ID!
   name: String!
-  total_stage: Int!
+  total_stage: Int
 }
 
 input MapScalarWhereInput {
@@ -1805,23 +2014,23 @@ input MapSubscriptionWhereInput {
 input MapUpdateDataInput {
   name: String
   total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
-  next_map: MapUpdateOneWithoutNext_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
 input MapUpdateInput {
   name: String
   total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
-  next_map: MapUpdateOneWithoutNext_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
 input MapUpdateManyDataInput {
@@ -1834,18 +2043,6 @@ input MapUpdateManyMutationInput {
   total_stage: Int
 }
 
-input MapUpdateManyWithoutBossesInput {
-  create: [MapCreateWithoutBossesInput!]
-  delete: [MapWhereUniqueInput!]
-  connect: [MapWhereUniqueInput!]
-  set: [MapWhereUniqueInput!]
-  disconnect: [MapWhereUniqueInput!]
-  update: [MapUpdateWithWhereUniqueWithoutBossesInput!]
-  upsert: [MapUpsertWithWhereUniqueWithoutBossesInput!]
-  deleteMany: [MapScalarWhereInput!]
-  updateMany: [MapUpdateManyWithWhereNestedInput!]
-}
-
 input MapUpdateManyWithoutContinentInput {
   create: [MapCreateWithoutContinentInput!]
   delete: [MapWhereUniqueInput!]
@@ -1854,6 +2051,18 @@ input MapUpdateManyWithoutContinentInput {
   disconnect: [MapWhereUniqueInput!]
   update: [MapUpdateWithWhereUniqueWithoutContinentInput!]
   upsert: [MapUpsertWithWhereUniqueWithoutContinentInput!]
+  deleteMany: [MapScalarWhereInput!]
+  updateMany: [MapUpdateManyWithWhereNestedInput!]
+}
+
+input MapUpdateManyWithoutNative_bossInput {
+  create: [MapCreateWithoutNative_bossInput!]
+  delete: [MapWhereUniqueInput!]
+  connect: [MapWhereUniqueInput!]
+  set: [MapWhereUniqueInput!]
+  disconnect: [MapWhereUniqueInput!]
+  update: [MapUpdateWithWhereUniqueWithoutNative_bossInput!]
+  upsert: [MapUpsertWithWhereUniqueWithoutNative_bossInput!]
   deleteMany: [MapScalarWhereInput!]
   updateMany: [MapUpdateManyWithWhereNestedInput!]
 }
@@ -1870,84 +2079,77 @@ input MapUpdateOneRequiredInput {
   connect: MapWhereUniqueInput
 }
 
-input MapUpdateOneRequiredWithoutObtainable_skillsInput {
+input MapUpdateOneRequiredWithoutConnected_mapsInput {
+  create: MapCreateWithoutConnected_mapsInput
+  update: MapUpdateWithoutConnected_mapsDataInput
+  upsert: MapUpsertWithoutConnected_mapsInput
+  connect: MapWhereUniqueInput
+}
+
+input MapUpdateOneRequiredWithoutField_stagesInput {
+  create: MapCreateWithoutField_stagesInput
+  update: MapUpdateWithoutField_stagesDataInput
+  upsert: MapUpsertWithoutField_stagesInput
+  connect: MapWhereUniqueInput
+}
+
+input MapUpdateOneWithoutObtainable_skillsInput {
   create: MapCreateWithoutObtainable_skillsInput
   update: MapUpdateWithoutObtainable_skillsDataInput
   upsert: MapUpsertWithoutObtainable_skillsInput
-  connect: MapWhereUniqueInput
-}
-
-input MapUpdateOneWithoutNext_mapInput {
-  create: MapCreateWithoutNext_mapInput
-  update: MapUpdateWithoutNext_mapDataInput
-  upsert: MapUpsertWithoutNext_mapInput
   delete: Boolean
   disconnect: Boolean
   connect: MapWhereUniqueInput
 }
 
-input MapUpdateOneWithoutPrevious_mapInput {
-  create: MapCreateWithoutPrevious_mapInput
-  update: MapUpdateWithoutPrevious_mapDataInput
-  upsert: MapUpsertWithoutPrevious_mapInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: MapWhereUniqueInput
-}
-
-input MapUpdateWithoutBossesDataInput {
+input MapUpdateWithoutConnected_mapsDataInput {
   name: String
   total_stage: Int
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
-  next_map: MapUpdateOneWithoutNext_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
 input MapUpdateWithoutContinentDataInput {
   name: String
   total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
-  next_map: MapUpdateOneWithoutNext_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
-input MapUpdateWithoutNext_mapDataInput {
+input MapUpdateWithoutField_stagesDataInput {
   name: String
   total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
+  boss_stages: BossStructUpdateManyInput
+}
+
+input MapUpdateWithoutNative_bossDataInput {
+  name: String
+  total_stage: Int
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
 input MapUpdateWithoutObtainable_skillsDataInput {
   name: String
   total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  previous_map: MapUpdateOneWithoutPrevious_mapInput
-  next_map: MapUpdateOneWithoutNext_mapInput
+  native_boss: BossUpdateManyWithoutLocations_foundInput
+  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
-  stages: BossStructUpdateManyInput
-}
-
-input MapUpdateWithoutPrevious_mapDataInput {
-  name: String
-  total_stage: Int
-  bosses: BossUpdateManyWithoutLocations_foundInput
-  next_map: MapUpdateOneWithoutNext_mapInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
-  obtainable_skills: SkillUpdateManyWithoutLocationInput
-  stages: BossStructUpdateManyInput
-}
-
-input MapUpdateWithWhereUniqueWithoutBossesInput {
-  where: MapWhereUniqueInput!
-  data: MapUpdateWithoutBossesDataInput!
+  boss_stages: BossStructUpdateManyInput
+  field_stages: StageStructUpdateManyWithoutMapInput
 }
 
 input MapUpdateWithWhereUniqueWithoutContinentInput {
@@ -1955,14 +2157,24 @@ input MapUpdateWithWhereUniqueWithoutContinentInput {
   data: MapUpdateWithoutContinentDataInput!
 }
 
+input MapUpdateWithWhereUniqueWithoutNative_bossInput {
+  where: MapWhereUniqueInput!
+  data: MapUpdateWithoutNative_bossDataInput!
+}
+
 input MapUpsertNestedInput {
   update: MapUpdateDataInput!
   create: MapCreateInput!
 }
 
-input MapUpsertWithoutNext_mapInput {
-  update: MapUpdateWithoutNext_mapDataInput!
-  create: MapCreateWithoutNext_mapInput!
+input MapUpsertWithoutConnected_mapsInput {
+  update: MapUpdateWithoutConnected_mapsDataInput!
+  create: MapCreateWithoutConnected_mapsInput!
+}
+
+input MapUpsertWithoutField_stagesInput {
+  update: MapUpdateWithoutField_stagesDataInput!
+  create: MapCreateWithoutField_stagesInput!
 }
 
 input MapUpsertWithoutObtainable_skillsInput {
@@ -1970,21 +2182,16 @@ input MapUpsertWithoutObtainable_skillsInput {
   create: MapCreateWithoutObtainable_skillsInput!
 }
 
-input MapUpsertWithoutPrevious_mapInput {
-  update: MapUpdateWithoutPrevious_mapDataInput!
-  create: MapCreateWithoutPrevious_mapInput!
-}
-
-input MapUpsertWithWhereUniqueWithoutBossesInput {
-  where: MapWhereUniqueInput!
-  update: MapUpdateWithoutBossesDataInput!
-  create: MapCreateWithoutBossesInput!
-}
-
 input MapUpsertWithWhereUniqueWithoutContinentInput {
   where: MapWhereUniqueInput!
   update: MapUpdateWithoutContinentDataInput!
   create: MapCreateWithoutContinentInput!
+}
+
+input MapUpsertWithWhereUniqueWithoutNative_bossInput {
+  where: MapWhereUniqueInput!
+  update: MapUpdateWithoutNative_bossDataInput!
+  create: MapCreateWithoutNative_bossInput!
 }
 
 input MapWhereInput {
@@ -2024,18 +2231,20 @@ input MapWhereInput {
   total_stage_lte: Int
   total_stage_gt: Int
   total_stage_gte: Int
-  bosses_every: BossWhereInput
-  bosses_some: BossWhereInput
-  bosses_none: BossWhereInput
-  previous_map: MapWhereInput
-  next_map: MapWhereInput
+  native_boss_every: BossWhereInput
+  native_boss_some: BossWhereInput
+  native_boss_none: BossWhereInput
+  connected_maps: ConnectedMapWhereInput
   continent: ContinentWhereInput
   obtainable_skills_every: SkillWhereInput
   obtainable_skills_some: SkillWhereInput
   obtainable_skills_none: SkillWhereInput
-  stages_every: BossStructWhereInput
-  stages_some: BossStructWhereInput
-  stages_none: BossStructWhereInput
+  boss_stages_every: BossStructWhereInput
+  boss_stages_some: BossStructWhereInput
+  boss_stages_none: BossStructWhereInput
+  field_stages_every: StageStructWhereInput
+  field_stages_some: StageStructWhereInput
+  field_stages_none: StageStructWhereInput
   AND: [MapWhereInput!]
   OR: [MapWhereInput!]
   NOT: [MapWhereInput!]
@@ -2334,6 +2543,16 @@ type Mutation {
   upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
   deleteClass(where: ClassWhereUniqueInput!): Class
   deleteManyClasses(where: ClassWhereInput): BatchPayload!
+  createConnectContinent(data: ConnectContinentCreateInput!): ConnectContinent!
+  updateConnectContinent(data: ConnectContinentUpdateInput!, where: ConnectContinentWhereUniqueInput!): ConnectContinent
+  upsertConnectContinent(where: ConnectContinentWhereUniqueInput!, create: ConnectContinentCreateInput!, update: ConnectContinentUpdateInput!): ConnectContinent!
+  deleteConnectContinent(where: ConnectContinentWhereUniqueInput!): ConnectContinent
+  deleteManyConnectContinents(where: ConnectContinentWhereInput): BatchPayload!
+  createConnectedMap(data: ConnectedMapCreateInput!): ConnectedMap!
+  updateConnectedMap(data: ConnectedMapUpdateInput!, where: ConnectedMapWhereUniqueInput!): ConnectedMap
+  upsertConnectedMap(where: ConnectedMapWhereUniqueInput!, create: ConnectedMapCreateInput!, update: ConnectedMapUpdateInput!): ConnectedMap!
+  deleteConnectedMap(where: ConnectedMapWhereUniqueInput!): ConnectedMap
+  deleteManyConnectedMaps(where: ConnectedMapWhereInput): BatchPayload!
   createContinent(data: ContinentCreateInput!): Continent!
   updateContinent(data: ContinentUpdateInput!, where: ContinentWhereUniqueInput!): Continent
   updateManyContinents(data: ContinentUpdateManyMutationInput!, where: ContinentWhereInput): BatchPayload!
@@ -2411,6 +2630,12 @@ type Query {
   class(where: ClassWhereUniqueInput!): Class
   classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
   classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
+  connectContinent(where: ConnectContinentWhereUniqueInput!): ConnectContinent
+  connectContinents(where: ConnectContinentWhereInput, orderBy: ConnectContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ConnectContinent]!
+  connectContinentsConnection(where: ConnectContinentWhereInput, orderBy: ConnectContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectContinentConnection!
+  connectedMap(where: ConnectedMapWhereUniqueInput!): ConnectedMap
+  connectedMaps(where: ConnectedMapWhereInput, orderBy: ConnectedMapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ConnectedMap]!
+  connectedMapsConnection(where: ConnectedMapWhereInput, orderBy: ConnectedMapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectedMapConnection!
   continent(where: ContinentWhereUniqueInput!): Continent
   continents(where: ContinentWhereInput, orderBy: ContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Continent]!
   continentsConnection(where: ContinentWhereInput, orderBy: ContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContinentConnection!
@@ -2451,7 +2676,7 @@ type Skill {
   skill_type: [SkillType!]!
   combat_type: [CombatType!]!
   energy: Int!
-  location: Map!
+  location: Map
   class: Class
 }
 
@@ -2472,7 +2697,7 @@ input SkillCreateInput {
   skill_type: SkillCreateskill_typeInput
   combat_type: SkillCreatecombat_typeInput
   energy: Int
-  location: MapCreateOneWithoutObtainable_skillsInput!
+  location: MapCreateOneWithoutObtainable_skillsInput
   class: ClassCreateOneWithoutSkillsInput
 }
 
@@ -2497,7 +2722,7 @@ input SkillCreateWithoutClassInput {
   skill_type: SkillCreateskill_typeInput
   combat_type: SkillCreatecombat_typeInput
   energy: Int
-  location: MapCreateOneWithoutObtainable_skillsInput!
+  location: MapCreateOneWithoutObtainable_skillsInput
 }
 
 input SkillCreateWithoutLocationInput {
@@ -2619,10 +2844,7 @@ enum SkillType {
   HEAL_TARGET
   HEAL_AOE
   HEAL_DOT
-  TAUNT
-  INTERUPT
-  KNOCKUP
-  SILENCE
+  CROWD_CONTROL
   SUMMON
   DEBUFF
   DISPELL
@@ -2641,7 +2863,7 @@ input SkillUpdateInput {
   skill_type: SkillUpdateskill_typeInput
   combat_type: SkillUpdatecombat_typeInput
   energy: Int
-  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+  location: MapUpdateOneWithoutObtainable_skillsInput
   class: ClassUpdateOneWithoutSkillsInput
 }
 
@@ -2700,7 +2922,7 @@ input SkillUpdateWithoutClassDataInput {
   skill_type: SkillUpdateskill_typeInput
   combat_type: SkillUpdatecombat_typeInput
   energy: Int
-  location: MapUpdateOneRequiredWithoutObtainable_skillsInput
+  location: MapUpdateOneWithoutObtainable_skillsInput
 }
 
 input SkillUpdateWithoutLocationDataInput {
@@ -2803,6 +3025,7 @@ type StageStruct {
   map: Map!
   base_exp: Int
   gear_level: Int
+  base_shell: Int
   boss_found: BossStruct
 }
 
@@ -2815,10 +3038,16 @@ type StageStructConnection {
 input StageStructCreateInput {
   id: ID
   stage_number: Int!
-  map: MapCreateOneInput!
+  map: MapCreateOneWithoutField_stagesInput!
   base_exp: Int
   gear_level: Int
+  base_shell: Int
   boss_found: BossStructCreateOneWithoutLocationInput
+}
+
+input StageStructCreateManyWithoutMapInput {
+  create: [StageStructCreateWithoutMapInput!]
+  connect: [StageStructWhereUniqueInput!]
 }
 
 input StageStructCreateOneWithoutBoss_foundInput {
@@ -2829,9 +3058,19 @@ input StageStructCreateOneWithoutBoss_foundInput {
 input StageStructCreateWithoutBoss_foundInput {
   id: ID
   stage_number: Int!
-  map: MapCreateOneInput!
+  map: MapCreateOneWithoutField_stagesInput!
   base_exp: Int
   gear_level: Int
+  base_shell: Int
+}
+
+input StageStructCreateWithoutMapInput {
+  id: ID
+  stage_number: Int!
+  base_exp: Int
+  gear_level: Int
+  base_shell: Int
+  boss_found: BossStructCreateOneWithoutLocationInput
 }
 
 type StageStructEdge {
@@ -2848,6 +3087,8 @@ enum StageStructOrderByInput {
   base_exp_DESC
   gear_level_ASC
   gear_level_DESC
+  base_shell_ASC
+  base_shell_DESC
 }
 
 type StageStructPreviousValues {
@@ -2855,6 +3096,59 @@ type StageStructPreviousValues {
   stage_number: Int!
   base_exp: Int
   gear_level: Int
+  base_shell: Int
+}
+
+input StageStructScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  stage_number: Int
+  stage_number_not: Int
+  stage_number_in: [Int!]
+  stage_number_not_in: [Int!]
+  stage_number_lt: Int
+  stage_number_lte: Int
+  stage_number_gt: Int
+  stage_number_gte: Int
+  base_exp: Int
+  base_exp_not: Int
+  base_exp_in: [Int!]
+  base_exp_not_in: [Int!]
+  base_exp_lt: Int
+  base_exp_lte: Int
+  base_exp_gt: Int
+  base_exp_gte: Int
+  gear_level: Int
+  gear_level_not: Int
+  gear_level_in: [Int!]
+  gear_level_not_in: [Int!]
+  gear_level_lt: Int
+  gear_level_lte: Int
+  gear_level_gt: Int
+  gear_level_gte: Int
+  base_shell: Int
+  base_shell_not: Int
+  base_shell_in: [Int!]
+  base_shell_not_in: [Int!]
+  base_shell_lt: Int
+  base_shell_lte: Int
+  base_shell_gt: Int
+  base_shell_gte: Int
+  AND: [StageStructScalarWhereInput!]
+  OR: [StageStructScalarWhereInput!]
+  NOT: [StageStructScalarWhereInput!]
 }
 
 type StageStructSubscriptionPayload {
@@ -2877,16 +3171,42 @@ input StageStructSubscriptionWhereInput {
 
 input StageStructUpdateInput {
   stage_number: Int
-  map: MapUpdateOneRequiredInput
+  map: MapUpdateOneRequiredWithoutField_stagesInput
   base_exp: Int
   gear_level: Int
+  base_shell: Int
   boss_found: BossStructUpdateOneWithoutLocationInput
+}
+
+input StageStructUpdateManyDataInput {
+  stage_number: Int
+  base_exp: Int
+  gear_level: Int
+  base_shell: Int
 }
 
 input StageStructUpdateManyMutationInput {
   stage_number: Int
   base_exp: Int
   gear_level: Int
+  base_shell: Int
+}
+
+input StageStructUpdateManyWithoutMapInput {
+  create: [StageStructCreateWithoutMapInput!]
+  delete: [StageStructWhereUniqueInput!]
+  connect: [StageStructWhereUniqueInput!]
+  set: [StageStructWhereUniqueInput!]
+  disconnect: [StageStructWhereUniqueInput!]
+  update: [StageStructUpdateWithWhereUniqueWithoutMapInput!]
+  upsert: [StageStructUpsertWithWhereUniqueWithoutMapInput!]
+  deleteMany: [StageStructScalarWhereInput!]
+  updateMany: [StageStructUpdateManyWithWhereNestedInput!]
+}
+
+input StageStructUpdateManyWithWhereNestedInput {
+  where: StageStructScalarWhereInput!
+  data: StageStructUpdateManyDataInput!
 }
 
 input StageStructUpdateOneWithoutBoss_foundInput {
@@ -2900,14 +3220,34 @@ input StageStructUpdateOneWithoutBoss_foundInput {
 
 input StageStructUpdateWithoutBoss_foundDataInput {
   stage_number: Int
-  map: MapUpdateOneRequiredInput
+  map: MapUpdateOneRequiredWithoutField_stagesInput
   base_exp: Int
   gear_level: Int
+  base_shell: Int
+}
+
+input StageStructUpdateWithoutMapDataInput {
+  stage_number: Int
+  base_exp: Int
+  gear_level: Int
+  base_shell: Int
+  boss_found: BossStructUpdateOneWithoutLocationInput
+}
+
+input StageStructUpdateWithWhereUniqueWithoutMapInput {
+  where: StageStructWhereUniqueInput!
+  data: StageStructUpdateWithoutMapDataInput!
 }
 
 input StageStructUpsertWithoutBoss_foundInput {
   update: StageStructUpdateWithoutBoss_foundDataInput!
   create: StageStructCreateWithoutBoss_foundInput!
+}
+
+input StageStructUpsertWithWhereUniqueWithoutMapInput {
+  where: StageStructWhereUniqueInput!
+  update: StageStructUpdateWithoutMapDataInput!
+  create: StageStructCreateWithoutMapInput!
 }
 
 input StageStructWhereInput {
@@ -2950,6 +3290,14 @@ input StageStructWhereInput {
   gear_level_lte: Int
   gear_level_gt: Int
   gear_level_gte: Int
+  base_shell: Int
+  base_shell_not: Int
+  base_shell_in: [Int!]
+  base_shell_not_in: [Int!]
+  base_shell_lt: Int
+  base_shell_lte: Int
+  base_shell_gt: Int
+  base_shell_gte: Int
   boss_found: BossStructWhereInput
   AND: [StageStructWhereInput!]
   OR: [StageStructWhereInput!]
@@ -2964,6 +3312,8 @@ type Subscription {
   boss(where: BossSubscriptionWhereInput): BossSubscriptionPayload
   bossStruct(where: BossStructSubscriptionWhereInput): BossStructSubscriptionPayload
   class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
+  connectContinent(where: ConnectContinentSubscriptionWhereInput): ConnectContinentSubscriptionPayload
+  connectedMap(where: ConnectedMapSubscriptionWhereInput): ConnectedMapSubscriptionPayload
   continent(where: ContinentSubscriptionWhereInput): ContinentSubscriptionPayload
   element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
   guide(where: GuideSubscriptionWhereInput): GuideSubscriptionPayload

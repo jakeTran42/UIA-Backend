@@ -27,7 +27,7 @@ type Skill {
   skill_type: [SkillType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
   combat_type: [CombatType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
   energy: Int! @default(value: 0)
-  location: Map! @relation(link: TABLE) 
+  location: Map @relation(link: TABLE) 
   class: Class @relation(link: INLINE)
 }
 
@@ -83,6 +83,7 @@ type StageStruct {
   map: Map! @relation(link: INLINE)
   base_exp: Int
   gear_level: Int
+  base_shell: Int
   boss_found: BossStruct 
 }
 
@@ -90,13 +91,21 @@ type StageStruct {
 type Map {
   id: ID! @id
   name: String! @unique
-  total_stage: Int!
-  bosses: [Boss!]!
-  previous_map: Map @relation(name: "LastMapRelation" link: INLINE)
-  next_map: Map @relation(name: "NextMapRelation" link: INLINE)
+  total_stage: Int
+  native_boss: [Boss!]!
+  #previous_map: Map @relation(name: "LastMapRelation")
+  #next_map: Map @relation(name: "NextMapRelation")
+  connected_maps: ConnectedMap @relation(name: "LastMapRelation" name: "NextMapRelation" link: TABLE)
   continent: Continent! @relation(link: INLINE)
   obtainable_skills: [Skill!]!
-  stages: [BossStruct!]!
+  boss_stages: [BossStruct!]!
+  field_stages: [StageStruct!]!
+}
+
+type ConnectedMap {
+  id: ID! @id
+  next_map: Map! @relation(name: "NextMapRelation")
+  previous_map: Map! @relation(name: "LastMapRelation")
 }
 
 # 'Continent' type is a type of unique continent in the game containing multiple map types
@@ -105,24 +114,27 @@ type Continent {
   name: String! @unique
   bosses: [Boss!]!
   maps: [Map!]!
-  next_continent: Continent @relation(name: "NextContinentRelation" link: INLINE)
-  previous_continent: Continent @relation(name: "LastContinentRelation" link: INLINE)
+  # next_continent: Continent @relation(name: "NextContinentRelation")
+  # previous_continent: Continent @relation(name: "LastContinentRelation")
+  connected_continent: ConnectContinent @relation(name: "LastContinentRelation" name: "NextContinentRelation" link: TABLE)
+}
+
+type ConnectContinent {
+  id: ID! @id
+  current_continent: Continent! @relation(name: "CurrentContinent")
+  next_continent: Continent @relation(name: "NextContinentRelation")
+  previous_continent: Continent @relation(name: "LastContinentRelation")
 }
 
 # Element is a type that contain predetermine enum ElementType to define the types in the game.
 type Element {
   id: ID! @id
-  name: ElementType!
-  weakness: ElementType!
-  effective: ElementType!
+  name: ElementType! @unique
+  weakness: ElementType
+  effective: ElementType
 }
 
-# Permission role which determine access level.
-enum Role {
-  ADMIN
-  MODERATOR
-  USER
-}
+#Below are different predertermined types for some types.
 
 enum CombatType {
   UNKNOWN
@@ -142,10 +154,7 @@ enum SkillType {
   HEAL_TARGET
   HEAL_AOE
   HEAL_DOT
-  TAUNT
-  INTERUPT
-  KNOCKUP
-  SILENCE
+  CROWD_CONTROL
   SUMMON
   DEBUFF
   DISPELL
@@ -184,4 +193,11 @@ enum Hero {
   MAGE
   GLADIATOR
   WARRIOR
+}
+
+# Permission role which determine access level.
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
 }

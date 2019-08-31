@@ -4,9 +4,15 @@ type Query {
 }
 
 type Mutation {
+    # User content and auth mutation
     postGuide(title: String!, body: String!): Guide!
     signup(email: String!, password: String!, handle: String!): AuthPayload!
     login(email: String, password: String!, handle: String): AuthPayload!
+
+    # In-game mutation
+    stageInsertion(stage_number: Int!, base_exp: Int!, gear_level: Int!, base_shell: Int!, mapId: String!): StageStruct
+    mapInsertion(name: String!, total_stage: Int, previous_mapId: String, next_mapId: String, continentId: String!): Map
+    mapUpdate(whereId: String!, total_stage: Int, next_map: String, previous_map: String, continent: String): Map
 }
 
 type Guide {
@@ -16,13 +22,162 @@ type Guide {
 }
 
 type User {
-    # id: ID!
+    id: ID!
     handle: String!
     email: String!
     guides: [Guide!]!
 }
 
 type AuthPayload {
-  token: String
-  user: User
+    token: String
+    user: User
+}
+
+# IN-GAME TYPES USE FOR MOSTLY QUERYING AND READ-ONLY
+
+type Class {
+    id: ID!
+    name: Hero!
+    description: String!
+    weapon: String!
+    skills: [Skill!]!
+}
+
+type Skill {
+    id: ID!
+    name: String!
+    description: String!
+    skill_type: [SkillType!]!
+    combat_type: [CombatType!]!
+    energy: Int!
+    location: Map
+    class: Class
+}
+
+type MonsterSkill {
+    id: ID!
+    name: String!
+    description: String!
+    skill_type: SkillType
+    combat_type: CombatType
+    energy: Int!
+}
+
+type Boss {
+    id: ID!
+    name: String!
+    element_one: Element
+    element_one_value: Int
+    element_two: Element 
+    element_two_value: Int
+    locations_found: [Map!]!
+    continent_found: [Continent!]!
+}
+
+
+type Map {
+    id: ID! 
+    name: String!
+    total_stage: Int!
+    native_boss: [Boss!]!
+    connected_maps: ConnectedMap
+    continent: Continent!
+    obtainable_skills: [Skill!]!
+    boss_stages: [BossStruct!]!
+    field_stages: [StageStruct!]!
+
+}
+
+type ConnectedMap {
+  next_map: Map!
+  previous_map: Map!
+}
+
+type Continent {
+    id: ID!
+    name: String!
+    bosses: [Boss!]!
+    maps: [Map!]!
+    connected_continent: ConnectContinent
+}
+
+type ConnectContinent {
+  next_continent: Continent!
+  previous_continent: Continent!
+}
+
+type StageStruct {
+    id: ID!
+    stage_number: Int!
+    map: Map!
+    base_exp: Int
+    gear_level: Int
+    base_shell: Int
+    boss_found: BossStruct 
+}
+
+type BossStruct {
+    id: ID!
+    monster_found: Boss!
+    minion_present: Boolean
+    location: StageStruct
+    HP: Int!
+    ATK: Int!
+    Armor: Int!
+    AtkSpd: Float!
+    skills: [MonsterSkill!]!
+}
+
+type Element {
+    id: ID!
+    name: ElementType!
+    weakness: ElementType
+    effective: ElementType
+}
+
+# OPTIONS FOR IN-GAME TYPES FIELDs
+
+enum ElementType {
+    FIRE
+    LIGHTNING
+    FROST
+    EARTH
+}
+
+enum CombatType {
+    UNKNOWN
+    RANGE
+    MEELEE
+    SELF
+    TEAM
+}
+
+enum SkillType {
+    UNKNOWN
+    BUFF
+    BUFF_AOE
+    DAMAGE_TARGET
+    DAMAGE_AOE
+    DAMAGE_DOT
+    HEAL_TARGET
+    HEAL_AOE
+    HEAL_DOT
+    CROWD_CONTROL
+    SUMMON
+    DEBUFF
+    DISPELL
+    ABSORB
+    STEALTH
+    PASSIVE
+}
+
+enum Hero {
+    WARLOCK
+    SHAMAN
+    ASSASSIN
+    HUNTER
+    DRUID
+    MAGE
+    GLADIATOR
+    WARRIOR
 }
