@@ -1,6 +1,7 @@
 require('dotenv').config()
 const { GraphQLServer } = require('graphql-yoga');
 const { prisma } = require('../UIA-prisma/generated/prisma-client')
+const typeDefs = require('./typeDefs/index.ts')
 
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
@@ -23,7 +24,8 @@ const resolvers = {
 }
 
 const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  // typeDefs: './src/schema.graphql',
+  typeDefs,
   resolvers,
   context: request => {
     return {

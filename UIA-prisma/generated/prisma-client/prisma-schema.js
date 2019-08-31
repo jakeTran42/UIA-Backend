@@ -189,9 +189,10 @@ input BossScalarWhereInput {
 
 type BossStruct {
   id: ID!
+  createdAt: DateTime!
   monster_found: Boss!
   minion_present: Boolean
-  location: StageStruct!
+  location: StageStruct
   HP: Int!
   ATK: Int!
   Armor: Int!
@@ -209,7 +210,7 @@ input BossStructCreateInput {
   id: ID
   monster_found: BossCreateOneInput!
   minion_present: Boolean
-  location: StageStructCreateOneInput!
+  location: StageStructCreateOneWithoutBoss_foundInput
   HP: Int!
   ATK: Int!
   Armor: Int!
@@ -222,6 +223,22 @@ input BossStructCreateManyInput {
   connect: [BossStructWhereUniqueInput!]
 }
 
+input BossStructCreateOneWithoutLocationInput {
+  create: BossStructCreateWithoutLocationInput
+  connect: BossStructWhereUniqueInput
+}
+
+input BossStructCreateWithoutLocationInput {
+  id: ID
+  monster_found: BossCreateOneInput!
+  minion_present: Boolean
+  HP: Int!
+  ATK: Int!
+  Armor: Int!
+  AtkSpd: Float!
+  skills: MonsterSkillCreateManyInput
+}
+
 type BossStructEdge {
   node: BossStruct!
   cursor: String!
@@ -230,6 +247,8 @@ type BossStructEdge {
 enum BossStructOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
   minion_present_ASC
   minion_present_DESC
   HP_ASC
@@ -244,6 +263,7 @@ enum BossStructOrderByInput {
 
 type BossStructPreviousValues {
   id: ID!
+  createdAt: DateTime!
   minion_present: Boolean
   HP: Int!
   ATK: Int!
@@ -266,6 +286,14 @@ input BossStructScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   minion_present: Boolean
   minion_present_not: Boolean
   HP: Int
@@ -326,7 +354,7 @@ input BossStructSubscriptionWhereInput {
 input BossStructUpdateDataInput {
   monster_found: BossUpdateOneRequiredInput
   minion_present: Boolean
-  location: StageStructUpdateOneRequiredInput
+  location: StageStructUpdateOneWithoutBoss_foundInput
   HP: Int
   ATK: Int
   Armor: Int
@@ -337,7 +365,7 @@ input BossStructUpdateDataInput {
 input BossStructUpdateInput {
   monster_found: BossUpdateOneRequiredInput
   minion_present: Boolean
-  location: StageStructUpdateOneRequiredInput
+  location: StageStructUpdateOneWithoutBoss_foundInput
   HP: Int
   ATK: Int
   Armor: Int
@@ -378,9 +406,33 @@ input BossStructUpdateManyWithWhereNestedInput {
   data: BossStructUpdateManyDataInput!
 }
 
+input BossStructUpdateOneWithoutLocationInput {
+  create: BossStructCreateWithoutLocationInput
+  update: BossStructUpdateWithoutLocationDataInput
+  upsert: BossStructUpsertWithoutLocationInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: BossStructWhereUniqueInput
+}
+
+input BossStructUpdateWithoutLocationDataInput {
+  monster_found: BossUpdateOneRequiredInput
+  minion_present: Boolean
+  HP: Int
+  ATK: Int
+  Armor: Int
+  AtkSpd: Float
+  skills: MonsterSkillUpdateManyInput
+}
+
 input BossStructUpdateWithWhereUniqueNestedInput {
   where: BossStructWhereUniqueInput!
   data: BossStructUpdateDataInput!
+}
+
+input BossStructUpsertWithoutLocationInput {
+  update: BossStructUpdateWithoutLocationDataInput!
+  create: BossStructCreateWithoutLocationInput!
 }
 
 input BossStructUpsertWithWhereUniqueNestedInput {
@@ -404,6 +456,14 @@ input BossStructWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   monster_found: BossWhereInput
   minion_present: Boolean
   minion_present_not: Boolean
@@ -648,7 +708,7 @@ input BossWhereUniqueInput {
 
 type Class {
   id: ID!
-  name: String!
+  name: Hero!
   description: String!
   weapon: String!
   skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill!]
@@ -662,7 +722,7 @@ type ClassConnection {
 
 input ClassCreateInput {
   id: ID
-  name: String!
+  name: Hero!
   description: String!
   weapon: String!
   skills: SkillCreateManyWithoutClassInput
@@ -675,7 +735,7 @@ input ClassCreateOneWithoutSkillsInput {
 
 input ClassCreateWithoutSkillsInput {
   id: ID
-  name: String!
+  name: Hero!
   description: String!
   weapon: String!
 }
@@ -698,7 +758,7 @@ enum ClassOrderByInput {
 
 type ClassPreviousValues {
   id: ID!
-  name: String!
+  name: Hero!
   description: String!
   weapon: String!
 }
@@ -722,14 +782,14 @@ input ClassSubscriptionWhereInput {
 }
 
 input ClassUpdateInput {
-  name: String
+  name: Hero
   description: String
   weapon: String
   skills: SkillUpdateManyWithoutClassInput
 }
 
 input ClassUpdateManyMutationInput {
-  name: String
+  name: Hero
   description: String
   weapon: String
 }
@@ -744,7 +804,7 @@ input ClassUpdateOneWithoutSkillsInput {
 }
 
 input ClassUpdateWithoutSkillsDataInput {
-  name: String
+  name: Hero
   description: String
   weapon: String
 }
@@ -769,20 +829,10 @@ input ClassWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
+  name: Hero
+  name_not: Hero
+  name_in: [Hero!]
+  name_not_in: [Hero!]
   description: String
   description_not: String
   description_in: [String!]
@@ -821,9 +871,11 @@ input ClassWhereInput {
 
 input ClassWhereUniqueInput {
   id: ID
+  name: Hero
 }
 
 enum CombatType {
+  UNKNOWN
   RANGE
   MEELEE
   SELF
@@ -1280,6 +1332,7 @@ input ElementWhereUniqueInput {
 type Guide {
   id: ID!
   createdAt: DateTime!
+  updateAt: DateTime
   title: String!
   body: String!
   owner: User!
@@ -1293,6 +1346,7 @@ type GuideConnection {
 
 input GuideCreateInput {
   id: ID
+  updateAt: DateTime
   title: String!
   body: String!
   owner: UserCreateOneWithoutGuidesInput!
@@ -1305,6 +1359,7 @@ input GuideCreateManyWithoutOwnerInput {
 
 input GuideCreateWithoutOwnerInput {
   id: ID
+  updateAt: DateTime
   title: String!
   body: String!
 }
@@ -1319,6 +1374,8 @@ enum GuideOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  updateAt_ASC
+  updateAt_DESC
   title_ASC
   title_DESC
   body_ASC
@@ -1328,6 +1385,7 @@ enum GuideOrderByInput {
 type GuidePreviousValues {
   id: ID!
   createdAt: DateTime!
+  updateAt: DateTime
   title: String!
   body: String!
 }
@@ -1355,6 +1413,14 @@ input GuideScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updateAt: DateTime
+  updateAt_not: DateTime
+  updateAt_in: [DateTime!]
+  updateAt_not_in: [DateTime!]
+  updateAt_lt: DateTime
+  updateAt_lte: DateTime
+  updateAt_gt: DateTime
+  updateAt_gte: DateTime
   title: String
   title_not: String
   title_in: [String!]
@@ -1407,17 +1473,20 @@ input GuideSubscriptionWhereInput {
 }
 
 input GuideUpdateInput {
+  updateAt: DateTime
   title: String
   body: String
   owner: UserUpdateOneRequiredWithoutGuidesInput
 }
 
 input GuideUpdateManyDataInput {
+  updateAt: DateTime
   title: String
   body: String
 }
 
 input GuideUpdateManyMutationInput {
+  updateAt: DateTime
   title: String
   body: String
 }
@@ -1440,6 +1509,7 @@ input GuideUpdateManyWithWhereNestedInput {
 }
 
 input GuideUpdateWithoutOwnerDataInput {
+  updateAt: DateTime
   title: String
   body: String
 }
@@ -1478,6 +1548,14 @@ input GuideWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updateAt: DateTime
+  updateAt_not: DateTime
+  updateAt_in: [DateTime!]
+  updateAt_not_in: [DateTime!]
+  updateAt_lt: DateTime
+  updateAt_lte: DateTime
+  updateAt_gt: DateTime
+  updateAt_gte: DateTime
   title: String
   title_not: String
   title_in: [String!]
@@ -1514,6 +1592,17 @@ input GuideWhereInput {
 
 input GuideWhereUniqueInput {
   id: ID
+}
+
+enum Hero {
+  WARLOCK
+  SHAMAN
+  ASSASSIN
+  HUNTER
+  DRUID
+  MAGE
+  GLADIATOR
+  WARRIOR
 }
 
 scalar Long
@@ -2359,8 +2448,8 @@ type Skill {
   id: ID!
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: [SkillType!]!
+  combat_type: [CombatType!]!
   energy: Int!
   location: Map!
   class: Class
@@ -2372,12 +2461,16 @@ type SkillConnection {
   aggregate: AggregateSkill!
 }
 
+input SkillCreatecombat_typeInput {
+  set: [CombatType!]
+}
+
 input SkillCreateInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillCreateskill_typeInput
+  combat_type: SkillCreatecombat_typeInput
   energy: Int
   location: MapCreateOneWithoutObtainable_skillsInput!
   class: ClassCreateOneWithoutSkillsInput
@@ -2393,12 +2486,16 @@ input SkillCreateManyWithoutLocationInput {
   connect: [SkillWhereUniqueInput!]
 }
 
+input SkillCreateskill_typeInput {
+  set: [SkillType!]
+}
+
 input SkillCreateWithoutClassInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillCreateskill_typeInput
+  combat_type: SkillCreatecombat_typeInput
   energy: Int
   location: MapCreateOneWithoutObtainable_skillsInput!
 }
@@ -2407,8 +2504,8 @@ input SkillCreateWithoutLocationInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillCreateskill_typeInput
+  combat_type: SkillCreatecombat_typeInput
   energy: Int
   class: ClassCreateOneWithoutSkillsInput
 }
@@ -2425,10 +2522,6 @@ enum SkillOrderByInput {
   name_DESC
   description_ASC
   description_DESC
-  skill_type_ASC
-  skill_type_DESC
-  combat_type_ASC
-  combat_type_DESC
   energy_ASC
   energy_DESC
 }
@@ -2437,8 +2530,8 @@ type SkillPreviousValues {
   id: ID!
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: [SkillType!]!
+  combat_type: [CombatType!]!
   energy: Int!
 }
 
@@ -2485,14 +2578,6 @@ input SkillScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  skill_type: SkillType
-  skill_type_not: SkillType
-  skill_type_in: [SkillType!]
-  skill_type_not_in: [SkillType!]
-  combat_type: CombatType
-  combat_type_not: CombatType
-  combat_type_in: [CombatType!]
-  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]
@@ -2546,11 +2631,15 @@ enum SkillType {
   PASSIVE
 }
 
+input SkillUpdatecombat_typeInput {
+  set: [CombatType!]
+}
+
 input SkillUpdateInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillUpdateskill_typeInput
+  combat_type: SkillUpdatecombat_typeInput
   energy: Int
   location: MapUpdateOneRequiredWithoutObtainable_skillsInput
   class: ClassUpdateOneWithoutSkillsInput
@@ -2559,16 +2648,16 @@ input SkillUpdateInput {
 input SkillUpdateManyDataInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillUpdateskill_typeInput
+  combat_type: SkillUpdatecombat_typeInput
   energy: Int
 }
 
 input SkillUpdateManyMutationInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillUpdateskill_typeInput
+  combat_type: SkillUpdatecombat_typeInput
   energy: Int
 }
 
@@ -2601,11 +2690,15 @@ input SkillUpdateManyWithWhereNestedInput {
   data: SkillUpdateManyDataInput!
 }
 
+input SkillUpdateskill_typeInput {
+  set: [SkillType!]
+}
+
 input SkillUpdateWithoutClassDataInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillUpdateskill_typeInput
+  combat_type: SkillUpdatecombat_typeInput
   energy: Int
   location: MapUpdateOneRequiredWithoutObtainable_skillsInput
 }
@@ -2613,8 +2706,8 @@ input SkillUpdateWithoutClassDataInput {
 input SkillUpdateWithoutLocationDataInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: SkillUpdateskill_typeInput
+  combat_type: SkillUpdatecombat_typeInput
   energy: Int
   class: ClassUpdateOneWithoutSkillsInput
 }
@@ -2684,14 +2777,6 @@ input SkillWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  skill_type: SkillType
-  skill_type_not: SkillType
-  skill_type_in: [SkillType!]
-  skill_type_not_in: [SkillType!]
-  combat_type: CombatType
-  combat_type_not: CombatType
-  combat_type_in: [CombatType!]
-  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]
@@ -2716,6 +2801,9 @@ type StageStruct {
   id: ID!
   stage_number: Int!
   map: Map!
+  base_exp: Int
+  gear_level: Int
+  boss_found: BossStruct
 }
 
 type StageStructConnection {
@@ -2728,11 +2816,22 @@ input StageStructCreateInput {
   id: ID
   stage_number: Int!
   map: MapCreateOneInput!
+  base_exp: Int
+  gear_level: Int
+  boss_found: BossStructCreateOneWithoutLocationInput
 }
 
-input StageStructCreateOneInput {
-  create: StageStructCreateInput
+input StageStructCreateOneWithoutBoss_foundInput {
+  create: StageStructCreateWithoutBoss_foundInput
   connect: StageStructWhereUniqueInput
+}
+
+input StageStructCreateWithoutBoss_foundInput {
+  id: ID
+  stage_number: Int!
+  map: MapCreateOneInput!
+  base_exp: Int
+  gear_level: Int
 }
 
 type StageStructEdge {
@@ -2745,11 +2844,17 @@ enum StageStructOrderByInput {
   id_DESC
   stage_number_ASC
   stage_number_DESC
+  base_exp_ASC
+  base_exp_DESC
+  gear_level_ASC
+  gear_level_DESC
 }
 
 type StageStructPreviousValues {
   id: ID!
   stage_number: Int!
+  base_exp: Int
+  gear_level: Int
 }
 
 type StageStructSubscriptionPayload {
@@ -2770,30 +2875,39 @@ input StageStructSubscriptionWhereInput {
   NOT: [StageStructSubscriptionWhereInput!]
 }
 
-input StageStructUpdateDataInput {
-  stage_number: Int
-  map: MapUpdateOneRequiredInput
-}
-
 input StageStructUpdateInput {
   stage_number: Int
   map: MapUpdateOneRequiredInput
+  base_exp: Int
+  gear_level: Int
+  boss_found: BossStructUpdateOneWithoutLocationInput
 }
 
 input StageStructUpdateManyMutationInput {
   stage_number: Int
+  base_exp: Int
+  gear_level: Int
 }
 
-input StageStructUpdateOneRequiredInput {
-  create: StageStructCreateInput
-  update: StageStructUpdateDataInput
-  upsert: StageStructUpsertNestedInput
+input StageStructUpdateOneWithoutBoss_foundInput {
+  create: StageStructCreateWithoutBoss_foundInput
+  update: StageStructUpdateWithoutBoss_foundDataInput
+  upsert: StageStructUpsertWithoutBoss_foundInput
+  delete: Boolean
+  disconnect: Boolean
   connect: StageStructWhereUniqueInput
 }
 
-input StageStructUpsertNestedInput {
-  update: StageStructUpdateDataInput!
-  create: StageStructCreateInput!
+input StageStructUpdateWithoutBoss_foundDataInput {
+  stage_number: Int
+  map: MapUpdateOneRequiredInput
+  base_exp: Int
+  gear_level: Int
+}
+
+input StageStructUpsertWithoutBoss_foundInput {
+  update: StageStructUpdateWithoutBoss_foundDataInput!
+  create: StageStructCreateWithoutBoss_foundInput!
 }
 
 input StageStructWhereInput {
@@ -2820,6 +2934,23 @@ input StageStructWhereInput {
   stage_number_gt: Int
   stage_number_gte: Int
   map: MapWhereInput
+  base_exp: Int
+  base_exp_not: Int
+  base_exp_in: [Int!]
+  base_exp_not_in: [Int!]
+  base_exp_lt: Int
+  base_exp_lte: Int
+  base_exp_gt: Int
+  base_exp_gte: Int
+  gear_level: Int
+  gear_level_not: Int
+  gear_level_in: [Int!]
+  gear_level_not_in: [Int!]
+  gear_level_lt: Int
+  gear_level_lte: Int
+  gear_level_gt: Int
+  gear_level_gte: Int
+  boss_found: BossStructWhereInput
   AND: [StageStructWhereInput!]
   OR: [StageStructWhereInput!]
   NOT: [StageStructWhereInput!]
@@ -2846,6 +2977,7 @@ type Subscription {
 type User {
   id: ID!
   createdAt: DateTime!
+  updateAt: DateTime
   handle: String!
   email: String!
   role: Role!
@@ -2861,6 +2993,7 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
+  updateAt: DateTime
   handle: String!
   email: String!
   role: Role
@@ -2875,6 +3008,7 @@ input UserCreateOneWithoutGuidesInput {
 
 input UserCreateWithoutGuidesInput {
   id: ID
+  updateAt: DateTime
   handle: String!
   email: String!
   role: Role
@@ -2891,6 +3025,8 @@ enum UserOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  updateAt_ASC
+  updateAt_DESC
   handle_ASC
   handle_DESC
   email_ASC
@@ -2904,6 +3040,7 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   createdAt: DateTime!
+  updateAt: DateTime
   handle: String!
   email: String!
   role: Role!
@@ -2929,6 +3066,7 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  updateAt: DateTime
   handle: String
   email: String
   role: Role
@@ -2937,6 +3075,7 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
+  updateAt: DateTime
   handle: String
   email: String
   role: Role
@@ -2951,6 +3090,7 @@ input UserUpdateOneRequiredWithoutGuidesInput {
 }
 
 input UserUpdateWithoutGuidesDataInput {
+  updateAt: DateTime
   handle: String
   email: String
   role: Role
@@ -2985,6 +3125,14 @@ input UserWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updateAt: DateTime
+  updateAt_not: DateTime
+  updateAt_in: [DateTime!]
+  updateAt_not_in: [DateTime!]
+  updateAt_lt: DateTime
+  updateAt_lte: DateTime
+  updateAt_gt: DateTime
+  updateAt_gte: DateTime
   handle: String
   handle_not: String
   handle_in: [String!]

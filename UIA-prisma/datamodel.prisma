@@ -1,6 +1,8 @@
+# 'Guide' Type is user generated content
 type Guide {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  updateAt: DateTime @updateAt
   title: String!
   body: String!
   owner: User! @relation(link: INLINE)
@@ -9,6 +11,7 @@ type Guide {
 type User {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  updateAt: DateTime @updateAt
   handle: String! @unique
   email: String! @unique
   role: Role! @default(value: USER)
@@ -16,17 +19,19 @@ type User {
   guides: [Guide!]!
 }
 
+# All the skill in the game which will be unique elements and their attributes.
 type Skill {
   id: ID! @id
   name: String! @unique
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: [SkillType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
+  combat_type: [CombatType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
   energy: Int! @default(value: 0)
-  location: Map! @relation(link: INLINE) 
+  location: Map! @relation(link: TABLE) 
   class: Class @relation(link: INLINE)
 }
 
+# All the monster skill in the game which will be unique elements and their attributes.
 type MonsterSkill {
   id: ID! @id
   name: String! @unique
@@ -36,14 +41,16 @@ type MonsterSkill {
   energy: Int! @default(value: 0)
 }
 
+# The predetermine class type with enum ClassType
 type Class {
   id: ID! @id
-  name: String!
+  name: Hero! @unique
   description: String!
   weapon: String!
   skills: [Skill!]!
 }
 
+# 'Boss' type of unique elements of boss that contain different attributes and their locations.
 type Boss {
   id: ID! @id
   name: String! @unique
@@ -55,11 +62,13 @@ type Boss {
   continent_found: [Continent!]! @relation(link: TABLE)
 }
 
+# 'BossStruct' Type is a struct of different boss stage attribute indicating specific boss location
 type BossStruct {
   id: ID! @id
+  createdAt: DateTime! @createdAt
   monster_found: Boss!
-  minion_present: Boolean @default(value: false)
-  location: StageStruct!
+  minion_present: Boolean @default(value: false) 
+  location: StageStruct @relation(link: TABLE) @unique
   HP: Int!
   ATK: Int!
   Armor: Int!
@@ -67,12 +76,17 @@ type BossStruct {
   skills: [MonsterSkill!]! @relation(link: TABLE)
 }
 
+# 'Stage Struct' is a struct of different stage attributes indicating the location of specfic boss.
 type StageStruct {
   id: ID! @id
   stage_number: Int!
   map: Map! @relation(link: INLINE)
+  base_exp: Int
+  gear_level: Int
+  boss_found: BossStruct 
 }
 
+# 'Map' type is a type of unique maps available in the game with different array attributes
 type Map {
   id: ID! @id
   name: String! @unique
@@ -85,6 +99,7 @@ type Map {
   stages: [BossStruct!]!
 }
 
+# 'Continent' type is a type of unique continent in the game containing multiple map types
 type Continent {
   id: ID! @id
   name: String! @unique
@@ -94,6 +109,7 @@ type Continent {
   previous_continent: Continent @relation(name: "LastContinentRelation" link: INLINE)
 }
 
+# Element is a type that contain predetermine enum ElementType to define the types in the game.
 type Element {
   id: ID! @id
   name: ElementType!
@@ -101,6 +117,7 @@ type Element {
   effective: ElementType!
 }
 
+# Permission role which determine access level.
 enum Role {
   ADMIN
   MODERATOR
@@ -108,17 +125,11 @@ enum Role {
 }
 
 enum CombatType {
+  UNKNOWN
   RANGE
   MEELEE
   SELF
   TEAM
-}
-
-enum ElementType {
-  FIRE
-  LIGHTNING
-  FROST
-  EARTH
 }
 
 enum SkillType {
@@ -141,4 +152,36 @@ enum SkillType {
   ABSORB
   STEALTH
   PASSIVE
+}
+
+enum ElementType {
+  FIRE
+  LIGHTNING
+  FROST
+  EARTH
+}
+
+enum PetTalent {
+  ATK
+  SYMBIOSIS
+  ASSIST
+  GUARDIAN
+}
+
+enum Rarity {
+  NORMAL
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+enum Hero {
+  WARLOCK
+  SHAMAN
+  ASSASSIN
+  HUNTER
+  DRUID
+  MAGE
+  GLADIATOR
+  WARRIOR
 }

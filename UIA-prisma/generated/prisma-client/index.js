@@ -57,11 +57,23 @@ var models = [
     embedded: false
   },
   {
+    name: "SkillType",
+    embedded: false
+  },
+  {
     name: "ElementType",
     embedded: false
   },
   {
-    name: "SkillType",
+    name: "PetTalent",
+    embedded: false
+  },
+  {
+    name: "Rarity",
+    embedded: false
+  },
+  {
+    name: "Hero",
     embedded: false
   }
 ];
