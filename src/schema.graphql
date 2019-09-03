@@ -8,11 +8,6 @@ type Mutation {
     postGuide(title: String!, body: String!): Guide!
     signup(email: String!, password: String!, handle: String!): AuthPayload!
     login(email: String, password: String!, handle: String): AuthPayload!
-
-    # In-game mutation
-    stageInsertion(stage_number: Int!, base_exp: Int!, gear_level: Int!, base_shell: Int!, mapId: String!): StageStruct
-    mapInsertion(name: String!, total_stage: Int, previous_mapId: String, next_mapId: String, continentId: String!): Map
-    mapUpdate(whereId: String!, total_stage: Int, next_map: String, previous_map: String, continent: String): Map
 }
 
 type Guide {
@@ -56,11 +51,11 @@ type Skill {
 
 type MonsterSkill {
     id: ID!
-    name: String!
-    description: String!
-    skill_type: SkillType
-    combat_type: CombatType
-    energy: Int!
+    name: String
+    description: String
+    skill_type: [SkillType!]!
+    combat_type: [CombatType!]!
+    energy: Int
 }
 
 type Boss {
@@ -70,27 +65,24 @@ type Boss {
     element_one_value: Int
     element_two: Element 
     element_two_value: Int
-    locations_found: [Map!]!
+    map_found: [Map!]!
     continent_found: [Continent!]!
 }
 
 
 type Map {
-    id: ID! 
-    name: String!
-    total_stage: Int!
+    id: ID! @id
+    name: String
+    total_stage: Int
     native_boss: [Boss!]!
-    connected_maps: ConnectedMap
-    continent: Continent!
     obtainable_skills: [Skill!]!
-    boss_stages: [BossStruct!]!
-    field_stages: [StageStruct!]!
+    bosses_found: [BossStruct!]!
+    previous_map: String
+    next_map: String
+    pet_unlock: [Pet!]!
+    continent: Continent! @relation(link: INLINE)
+    imageurl: String
 
-}
-
-type ConnectedMap {
-  next_map: Map!
-  previous_map: Map!
 }
 
 type Continent {
@@ -98,33 +90,15 @@ type Continent {
     name: String!
     bosses: [Boss!]!
     maps: [Map!]!
-    connected_continent: ConnectContinent
-}
-
-type ConnectContinent {
-  next_continent: Continent!
-  previous_continent: Continent!
-}
-
-type StageStruct {
-    id: ID!
-    stage_number: Int!
-    map: Map!
-    base_exp: Int
-    gear_level: Int
-    base_shell: Int
-    boss_found: BossStruct 
+    next_continent: String
+    previous_continent: String
 }
 
 type BossStruct {
     id: ID!
-    monster_found: Boss!
-    minion_present: Boolean
-    location: StageStruct
-    HP: Int!
-    ATK: Int!
-    Armor: Int!
-    AtkSpd: Float!
+    map: Map!
+    boss: Boss!
+    AtkSpd: Float
     skills: [MonsterSkill!]!
 }
 
@@ -135,49 +109,89 @@ type Element {
     effective: ElementType
 }
 
+type Pet {
+  id: ID!
+  name: String!
+  element_one: Element
+  element_one_value: Int
+  element_two: Element
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: Food
+  area: Map
+  imageurl: String
+}
+
+type Food {
+  id: ID! @id
+  name: String! @unique
+  pet_favorite: [Pet!]!
+  buff: Stat
+  imageurl: String
+}
+
 # OPTIONS FOR IN-GAME TYPES FIELDs
 
-enum ElementType {
-    FIRE
-    LIGHTNING
-    FROST
-    EARTH
+enum SkillType {
+  UNKNOWN
+  ACTIVE
+  PASSIVE
 }
 
 enum CombatType {
-    UNKNOWN
-    RANGE
-    MEELEE
-    SELF
-    TEAM
+  UNKNOWN
+  BUFF
+  DAMAGE
+  HEAL
+  CONTINUOUS
+  OVER_TIME
+  AREA_OF_EFFECT
+  TARGET
+  CROWD_CONTROL
+  SUMMON
+  DEBUFF
+  DISPELL
+  RANDOM
+  ABSORB
+  STEALTH
+  PASSIVE
 }
 
-enum SkillType {
-    UNKNOWN
-    BUFF
-    BUFF_AOE
-    DAMAGE_TARGET
-    DAMAGE_AOE
-    DAMAGE_DOT
-    HEAL_TARGET
-    HEAL_AOE
-    HEAL_DOT
-    CROWD_CONTROL
-    SUMMON
-    DEBUFF
-    DISPELL
-    ABSORB
-    STEALTH
-    PASSIVE
+enum ElementType {
+  FIRE
+  LIGHTNING
+  FROST
+  EARTH
+}
+
+enum PetType {
+  ASSIST
+  SYMBIOSIS
+  ATTACK
+  GUARDIAN
 }
 
 enum Hero {
-    WARLOCK
-    SHAMAN
-    ASSASSIN
-    HUNTER
-    DRUID
-    MAGE
-    GLADIATOR
-    WARRIOR
+  WARLOCK
+  SHAMAN
+  ASSASSIN
+  HUNTER
+  DRUID
+  MAGE
+  GLADIATOR
+  WARRIOR
+}
+
+enum Stat {
+  ATTACK
+  HP
+  ARMOR
+  ATK_SPD
+  HIT
+  EVASION
+  CRIT
+  TENACITY
+  BLOCK
+  IMPALE
 }

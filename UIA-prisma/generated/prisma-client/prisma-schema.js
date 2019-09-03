@@ -15,19 +15,15 @@ type AggregateClass {
   count: Int!
 }
 
-type AggregateConnectContinent {
-  count: Int!
-}
-
-type AggregateConnectedMap {
-  count: Int!
-}
-
 type AggregateContinent {
   count: Int!
 }
 
 type AggregateElement {
+  count: Int!
+}
+
+type AggregateFood {
   count: Int!
 }
 
@@ -43,11 +39,11 @@ type AggregateMonsterSkill {
   count: Int!
 }
 
-type AggregateSkill {
+type AggregatePet {
   count: Int!
 }
 
-type AggregateStageStruct {
+type AggregateSkill {
   count: Int!
 }
 
@@ -66,7 +62,7 @@ type Boss {
   element_one_value: Int
   element_two: Element
   element_two_value: Int
-  locations_found(where: MapWhereInput, orderBy: MapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Map!]
+  map_found(where: MapWhereInput, orderBy: MapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Map!]
   continent_found(where: ContinentWhereInput, orderBy: ContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Continent!]
 }
 
@@ -83,7 +79,7 @@ input BossCreateInput {
   element_one_value: Int
   element_two: ElementCreateOneInput
   element_two_value: Int
-  locations_found: MapCreateManyWithoutNative_bossInput
+  map_found: MapCreateManyWithoutNative_bossInput
   continent_found: ContinentCreateManyWithoutBossesInput
 }
 
@@ -92,8 +88,8 @@ input BossCreateManyWithoutContinent_foundInput {
   connect: [BossWhereUniqueInput!]
 }
 
-input BossCreateManyWithoutLocations_foundInput {
-  create: [BossCreateWithoutLocations_foundInput!]
+input BossCreateManyWithoutMap_foundInput {
+  create: [BossCreateWithoutMap_foundInput!]
   connect: [BossWhereUniqueInput!]
 }
 
@@ -109,10 +105,10 @@ input BossCreateWithoutContinent_foundInput {
   element_one_value: Int
   element_two: ElementCreateOneInput
   element_two_value: Int
-  locations_found: MapCreateManyWithoutNative_bossInput
+  map_found: MapCreateManyWithoutNative_bossInput
 }
 
-input BossCreateWithoutLocations_foundInput {
+input BossCreateWithoutMap_foundInput {
   id: ID
   name: String!
   element_one: ElementCreateOneInput
@@ -197,14 +193,10 @@ input BossScalarWhereInput {
 
 type BossStruct {
   id: ID!
-  createdAt: DateTime!
-  monster_found: Boss!
+  map: Map!
+  boss: Boss!
   minion_present: Boolean
-  location: StageStruct
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Float!
+  AtkSpd: Float
   skills(where: MonsterSkillWhereInput, orderBy: MonsterSkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MonsterSkill!]
 }
 
@@ -216,34 +208,23 @@ type BossStructConnection {
 
 input BossStructCreateInput {
   id: ID
-  monster_found: BossCreateOneInput!
+  map: MapCreateOneWithoutBosses_foundInput!
+  boss: BossCreateOneInput!
   minion_present: Boolean
-  location: StageStructCreateOneWithoutBoss_foundInput
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Float!
+  AtkSpd: Float
   skills: MonsterSkillCreateManyInput
 }
 
-input BossStructCreateManyInput {
-  create: [BossStructCreateInput!]
+input BossStructCreateManyWithoutMapInput {
+  create: [BossStructCreateWithoutMapInput!]
   connect: [BossStructWhereUniqueInput!]
 }
 
-input BossStructCreateOneWithoutLocationInput {
-  create: BossStructCreateWithoutLocationInput
-  connect: BossStructWhereUniqueInput
-}
-
-input BossStructCreateWithoutLocationInput {
+input BossStructCreateWithoutMapInput {
   id: ID
-  monster_found: BossCreateOneInput!
+  boss: BossCreateOneInput!
   minion_present: Boolean
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Float!
+  AtkSpd: Float
   skills: MonsterSkillCreateManyInput
 }
 
@@ -255,28 +236,16 @@ type BossStructEdge {
 enum BossStructOrderByInput {
   id_ASC
   id_DESC
-  createdAt_ASC
-  createdAt_DESC
   minion_present_ASC
   minion_present_DESC
-  HP_ASC
-  HP_DESC
-  ATK_ASC
-  ATK_DESC
-  Armor_ASC
-  Armor_DESC
   AtkSpd_ASC
   AtkSpd_DESC
 }
 
 type BossStructPreviousValues {
   id: ID!
-  createdAt: DateTime!
   minion_present: Boolean
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Float!
+  AtkSpd: Float
 }
 
 input BossStructScalarWhereInput {
@@ -294,40 +263,8 @@ input BossStructScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
   minion_present: Boolean
   minion_present_not: Boolean
-  HP: Int
-  HP_not: Int
-  HP_in: [Int!]
-  HP_not_in: [Int!]
-  HP_lt: Int
-  HP_lte: Int
-  HP_gt: Int
-  HP_gte: Int
-  ATK: Int
-  ATK_not: Int
-  ATK_in: [Int!]
-  ATK_not_in: [Int!]
-  ATK_lt: Int
-  ATK_lte: Int
-  ATK_gt: Int
-  ATK_gte: Int
-  Armor: Int
-  Armor_not: Int
-  Armor_in: [Int!]
-  Armor_not_in: [Int!]
-  Armor_lt: Int
-  Armor_lte: Int
-  Armor_gt: Int
-  Armor_gte: Int
   AtkSpd: Float
   AtkSpd_not: Float
   AtkSpd_in: [Float!]
@@ -359,54 +296,34 @@ input BossStructSubscriptionWhereInput {
   NOT: [BossStructSubscriptionWhereInput!]
 }
 
-input BossStructUpdateDataInput {
-  monster_found: BossUpdateOneRequiredInput
-  minion_present: Boolean
-  location: StageStructUpdateOneWithoutBoss_foundInput
-  HP: Int
-  ATK: Int
-  Armor: Int
-  AtkSpd: Float
-  skills: MonsterSkillUpdateManyInput
-}
-
 input BossStructUpdateInput {
-  monster_found: BossUpdateOneRequiredInput
+  map: MapUpdateOneRequiredWithoutBosses_foundInput
+  boss: BossUpdateOneRequiredInput
   minion_present: Boolean
-  location: StageStructUpdateOneWithoutBoss_foundInput
-  HP: Int
-  ATK: Int
-  Armor: Int
   AtkSpd: Float
   skills: MonsterSkillUpdateManyInput
 }
 
 input BossStructUpdateManyDataInput {
   minion_present: Boolean
-  HP: Int
-  ATK: Int
-  Armor: Int
   AtkSpd: Float
-}
-
-input BossStructUpdateManyInput {
-  create: [BossStructCreateInput!]
-  update: [BossStructUpdateWithWhereUniqueNestedInput!]
-  upsert: [BossStructUpsertWithWhereUniqueNestedInput!]
-  delete: [BossStructWhereUniqueInput!]
-  connect: [BossStructWhereUniqueInput!]
-  set: [BossStructWhereUniqueInput!]
-  disconnect: [BossStructWhereUniqueInput!]
-  deleteMany: [BossStructScalarWhereInput!]
-  updateMany: [BossStructUpdateManyWithWhereNestedInput!]
 }
 
 input BossStructUpdateManyMutationInput {
   minion_present: Boolean
-  HP: Int
-  ATK: Int
-  Armor: Int
   AtkSpd: Float
+}
+
+input BossStructUpdateManyWithoutMapInput {
+  create: [BossStructCreateWithoutMapInput!]
+  delete: [BossStructWhereUniqueInput!]
+  connect: [BossStructWhereUniqueInput!]
+  set: [BossStructWhereUniqueInput!]
+  disconnect: [BossStructWhereUniqueInput!]
+  update: [BossStructUpdateWithWhereUniqueWithoutMapInput!]
+  upsert: [BossStructUpsertWithWhereUniqueWithoutMapInput!]
+  deleteMany: [BossStructScalarWhereInput!]
+  updateMany: [BossStructUpdateManyWithWhereNestedInput!]
 }
 
 input BossStructUpdateManyWithWhereNestedInput {
@@ -414,39 +331,22 @@ input BossStructUpdateManyWithWhereNestedInput {
   data: BossStructUpdateManyDataInput!
 }
 
-input BossStructUpdateOneWithoutLocationInput {
-  create: BossStructCreateWithoutLocationInput
-  update: BossStructUpdateWithoutLocationDataInput
-  upsert: BossStructUpsertWithoutLocationInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: BossStructWhereUniqueInput
-}
-
-input BossStructUpdateWithoutLocationDataInput {
-  monster_found: BossUpdateOneRequiredInput
+input BossStructUpdateWithoutMapDataInput {
+  boss: BossUpdateOneRequiredInput
   minion_present: Boolean
-  HP: Int
-  ATK: Int
-  Armor: Int
   AtkSpd: Float
   skills: MonsterSkillUpdateManyInput
 }
 
-input BossStructUpdateWithWhereUniqueNestedInput {
+input BossStructUpdateWithWhereUniqueWithoutMapInput {
   where: BossStructWhereUniqueInput!
-  data: BossStructUpdateDataInput!
+  data: BossStructUpdateWithoutMapDataInput!
 }
 
-input BossStructUpsertWithoutLocationInput {
-  update: BossStructUpdateWithoutLocationDataInput!
-  create: BossStructCreateWithoutLocationInput!
-}
-
-input BossStructUpsertWithWhereUniqueNestedInput {
+input BossStructUpsertWithWhereUniqueWithoutMapInput {
   where: BossStructWhereUniqueInput!
-  update: BossStructUpdateDataInput!
-  create: BossStructCreateInput!
+  update: BossStructUpdateWithoutMapDataInput!
+  create: BossStructCreateWithoutMapInput!
 }
 
 input BossStructWhereInput {
@@ -464,42 +364,10 @@ input BossStructWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  monster_found: BossWhereInput
+  map: MapWhereInput
+  boss: BossWhereInput
   minion_present: Boolean
   minion_present_not: Boolean
-  location: StageStructWhereInput
-  HP: Int
-  HP_not: Int
-  HP_in: [Int!]
-  HP_not_in: [Int!]
-  HP_lt: Int
-  HP_lte: Int
-  HP_gt: Int
-  HP_gte: Int
-  ATK: Int
-  ATK_not: Int
-  ATK_in: [Int!]
-  ATK_not_in: [Int!]
-  ATK_lt: Int
-  ATK_lte: Int
-  ATK_gt: Int
-  ATK_gte: Int
-  Armor: Int
-  Armor_not: Int
-  Armor_in: [Int!]
-  Armor_not_in: [Int!]
-  Armor_lt: Int
-  Armor_lte: Int
-  Armor_gt: Int
-  Armor_gte: Int
   AtkSpd: Float
   AtkSpd_not: Float
   AtkSpd_in: [Float!]
@@ -544,7 +412,7 @@ input BossUpdateDataInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutNative_bossInput
+  map_found: MapUpdateManyWithoutNative_bossInput
   continent_found: ContinentUpdateManyWithoutBossesInput
 }
 
@@ -554,7 +422,7 @@ input BossUpdateInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutNative_bossInput
+  map_found: MapUpdateManyWithoutNative_bossInput
   continent_found: ContinentUpdateManyWithoutBossesInput
 }
 
@@ -582,14 +450,14 @@ input BossUpdateManyWithoutContinent_foundInput {
   updateMany: [BossUpdateManyWithWhereNestedInput!]
 }
 
-input BossUpdateManyWithoutLocations_foundInput {
-  create: [BossCreateWithoutLocations_foundInput!]
+input BossUpdateManyWithoutMap_foundInput {
+  create: [BossCreateWithoutMap_foundInput!]
   delete: [BossWhereUniqueInput!]
   connect: [BossWhereUniqueInput!]
   set: [BossWhereUniqueInput!]
   disconnect: [BossWhereUniqueInput!]
-  update: [BossUpdateWithWhereUniqueWithoutLocations_foundInput!]
-  upsert: [BossUpsertWithWhereUniqueWithoutLocations_foundInput!]
+  update: [BossUpdateWithWhereUniqueWithoutMap_foundInput!]
+  upsert: [BossUpsertWithWhereUniqueWithoutMap_foundInput!]
   deleteMany: [BossScalarWhereInput!]
   updateMany: [BossUpdateManyWithWhereNestedInput!]
 }
@@ -612,10 +480,10 @@ input BossUpdateWithoutContinent_foundDataInput {
   element_one_value: Int
   element_two: ElementUpdateOneInput
   element_two_value: Int
-  locations_found: MapUpdateManyWithoutNative_bossInput
+  map_found: MapUpdateManyWithoutNative_bossInput
 }
 
-input BossUpdateWithoutLocations_foundDataInput {
+input BossUpdateWithoutMap_foundDataInput {
   name: String
   element_one: ElementUpdateOneInput
   element_one_value: Int
@@ -629,9 +497,9 @@ input BossUpdateWithWhereUniqueWithoutContinent_foundInput {
   data: BossUpdateWithoutContinent_foundDataInput!
 }
 
-input BossUpdateWithWhereUniqueWithoutLocations_foundInput {
+input BossUpdateWithWhereUniqueWithoutMap_foundInput {
   where: BossWhereUniqueInput!
-  data: BossUpdateWithoutLocations_foundDataInput!
+  data: BossUpdateWithoutMap_foundDataInput!
 }
 
 input BossUpsertNestedInput {
@@ -645,10 +513,10 @@ input BossUpsertWithWhereUniqueWithoutContinent_foundInput {
   create: BossCreateWithoutContinent_foundInput!
 }
 
-input BossUpsertWithWhereUniqueWithoutLocations_foundInput {
+input BossUpsertWithWhereUniqueWithoutMap_foundInput {
   where: BossWhereUniqueInput!
-  update: BossUpdateWithoutLocations_foundDataInput!
-  create: BossCreateWithoutLocations_foundInput!
+  update: BossUpdateWithoutMap_foundDataInput!
+  create: BossCreateWithoutMap_foundInput!
 }
 
 input BossWhereInput {
@@ -698,9 +566,9 @@ input BossWhereInput {
   element_two_value_lte: Int
   element_two_value_gt: Int
   element_two_value_gte: Int
-  locations_found_every: MapWhereInput
-  locations_found_some: MapWhereInput
-  locations_found_none: MapWhereInput
+  map_found_every: MapWhereInput
+  map_found_some: MapWhereInput
+  map_found_none: MapWhereInput
   continent_found_every: ContinentWhereInput
   continent_found_some: ContinentWhereInput
   continent_found_none: ContinentWhereInput
@@ -884,228 +752,21 @@ input ClassWhereUniqueInput {
 
 enum CombatType {
   UNKNOWN
-  RANGE
-  MEELEE
-  SELF
-  TEAM
-}
-
-type ConnectContinent {
-  id: ID!
-  next_continent: Continent
-  previous_continent: Continent
-}
-
-type ConnectContinentConnection {
-  pageInfo: PageInfo!
-  edges: [ConnectContinentEdge]!
-  aggregate: AggregateConnectContinent!
-}
-
-input ConnectContinentCreateInput {
-  id: ID
-  next_continent: ContinentCreateOneInput
-  previous_continent: ContinentCreateOneWithoutConnected_continentInput
-}
-
-input ConnectContinentCreateOneWithoutPrevious_continentInput {
-  create: ConnectContinentCreateWithoutPrevious_continentInput
-  connect: ConnectContinentWhereUniqueInput
-}
-
-input ConnectContinentCreateWithoutPrevious_continentInput {
-  id: ID
-  next_continent: ContinentCreateOneInput
-}
-
-type ConnectContinentEdge {
-  node: ConnectContinent!
-  cursor: String!
-}
-
-enum ConnectContinentOrderByInput {
-  id_ASC
-  id_DESC
-}
-
-type ConnectContinentPreviousValues {
-  id: ID!
-}
-
-type ConnectContinentSubscriptionPayload {
-  mutation: MutationType!
-  node: ConnectContinent
-  updatedFields: [String!]
-  previousValues: ConnectContinentPreviousValues
-}
-
-input ConnectContinentSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ConnectContinentWhereInput
-  AND: [ConnectContinentSubscriptionWhereInput!]
-  OR: [ConnectContinentSubscriptionWhereInput!]
-  NOT: [ConnectContinentSubscriptionWhereInput!]
-}
-
-input ConnectContinentUpdateInput {
-  next_continent: ContinentUpdateOneInput
-  previous_continent: ContinentUpdateOneWithoutConnected_continentInput
-}
-
-input ConnectContinentUpdateOneWithoutPrevious_continentInput {
-  create: ConnectContinentCreateWithoutPrevious_continentInput
-  update: ConnectContinentUpdateWithoutPrevious_continentDataInput
-  upsert: ConnectContinentUpsertWithoutPrevious_continentInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ConnectContinentWhereUniqueInput
-}
-
-input ConnectContinentUpdateWithoutPrevious_continentDataInput {
-  next_continent: ContinentUpdateOneInput
-}
-
-input ConnectContinentUpsertWithoutPrevious_continentInput {
-  update: ConnectContinentUpdateWithoutPrevious_continentDataInput!
-  create: ConnectContinentCreateWithoutPrevious_continentInput!
-}
-
-input ConnectContinentWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  next_continent: ContinentWhereInput
-  previous_continent: ContinentWhereInput
-  AND: [ConnectContinentWhereInput!]
-  OR: [ConnectContinentWhereInput!]
-  NOT: [ConnectContinentWhereInput!]
-}
-
-input ConnectContinentWhereUniqueInput {
-  id: ID
-}
-
-type ConnectedMap {
-  id: ID!
-  next_map: Map!
-  previous_map: Map!
-}
-
-type ConnectedMapConnection {
-  pageInfo: PageInfo!
-  edges: [ConnectedMapEdge]!
-  aggregate: AggregateConnectedMap!
-}
-
-input ConnectedMapCreateInput {
-  id: ID
-  next_map: MapCreateOneInput!
-  previous_map: MapCreateOneWithoutConnected_mapsInput!
-}
-
-input ConnectedMapCreateOneWithoutPrevious_mapInput {
-  create: ConnectedMapCreateWithoutPrevious_mapInput
-  connect: ConnectedMapWhereUniqueInput
-}
-
-input ConnectedMapCreateWithoutPrevious_mapInput {
-  id: ID
-  next_map: MapCreateOneInput!
-}
-
-type ConnectedMapEdge {
-  node: ConnectedMap!
-  cursor: String!
-}
-
-enum ConnectedMapOrderByInput {
-  id_ASC
-  id_DESC
-}
-
-type ConnectedMapPreviousValues {
-  id: ID!
-}
-
-type ConnectedMapSubscriptionPayload {
-  mutation: MutationType!
-  node: ConnectedMap
-  updatedFields: [String!]
-  previousValues: ConnectedMapPreviousValues
-}
-
-input ConnectedMapSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ConnectedMapWhereInput
-  AND: [ConnectedMapSubscriptionWhereInput!]
-  OR: [ConnectedMapSubscriptionWhereInput!]
-  NOT: [ConnectedMapSubscriptionWhereInput!]
-}
-
-input ConnectedMapUpdateInput {
-  next_map: MapUpdateOneRequiredInput
-  previous_map: MapUpdateOneRequiredWithoutConnected_mapsInput
-}
-
-input ConnectedMapUpdateOneWithoutPrevious_mapInput {
-  create: ConnectedMapCreateWithoutPrevious_mapInput
-  update: ConnectedMapUpdateWithoutPrevious_mapDataInput
-  upsert: ConnectedMapUpsertWithoutPrevious_mapInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ConnectedMapWhereUniqueInput
-}
-
-input ConnectedMapUpdateWithoutPrevious_mapDataInput {
-  next_map: MapUpdateOneRequiredInput
-}
-
-input ConnectedMapUpsertWithoutPrevious_mapInput {
-  update: ConnectedMapUpdateWithoutPrevious_mapDataInput!
-  create: ConnectedMapCreateWithoutPrevious_mapInput!
-}
-
-input ConnectedMapWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  next_map: MapWhereInput
-  previous_map: MapWhereInput
-  AND: [ConnectedMapWhereInput!]
-  OR: [ConnectedMapWhereInput!]
-  NOT: [ConnectedMapWhereInput!]
-}
-
-input ConnectedMapWhereUniqueInput {
-  id: ID
+  BUFF
+  DAMAGE
+  HEAL
+  CONTINUOUS
+  OVER_TIME
+  AREA_OF_EFFECT
+  TARGET
+  CROWD_CONTROL
+  SUMMON
+  DEBUFF
+  DISPELL
+  RANDOM
+  ABSORB
+  STEALTH
+  PASSIVE
 }
 
 type Continent {
@@ -1113,7 +774,8 @@ type Continent {
   name: String!
   bosses(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss!]
   maps(where: MapWhereInput, orderBy: MapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Map!]
-  connected_continent: ConnectContinent
+  next_continent: String
+  previous_continent: String
 }
 
 type ContinentConnection {
@@ -1127,22 +789,13 @@ input ContinentCreateInput {
   name: String!
   bosses: BossCreateManyWithoutContinent_foundInput
   maps: MapCreateManyWithoutContinentInput
-  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentCreateManyWithoutBossesInput {
   create: [ContinentCreateWithoutBossesInput!]
   connect: [ContinentWhereUniqueInput!]
-}
-
-input ContinentCreateOneInput {
-  create: ContinentCreateInput
-  connect: ContinentWhereUniqueInput
-}
-
-input ContinentCreateOneWithoutConnected_continentInput {
-  create: ContinentCreateWithoutConnected_continentInput
-  connect: ContinentWhereUniqueInput
 }
 
 input ContinentCreateOneWithoutMapsInput {
@@ -1154,21 +807,16 @@ input ContinentCreateWithoutBossesInput {
   id: ID
   name: String!
   maps: MapCreateManyWithoutContinentInput
-  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
-}
-
-input ContinentCreateWithoutConnected_continentInput {
-  id: ID
-  name: String!
-  bosses: BossCreateManyWithoutContinent_foundInput
-  maps: MapCreateManyWithoutContinentInput
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentCreateWithoutMapsInput {
   id: ID
   name: String!
   bosses: BossCreateManyWithoutContinent_foundInput
-  connected_continent: ConnectContinentCreateOneWithoutPrevious_continentInput
+  next_continent: String
+  previous_continent: String
 }
 
 type ContinentEdge {
@@ -1181,11 +829,17 @@ enum ContinentOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  next_continent_ASC
+  next_continent_DESC
+  previous_continent_ASC
+  previous_continent_DESC
 }
 
 type ContinentPreviousValues {
   id: ID!
   name: String!
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentScalarWhereInput {
@@ -1217,6 +871,34 @@ input ContinentScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  next_continent: String
+  next_continent_not: String
+  next_continent_in: [String!]
+  next_continent_not_in: [String!]
+  next_continent_lt: String
+  next_continent_lte: String
+  next_continent_gt: String
+  next_continent_gte: String
+  next_continent_contains: String
+  next_continent_not_contains: String
+  next_continent_starts_with: String
+  next_continent_not_starts_with: String
+  next_continent_ends_with: String
+  next_continent_not_ends_with: String
+  previous_continent: String
+  previous_continent_not: String
+  previous_continent_in: [String!]
+  previous_continent_not_in: [String!]
+  previous_continent_lt: String
+  previous_continent_lte: String
+  previous_continent_gt: String
+  previous_continent_gte: String
+  previous_continent_contains: String
+  previous_continent_not_contains: String
+  previous_continent_starts_with: String
+  previous_continent_not_starts_with: String
+  previous_continent_ends_with: String
+  previous_continent_not_ends_with: String
   AND: [ContinentScalarWhereInput!]
   OR: [ContinentScalarWhereInput!]
   NOT: [ContinentScalarWhereInput!]
@@ -1240,26 +922,24 @@ input ContinentSubscriptionWhereInput {
   NOT: [ContinentSubscriptionWhereInput!]
 }
 
-input ContinentUpdateDataInput {
-  name: String
-  bosses: BossUpdateManyWithoutContinent_foundInput
-  maps: MapUpdateManyWithoutContinentInput
-  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
-}
-
 input ContinentUpdateInput {
   name: String
   bosses: BossUpdateManyWithoutContinent_foundInput
   maps: MapUpdateManyWithoutContinentInput
-  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentUpdateManyDataInput {
   name: String
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentUpdateManyMutationInput {
   name: String
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentUpdateManyWithoutBossesInput {
@@ -1279,15 +959,6 @@ input ContinentUpdateManyWithWhereNestedInput {
   data: ContinentUpdateManyDataInput!
 }
 
-input ContinentUpdateOneInput {
-  create: ContinentCreateInput
-  update: ContinentUpdateDataInput
-  upsert: ContinentUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ContinentWhereUniqueInput
-}
-
 input ContinentUpdateOneRequiredWithoutMapsInput {
   create: ContinentCreateWithoutMapsInput
   update: ContinentUpdateWithoutMapsDataInput
@@ -1295,46 +966,23 @@ input ContinentUpdateOneRequiredWithoutMapsInput {
   connect: ContinentWhereUniqueInput
 }
 
-input ContinentUpdateOneWithoutConnected_continentInput {
-  create: ContinentCreateWithoutConnected_continentInput
-  update: ContinentUpdateWithoutConnected_continentDataInput
-  upsert: ContinentUpsertWithoutConnected_continentInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ContinentWhereUniqueInput
-}
-
 input ContinentUpdateWithoutBossesDataInput {
   name: String
   maps: MapUpdateManyWithoutContinentInput
-  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
-}
-
-input ContinentUpdateWithoutConnected_continentDataInput {
-  name: String
-  bosses: BossUpdateManyWithoutContinent_foundInput
-  maps: MapUpdateManyWithoutContinentInput
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentUpdateWithoutMapsDataInput {
   name: String
   bosses: BossUpdateManyWithoutContinent_foundInput
-  connected_continent: ConnectContinentUpdateOneWithoutPrevious_continentInput
+  next_continent: String
+  previous_continent: String
 }
 
 input ContinentUpdateWithWhereUniqueWithoutBossesInput {
   where: ContinentWhereUniqueInput!
   data: ContinentUpdateWithoutBossesDataInput!
-}
-
-input ContinentUpsertNestedInput {
-  update: ContinentUpdateDataInput!
-  create: ContinentCreateInput!
-}
-
-input ContinentUpsertWithoutConnected_continentInput {
-  update: ContinentUpdateWithoutConnected_continentDataInput!
-  create: ContinentCreateWithoutConnected_continentInput!
 }
 
 input ContinentUpsertWithoutMapsInput {
@@ -1383,7 +1031,34 @@ input ContinentWhereInput {
   maps_every: MapWhereInput
   maps_some: MapWhereInput
   maps_none: MapWhereInput
-  connected_continent: ConnectContinentWhereInput
+  next_continent: String
+  next_continent_not: String
+  next_continent_in: [String!]
+  next_continent_not_in: [String!]
+  next_continent_lt: String
+  next_continent_lte: String
+  next_continent_gt: String
+  next_continent_gte: String
+  next_continent_contains: String
+  next_continent_not_contains: String
+  next_continent_starts_with: String
+  next_continent_not_starts_with: String
+  next_continent_ends_with: String
+  next_continent_not_ends_with: String
+  previous_continent: String
+  previous_continent_not: String
+  previous_continent_in: [String!]
+  previous_continent_not_in: [String!]
+  previous_continent_lt: String
+  previous_continent_lte: String
+  previous_continent_gt: String
+  previous_continent_gte: String
+  previous_continent_contains: String
+  previous_continent_not_contains: String
+  previous_continent_starts_with: String
+  previous_continent_not_starts_with: String
+  previous_continent_ends_with: String
+  previous_continent_not_ends_with: String
   AND: [ContinentWhereInput!]
   OR: [ContinentWhereInput!]
   NOT: [ContinentWhereInput!]
@@ -1536,6 +1211,174 @@ input ElementWhereInput {
 input ElementWhereUniqueInput {
   id: ID
   name: ElementType
+}
+
+type Food {
+  id: ID!
+  name: String!
+  pet_favorite(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pet!]
+  buff: Stat
+  imageurl: String
+}
+
+type FoodConnection {
+  pageInfo: PageInfo!
+  edges: [FoodEdge]!
+  aggregate: AggregateFood!
+}
+
+input FoodCreateInput {
+  id: ID
+  name: String!
+  pet_favorite: PetCreateManyWithoutFavorite_foodInput
+  buff: Stat
+  imageurl: String
+}
+
+input FoodCreateOneWithoutPet_favoriteInput {
+  create: FoodCreateWithoutPet_favoriteInput
+  connect: FoodWhereUniqueInput
+}
+
+input FoodCreateWithoutPet_favoriteInput {
+  id: ID
+  name: String!
+  buff: Stat
+  imageurl: String
+}
+
+type FoodEdge {
+  node: Food!
+  cursor: String!
+}
+
+enum FoodOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  buff_ASC
+  buff_DESC
+  imageurl_ASC
+  imageurl_DESC
+}
+
+type FoodPreviousValues {
+  id: ID!
+  name: String!
+  buff: Stat
+  imageurl: String
+}
+
+type FoodSubscriptionPayload {
+  mutation: MutationType!
+  node: Food
+  updatedFields: [String!]
+  previousValues: FoodPreviousValues
+}
+
+input FoodSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FoodWhereInput
+  AND: [FoodSubscriptionWhereInput!]
+  OR: [FoodSubscriptionWhereInput!]
+  NOT: [FoodSubscriptionWhereInput!]
+}
+
+input FoodUpdateInput {
+  name: String
+  pet_favorite: PetUpdateManyWithoutFavorite_foodInput
+  buff: Stat
+  imageurl: String
+}
+
+input FoodUpdateManyMutationInput {
+  name: String
+  buff: Stat
+  imageurl: String
+}
+
+input FoodUpdateOneWithoutPet_favoriteInput {
+  create: FoodCreateWithoutPet_favoriteInput
+  update: FoodUpdateWithoutPet_favoriteDataInput
+  upsert: FoodUpsertWithoutPet_favoriteInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: FoodWhereUniqueInput
+}
+
+input FoodUpdateWithoutPet_favoriteDataInput {
+  name: String
+  buff: Stat
+  imageurl: String
+}
+
+input FoodUpsertWithoutPet_favoriteInput {
+  update: FoodUpdateWithoutPet_favoriteDataInput!
+  create: FoodCreateWithoutPet_favoriteInput!
+}
+
+input FoodWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  pet_favorite_every: PetWhereInput
+  pet_favorite_some: PetWhereInput
+  pet_favorite_none: PetWhereInput
+  buff: Stat
+  buff_not: Stat
+  buff_in: [Stat!]
+  buff_not_in: [Stat!]
+  imageurl: String
+  imageurl_not: String
+  imageurl_in: [String!]
+  imageurl_not_in: [String!]
+  imageurl_lt: String
+  imageurl_lte: String
+  imageurl_gt: String
+  imageurl_gte: String
+  imageurl_contains: String
+  imageurl_not_contains: String
+  imageurl_starts_with: String
+  imageurl_not_starts_with: String
+  imageurl_ends_with: String
+  imageurl_not_ends_with: String
+  AND: [FoodWhereInput!]
+  OR: [FoodWhereInput!]
+  NOT: [FoodWhereInput!]
+}
+
+input FoodWhereUniqueInput {
+  id: ID
+  name: String
 }
 
 type Guide {
@@ -1821,11 +1664,13 @@ type Map {
   name: String!
   total_stage: Int
   native_boss(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss!]
-  connected_maps: ConnectedMap
-  continent: Continent!
   obtainable_skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill!]
-  boss_stages(where: BossStructWhereInput, orderBy: BossStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BossStruct!]
-  field_stages(where: StageStructWhereInput, orderBy: StageStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StageStruct!]
+  bosses_found(where: BossStructWhereInput, orderBy: BossStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BossStruct!]
+  previous_map: String
+  next_map: String
+  pet_unlock(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pet!]
+  continent: Continent!
+  imageurl: String
 }
 
 type MapConnection {
@@ -1838,12 +1683,14 @@ input MapCreateInput {
   id: ID
   name: String!
   total_stage: Int
-  native_boss: BossCreateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
-  continent: ContinentCreateOneWithoutMapsInput!
+  native_boss: BossCreateManyWithoutMap_foundInput
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  boss_stages: BossStructCreateManyInput
-  field_stages: StageStructCreateManyWithoutMapInput
+  bosses_found: BossStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetCreateManyWithoutAreaInput
+  continent: ContinentCreateOneWithoutMapsInput!
+  imageurl: String
 }
 
 input MapCreateManyWithoutContinentInput {
@@ -1856,18 +1703,8 @@ input MapCreateManyWithoutNative_bossInput {
   connect: [MapWhereUniqueInput!]
 }
 
-input MapCreateOneInput {
-  create: MapCreateInput
-  connect: MapWhereUniqueInput
-}
-
-input MapCreateOneWithoutConnected_mapsInput {
-  create: MapCreateWithoutConnected_mapsInput
-  connect: MapWhereUniqueInput
-}
-
-input MapCreateOneWithoutField_stagesInput {
-  create: MapCreateWithoutField_stagesInput
+input MapCreateOneWithoutBosses_foundInput {
+  create: MapCreateWithoutBosses_foundInput
   connect: MapWhereUniqueInput
 }
 
@@ -1876,59 +1713,74 @@ input MapCreateOneWithoutObtainable_skillsInput {
   connect: MapWhereUniqueInput
 }
 
-input MapCreateWithoutConnected_mapsInput {
+input MapCreateOneWithoutPet_unlockInput {
+  create: MapCreateWithoutPet_unlockInput
+  connect: MapWhereUniqueInput
+}
+
+input MapCreateWithoutBosses_foundInput {
   id: ID
   name: String!
   total_stage: Int
-  native_boss: BossCreateManyWithoutLocations_foundInput
-  continent: ContinentCreateOneWithoutMapsInput!
+  native_boss: BossCreateManyWithoutMap_foundInput
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  boss_stages: BossStructCreateManyInput
-  field_stages: StageStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetCreateManyWithoutAreaInput
+  continent: ContinentCreateOneWithoutMapsInput!
+  imageurl: String
 }
 
 input MapCreateWithoutContinentInput {
   id: ID
   name: String!
   total_stage: Int
-  native_boss: BossCreateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
+  native_boss: BossCreateManyWithoutMap_foundInput
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  boss_stages: BossStructCreateManyInput
-  field_stages: StageStructCreateManyWithoutMapInput
-}
-
-input MapCreateWithoutField_stagesInput {
-  id: ID
-  name: String!
-  total_stage: Int
-  native_boss: BossCreateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
-  continent: ContinentCreateOneWithoutMapsInput!
-  obtainable_skills: SkillCreateManyWithoutLocationInput
-  boss_stages: BossStructCreateManyInput
+  bosses_found: BossStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetCreateManyWithoutAreaInput
+  imageurl: String
 }
 
 input MapCreateWithoutNative_bossInput {
   id: ID
   name: String!
   total_stage: Int
-  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
-  continent: ContinentCreateOneWithoutMapsInput!
   obtainable_skills: SkillCreateManyWithoutLocationInput
-  boss_stages: BossStructCreateManyInput
-  field_stages: StageStructCreateManyWithoutMapInput
+  bosses_found: BossStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetCreateManyWithoutAreaInput
+  continent: ContinentCreateOneWithoutMapsInput!
+  imageurl: String
 }
 
 input MapCreateWithoutObtainable_skillsInput {
   id: ID
   name: String!
   total_stage: Int
-  native_boss: BossCreateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapCreateOneWithoutPrevious_mapInput
+  native_boss: BossCreateManyWithoutMap_foundInput
+  bosses_found: BossStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetCreateManyWithoutAreaInput
   continent: ContinentCreateOneWithoutMapsInput!
-  boss_stages: BossStructCreateManyInput
-  field_stages: StageStructCreateManyWithoutMapInput
+  imageurl: String
+}
+
+input MapCreateWithoutPet_unlockInput {
+  id: ID
+  name: String!
+  total_stage: Int
+  native_boss: BossCreateManyWithoutMap_foundInput
+  obtainable_skills: SkillCreateManyWithoutLocationInput
+  bosses_found: BossStructCreateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  continent: ContinentCreateOneWithoutMapsInput!
+  imageurl: String
 }
 
 type MapEdge {
@@ -1943,12 +1795,21 @@ enum MapOrderByInput {
   name_DESC
   total_stage_ASC
   total_stage_DESC
+  previous_map_ASC
+  previous_map_DESC
+  next_map_ASC
+  next_map_DESC
+  imageurl_ASC
+  imageurl_DESC
 }
 
 type MapPreviousValues {
   id: ID!
   name: String!
   total_stage: Int
+  previous_map: String
+  next_map: String
+  imageurl: String
 }
 
 input MapScalarWhereInput {
@@ -1988,6 +1849,48 @@ input MapScalarWhereInput {
   total_stage_lte: Int
   total_stage_gt: Int
   total_stage_gte: Int
+  previous_map: String
+  previous_map_not: String
+  previous_map_in: [String!]
+  previous_map_not_in: [String!]
+  previous_map_lt: String
+  previous_map_lte: String
+  previous_map_gt: String
+  previous_map_gte: String
+  previous_map_contains: String
+  previous_map_not_contains: String
+  previous_map_starts_with: String
+  previous_map_not_starts_with: String
+  previous_map_ends_with: String
+  previous_map_not_ends_with: String
+  next_map: String
+  next_map_not: String
+  next_map_in: [String!]
+  next_map_not_in: [String!]
+  next_map_lt: String
+  next_map_lte: String
+  next_map_gt: String
+  next_map_gte: String
+  next_map_contains: String
+  next_map_not_contains: String
+  next_map_starts_with: String
+  next_map_not_starts_with: String
+  next_map_ends_with: String
+  next_map_not_ends_with: String
+  imageurl: String
+  imageurl_not: String
+  imageurl_in: [String!]
+  imageurl_not_in: [String!]
+  imageurl_lt: String
+  imageurl_lte: String
+  imageurl_gt: String
+  imageurl_gte: String
+  imageurl_contains: String
+  imageurl_not_contains: String
+  imageurl_starts_with: String
+  imageurl_not_starts_with: String
+  imageurl_ends_with: String
+  imageurl_not_ends_with: String
   AND: [MapScalarWhereInput!]
   OR: [MapScalarWhereInput!]
   NOT: [MapScalarWhereInput!]
@@ -2011,36 +1914,33 @@ input MapSubscriptionWhereInput {
   NOT: [MapSubscriptionWhereInput!]
 }
 
-input MapUpdateDataInput {
-  name: String
-  total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
-  obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
-}
-
 input MapUpdateInput {
   name: String
   total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  native_boss: BossUpdateManyWithoutMap_foundInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
+  bosses_found: BossStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetUpdateManyWithoutAreaInput
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  imageurl: String
 }
 
 input MapUpdateManyDataInput {
   name: String
   total_stage: Int
+  previous_map: String
+  next_map: String
+  imageurl: String
 }
 
 input MapUpdateManyMutationInput {
   name: String
   total_stage: Int
+  previous_map: String
+  next_map: String
+  imageurl: String
 }
 
 input MapUpdateManyWithoutContinentInput {
@@ -2072,24 +1972,10 @@ input MapUpdateManyWithWhereNestedInput {
   data: MapUpdateManyDataInput!
 }
 
-input MapUpdateOneRequiredInput {
-  create: MapCreateInput
-  update: MapUpdateDataInput
-  upsert: MapUpsertNestedInput
-  connect: MapWhereUniqueInput
-}
-
-input MapUpdateOneRequiredWithoutConnected_mapsInput {
-  create: MapCreateWithoutConnected_mapsInput
-  update: MapUpdateWithoutConnected_mapsDataInput
-  upsert: MapUpsertWithoutConnected_mapsInput
-  connect: MapWhereUniqueInput
-}
-
-input MapUpdateOneRequiredWithoutField_stagesInput {
-  create: MapCreateWithoutField_stagesInput
-  update: MapUpdateWithoutField_stagesDataInput
-  upsert: MapUpsertWithoutField_stagesInput
+input MapUpdateOneRequiredWithoutBosses_foundInput {
+  create: MapCreateWithoutBosses_foundInput
+  update: MapUpdateWithoutBosses_foundDataInput
+  upsert: MapUpsertWithoutBosses_foundInput
   connect: MapWhereUniqueInput
 }
 
@@ -2102,54 +1988,73 @@ input MapUpdateOneWithoutObtainable_skillsInput {
   connect: MapWhereUniqueInput
 }
 
-input MapUpdateWithoutConnected_mapsDataInput {
+input MapUpdateOneWithoutPet_unlockInput {
+  create: MapCreateWithoutPet_unlockInput
+  update: MapUpdateWithoutPet_unlockDataInput
+  upsert: MapUpsertWithoutPet_unlockInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: MapWhereUniqueInput
+}
+
+input MapUpdateWithoutBosses_foundDataInput {
   name: String
   total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  native_boss: BossUpdateManyWithoutMap_foundInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetUpdateManyWithoutAreaInput
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  imageurl: String
 }
 
 input MapUpdateWithoutContinentDataInput {
   name: String
   total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
+  native_boss: BossUpdateManyWithoutMap_foundInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
-}
-
-input MapUpdateWithoutField_stagesDataInput {
-  name: String
-  total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
-  obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
+  bosses_found: BossStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetUpdateManyWithoutAreaInput
+  imageurl: String
 }
 
 input MapUpdateWithoutNative_bossDataInput {
   name: String
   total_stage: Int
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
-  continent: ContinentUpdateOneRequiredWithoutMapsInput
   obtainable_skills: SkillUpdateManyWithoutLocationInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
+  bosses_found: BossStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetUpdateManyWithoutAreaInput
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  imageurl: String
 }
 
 input MapUpdateWithoutObtainable_skillsDataInput {
   name: String
   total_stage: Int
-  native_boss: BossUpdateManyWithoutLocations_foundInput
-  connected_maps: ConnectedMapUpdateOneWithoutPrevious_mapInput
+  native_boss: BossUpdateManyWithoutMap_foundInput
+  bosses_found: BossStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  pet_unlock: PetUpdateManyWithoutAreaInput
   continent: ContinentUpdateOneRequiredWithoutMapsInput
-  boss_stages: BossStructUpdateManyInput
-  field_stages: StageStructUpdateManyWithoutMapInput
+  imageurl: String
+}
+
+input MapUpdateWithoutPet_unlockDataInput {
+  name: String
+  total_stage: Int
+  native_boss: BossUpdateManyWithoutMap_foundInput
+  obtainable_skills: SkillUpdateManyWithoutLocationInput
+  bosses_found: BossStructUpdateManyWithoutMapInput
+  previous_map: String
+  next_map: String
+  continent: ContinentUpdateOneRequiredWithoutMapsInput
+  imageurl: String
 }
 
 input MapUpdateWithWhereUniqueWithoutContinentInput {
@@ -2162,24 +2067,19 @@ input MapUpdateWithWhereUniqueWithoutNative_bossInput {
   data: MapUpdateWithoutNative_bossDataInput!
 }
 
-input MapUpsertNestedInput {
-  update: MapUpdateDataInput!
-  create: MapCreateInput!
-}
-
-input MapUpsertWithoutConnected_mapsInput {
-  update: MapUpdateWithoutConnected_mapsDataInput!
-  create: MapCreateWithoutConnected_mapsInput!
-}
-
-input MapUpsertWithoutField_stagesInput {
-  update: MapUpdateWithoutField_stagesDataInput!
-  create: MapCreateWithoutField_stagesInput!
+input MapUpsertWithoutBosses_foundInput {
+  update: MapUpdateWithoutBosses_foundDataInput!
+  create: MapCreateWithoutBosses_foundInput!
 }
 
 input MapUpsertWithoutObtainable_skillsInput {
   update: MapUpdateWithoutObtainable_skillsDataInput!
   create: MapCreateWithoutObtainable_skillsInput!
+}
+
+input MapUpsertWithoutPet_unlockInput {
+  update: MapUpdateWithoutPet_unlockDataInput!
+  create: MapCreateWithoutPet_unlockInput!
 }
 
 input MapUpsertWithWhereUniqueWithoutContinentInput {
@@ -2234,17 +2134,58 @@ input MapWhereInput {
   native_boss_every: BossWhereInput
   native_boss_some: BossWhereInput
   native_boss_none: BossWhereInput
-  connected_maps: ConnectedMapWhereInput
-  continent: ContinentWhereInput
   obtainable_skills_every: SkillWhereInput
   obtainable_skills_some: SkillWhereInput
   obtainable_skills_none: SkillWhereInput
-  boss_stages_every: BossStructWhereInput
-  boss_stages_some: BossStructWhereInput
-  boss_stages_none: BossStructWhereInput
-  field_stages_every: StageStructWhereInput
-  field_stages_some: StageStructWhereInput
-  field_stages_none: StageStructWhereInput
+  bosses_found_every: BossStructWhereInput
+  bosses_found_some: BossStructWhereInput
+  bosses_found_none: BossStructWhereInput
+  previous_map: String
+  previous_map_not: String
+  previous_map_in: [String!]
+  previous_map_not_in: [String!]
+  previous_map_lt: String
+  previous_map_lte: String
+  previous_map_gt: String
+  previous_map_gte: String
+  previous_map_contains: String
+  previous_map_not_contains: String
+  previous_map_starts_with: String
+  previous_map_not_starts_with: String
+  previous_map_ends_with: String
+  previous_map_not_ends_with: String
+  next_map: String
+  next_map_not: String
+  next_map_in: [String!]
+  next_map_not_in: [String!]
+  next_map_lt: String
+  next_map_lte: String
+  next_map_gt: String
+  next_map_gte: String
+  next_map_contains: String
+  next_map_not_contains: String
+  next_map_starts_with: String
+  next_map_not_starts_with: String
+  next_map_ends_with: String
+  next_map_not_ends_with: String
+  pet_unlock_every: PetWhereInput
+  pet_unlock_some: PetWhereInput
+  pet_unlock_none: PetWhereInput
+  continent: ContinentWhereInput
+  imageurl: String
+  imageurl_not: String
+  imageurl_in: [String!]
+  imageurl_not_in: [String!]
+  imageurl_lt: String
+  imageurl_lte: String
+  imageurl_gt: String
+  imageurl_gte: String
+  imageurl_contains: String
+  imageurl_not_contains: String
+  imageurl_starts_with: String
+  imageurl_not_starts_with: String
+  imageurl_ends_with: String
+  imageurl_not_ends_with: String
   AND: [MapWhereInput!]
   OR: [MapWhereInput!]
   NOT: [MapWhereInput!]
@@ -2259,9 +2200,9 @@ type MonsterSkill {
   id: ID!
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
-  energy: Int!
+  skill_type: [SkillType!]!
+  combat_type: [CombatType!]!
+  energy: Int
 }
 
 type MonsterSkillConnection {
@@ -2270,18 +2211,26 @@ type MonsterSkillConnection {
   aggregate: AggregateMonsterSkill!
 }
 
+input MonsterSkillCreatecombat_typeInput {
+  set: [CombatType!]
+}
+
 input MonsterSkillCreateInput {
   id: ID
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: MonsterSkillCreateskill_typeInput
+  combat_type: MonsterSkillCreatecombat_typeInput
   energy: Int
 }
 
 input MonsterSkillCreateManyInput {
   create: [MonsterSkillCreateInput!]
   connect: [MonsterSkillWhereUniqueInput!]
+}
+
+input MonsterSkillCreateskill_typeInput {
+  set: [SkillType!]
 }
 
 type MonsterSkillEdge {
@@ -2296,10 +2245,6 @@ enum MonsterSkillOrderByInput {
   name_DESC
   description_ASC
   description_DESC
-  skill_type_ASC
-  skill_type_DESC
-  combat_type_ASC
-  combat_type_DESC
   energy_ASC
   energy_DESC
 }
@@ -2308,9 +2253,9 @@ type MonsterSkillPreviousValues {
   id: ID!
   name: String!
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
-  energy: Int!
+  skill_type: [SkillType!]!
+  combat_type: [CombatType!]!
+  energy: Int
 }
 
 input MonsterSkillScalarWhereInput {
@@ -2356,14 +2301,6 @@ input MonsterSkillScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  skill_type: SkillType
-  skill_type_not: SkillType
-  skill_type_in: [SkillType!]
-  skill_type_not_in: [SkillType!]
-  combat_type: CombatType
-  combat_type_not: CombatType
-  combat_type_in: [CombatType!]
-  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]
@@ -2395,27 +2332,31 @@ input MonsterSkillSubscriptionWhereInput {
   NOT: [MonsterSkillSubscriptionWhereInput!]
 }
 
+input MonsterSkillUpdatecombat_typeInput {
+  set: [CombatType!]
+}
+
 input MonsterSkillUpdateDataInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: MonsterSkillUpdateskill_typeInput
+  combat_type: MonsterSkillUpdatecombat_typeInput
   energy: Int
 }
 
 input MonsterSkillUpdateInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: MonsterSkillUpdateskill_typeInput
+  combat_type: MonsterSkillUpdatecombat_typeInput
   energy: Int
 }
 
 input MonsterSkillUpdateManyDataInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: MonsterSkillUpdateskill_typeInput
+  combat_type: MonsterSkillUpdatecombat_typeInput
   energy: Int
 }
 
@@ -2434,14 +2375,18 @@ input MonsterSkillUpdateManyInput {
 input MonsterSkillUpdateManyMutationInput {
   name: String
   description: String
-  skill_type: SkillType
-  combat_type: CombatType
+  skill_type: MonsterSkillUpdateskill_typeInput
+  combat_type: MonsterSkillUpdatecombat_typeInput
   energy: Int
 }
 
 input MonsterSkillUpdateManyWithWhereNestedInput {
   where: MonsterSkillScalarWhereInput!
   data: MonsterSkillUpdateManyDataInput!
+}
+
+input MonsterSkillUpdateskill_typeInput {
+  set: [SkillType!]
 }
 
 input MonsterSkillUpdateWithWhereUniqueNestedInput {
@@ -2498,14 +2443,6 @@ input MonsterSkillWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  skill_type: SkillType
-  skill_type_not: SkillType
-  skill_type_in: [SkillType!]
-  skill_type_not_in: [SkillType!]
-  combat_type: CombatType
-  combat_type_not: CombatType
-  combat_type_in: [CombatType!]
-  combat_type_not_in: [CombatType!]
   energy: Int
   energy_not: Int
   energy_in: [Int!]
@@ -2543,16 +2480,6 @@ type Mutation {
   upsertClass(where: ClassWhereUniqueInput!, create: ClassCreateInput!, update: ClassUpdateInput!): Class!
   deleteClass(where: ClassWhereUniqueInput!): Class
   deleteManyClasses(where: ClassWhereInput): BatchPayload!
-  createConnectContinent(data: ConnectContinentCreateInput!): ConnectContinent!
-  updateConnectContinent(data: ConnectContinentUpdateInput!, where: ConnectContinentWhereUniqueInput!): ConnectContinent
-  upsertConnectContinent(where: ConnectContinentWhereUniqueInput!, create: ConnectContinentCreateInput!, update: ConnectContinentUpdateInput!): ConnectContinent!
-  deleteConnectContinent(where: ConnectContinentWhereUniqueInput!): ConnectContinent
-  deleteManyConnectContinents(where: ConnectContinentWhereInput): BatchPayload!
-  createConnectedMap(data: ConnectedMapCreateInput!): ConnectedMap!
-  updateConnectedMap(data: ConnectedMapUpdateInput!, where: ConnectedMapWhereUniqueInput!): ConnectedMap
-  upsertConnectedMap(where: ConnectedMapWhereUniqueInput!, create: ConnectedMapCreateInput!, update: ConnectedMapUpdateInput!): ConnectedMap!
-  deleteConnectedMap(where: ConnectedMapWhereUniqueInput!): ConnectedMap
-  deleteManyConnectedMaps(where: ConnectedMapWhereInput): BatchPayload!
   createContinent(data: ContinentCreateInput!): Continent!
   updateContinent(data: ContinentUpdateInput!, where: ContinentWhereUniqueInput!): Continent
   updateManyContinents(data: ContinentUpdateManyMutationInput!, where: ContinentWhereInput): BatchPayload!
@@ -2565,6 +2492,12 @@ type Mutation {
   upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
   deleteElement(where: ElementWhereUniqueInput!): Element
   deleteManyElements(where: ElementWhereInput): BatchPayload!
+  createFood(data: FoodCreateInput!): Food!
+  updateFood(data: FoodUpdateInput!, where: FoodWhereUniqueInput!): Food
+  updateManyFoods(data: FoodUpdateManyMutationInput!, where: FoodWhereInput): BatchPayload!
+  upsertFood(where: FoodWhereUniqueInput!, create: FoodCreateInput!, update: FoodUpdateInput!): Food!
+  deleteFood(where: FoodWhereUniqueInput!): Food
+  deleteManyFoods(where: FoodWhereInput): BatchPayload!
   createGuide(data: GuideCreateInput!): Guide!
   updateGuide(data: GuideUpdateInput!, where: GuideWhereUniqueInput!): Guide
   updateManyGuides(data: GuideUpdateManyMutationInput!, where: GuideWhereInput): BatchPayload!
@@ -2583,18 +2516,18 @@ type Mutation {
   upsertMonsterSkill(where: MonsterSkillWhereUniqueInput!, create: MonsterSkillCreateInput!, update: MonsterSkillUpdateInput!): MonsterSkill!
   deleteMonsterSkill(where: MonsterSkillWhereUniqueInput!): MonsterSkill
   deleteManyMonsterSkills(where: MonsterSkillWhereInput): BatchPayload!
+  createPet(data: PetCreateInput!): Pet!
+  updatePet(data: PetUpdateInput!, where: PetWhereUniqueInput!): Pet
+  updateManyPets(data: PetUpdateManyMutationInput!, where: PetWhereInput): BatchPayload!
+  upsertPet(where: PetWhereUniqueInput!, create: PetCreateInput!, update: PetUpdateInput!): Pet!
+  deletePet(where: PetWhereUniqueInput!): Pet
+  deleteManyPets(where: PetWhereInput): BatchPayload!
   createSkill(data: SkillCreateInput!): Skill!
   updateSkill(data: SkillUpdateInput!, where: SkillWhereUniqueInput!): Skill
   updateManySkills(data: SkillUpdateManyMutationInput!, where: SkillWhereInput): BatchPayload!
   upsertSkill(where: SkillWhereUniqueInput!, create: SkillCreateInput!, update: SkillUpdateInput!): Skill!
   deleteSkill(where: SkillWhereUniqueInput!): Skill
   deleteManySkills(where: SkillWhereInput): BatchPayload!
-  createStageStruct(data: StageStructCreateInput!): StageStruct!
-  updateStageStruct(data: StageStructUpdateInput!, where: StageStructWhereUniqueInput!): StageStruct
-  updateManyStageStructs(data: StageStructUpdateManyMutationInput!, where: StageStructWhereInput): BatchPayload!
-  upsertStageStruct(where: StageStructWhereUniqueInput!, create: StageStructCreateInput!, update: StageStructUpdateInput!): StageStruct!
-  deleteStageStruct(where: StageStructWhereUniqueInput!): StageStruct
-  deleteManyStageStructs(where: StageStructWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -2620,6 +2553,400 @@ type PageInfo {
   endCursor: String
 }
 
+type Pet {
+  id: ID!
+  name: String!
+  element_one: Element
+  element_one_value: Int
+  element_two: Element
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: Food
+  area: Map
+  imageurl: String
+}
+
+type PetConnection {
+  pageInfo: PageInfo!
+  edges: [PetEdge]!
+  aggregate: AggregatePet!
+}
+
+input PetCreateInput {
+  id: ID
+  name: String!
+  element_one: ElementCreateOneInput
+  element_one_value: Int
+  element_two: ElementCreateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: FoodCreateOneWithoutPet_favoriteInput
+  area: MapCreateOneWithoutPet_unlockInput
+  imageurl: String
+}
+
+input PetCreateManyWithoutAreaInput {
+  create: [PetCreateWithoutAreaInput!]
+  connect: [PetWhereUniqueInput!]
+}
+
+input PetCreateManyWithoutFavorite_foodInput {
+  create: [PetCreateWithoutFavorite_foodInput!]
+  connect: [PetWhereUniqueInput!]
+}
+
+input PetCreateWithoutAreaInput {
+  id: ID
+  name: String!
+  element_one: ElementCreateOneInput
+  element_one_value: Int
+  element_two: ElementCreateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: FoodCreateOneWithoutPet_favoriteInput
+  imageurl: String
+}
+
+input PetCreateWithoutFavorite_foodInput {
+  id: ID
+  name: String!
+  element_one: ElementCreateOneInput
+  element_one_value: Int
+  element_two: ElementCreateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  area: MapCreateOneWithoutPet_unlockInput
+  imageurl: String
+}
+
+type PetEdge {
+  node: Pet!
+  cursor: String!
+}
+
+enum PetOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  element_one_value_ASC
+  element_one_value_DESC
+  element_two_value_ASC
+  element_two_value_DESC
+  talent_cap_ASC
+  talent_cap_DESC
+  type_ASC
+  type_DESC
+  imageurl_ASC
+  imageurl_DESC
+}
+
+type PetPreviousValues {
+  id: ID!
+  name: String!
+  element_one_value: Int
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  imageurl: String
+}
+
+input PetScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  element_one_value: Int
+  element_one_value_not: Int
+  element_one_value_in: [Int!]
+  element_one_value_not_in: [Int!]
+  element_one_value_lt: Int
+  element_one_value_lte: Int
+  element_one_value_gt: Int
+  element_one_value_gte: Int
+  element_two_value: Int
+  element_two_value_not: Int
+  element_two_value_in: [Int!]
+  element_two_value_not_in: [Int!]
+  element_two_value_lt: Int
+  element_two_value_lte: Int
+  element_two_value_gt: Int
+  element_two_value_gte: Int
+  talent_cap: Float
+  talent_cap_not: Float
+  talent_cap_in: [Float!]
+  talent_cap_not_in: [Float!]
+  talent_cap_lt: Float
+  talent_cap_lte: Float
+  talent_cap_gt: Float
+  talent_cap_gte: Float
+  type: PetType
+  type_not: PetType
+  type_in: [PetType!]
+  type_not_in: [PetType!]
+  imageurl: String
+  imageurl_not: String
+  imageurl_in: [String!]
+  imageurl_not_in: [String!]
+  imageurl_lt: String
+  imageurl_lte: String
+  imageurl_gt: String
+  imageurl_gte: String
+  imageurl_contains: String
+  imageurl_not_contains: String
+  imageurl_starts_with: String
+  imageurl_not_starts_with: String
+  imageurl_ends_with: String
+  imageurl_not_ends_with: String
+  AND: [PetScalarWhereInput!]
+  OR: [PetScalarWhereInput!]
+  NOT: [PetScalarWhereInput!]
+}
+
+type PetSubscriptionPayload {
+  mutation: MutationType!
+  node: Pet
+  updatedFields: [String!]
+  previousValues: PetPreviousValues
+}
+
+input PetSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PetWhereInput
+  AND: [PetSubscriptionWhereInput!]
+  OR: [PetSubscriptionWhereInput!]
+  NOT: [PetSubscriptionWhereInput!]
+}
+
+enum PetType {
+  ASSIST
+  SYMBIOSIS
+  ATTACK
+  GUARDIAN
+}
+
+input PetUpdateInput {
+  name: String
+  element_one: ElementUpdateOneInput
+  element_one_value: Int
+  element_two: ElementUpdateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: FoodUpdateOneWithoutPet_favoriteInput
+  area: MapUpdateOneWithoutPet_unlockInput
+  imageurl: String
+}
+
+input PetUpdateManyDataInput {
+  name: String
+  element_one_value: Int
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  imageurl: String
+}
+
+input PetUpdateManyMutationInput {
+  name: String
+  element_one_value: Int
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  imageurl: String
+}
+
+input PetUpdateManyWithoutAreaInput {
+  create: [PetCreateWithoutAreaInput!]
+  delete: [PetWhereUniqueInput!]
+  connect: [PetWhereUniqueInput!]
+  set: [PetWhereUniqueInput!]
+  disconnect: [PetWhereUniqueInput!]
+  update: [PetUpdateWithWhereUniqueWithoutAreaInput!]
+  upsert: [PetUpsertWithWhereUniqueWithoutAreaInput!]
+  deleteMany: [PetScalarWhereInput!]
+  updateMany: [PetUpdateManyWithWhereNestedInput!]
+}
+
+input PetUpdateManyWithoutFavorite_foodInput {
+  create: [PetCreateWithoutFavorite_foodInput!]
+  delete: [PetWhereUniqueInput!]
+  connect: [PetWhereUniqueInput!]
+  set: [PetWhereUniqueInput!]
+  disconnect: [PetWhereUniqueInput!]
+  update: [PetUpdateWithWhereUniqueWithoutFavorite_foodInput!]
+  upsert: [PetUpsertWithWhereUniqueWithoutFavorite_foodInput!]
+  deleteMany: [PetScalarWhereInput!]
+  updateMany: [PetUpdateManyWithWhereNestedInput!]
+}
+
+input PetUpdateManyWithWhereNestedInput {
+  where: PetScalarWhereInput!
+  data: PetUpdateManyDataInput!
+}
+
+input PetUpdateWithoutAreaDataInput {
+  name: String
+  element_one: ElementUpdateOneInput
+  element_one_value: Int
+  element_two: ElementUpdateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: FoodUpdateOneWithoutPet_favoriteInput
+  imageurl: String
+}
+
+input PetUpdateWithoutFavorite_foodDataInput {
+  name: String
+  element_one: ElementUpdateOneInput
+  element_one_value: Int
+  element_two: ElementUpdateOneInput
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  area: MapUpdateOneWithoutPet_unlockInput
+  imageurl: String
+}
+
+input PetUpdateWithWhereUniqueWithoutAreaInput {
+  where: PetWhereUniqueInput!
+  data: PetUpdateWithoutAreaDataInput!
+}
+
+input PetUpdateWithWhereUniqueWithoutFavorite_foodInput {
+  where: PetWhereUniqueInput!
+  data: PetUpdateWithoutFavorite_foodDataInput!
+}
+
+input PetUpsertWithWhereUniqueWithoutAreaInput {
+  where: PetWhereUniqueInput!
+  update: PetUpdateWithoutAreaDataInput!
+  create: PetCreateWithoutAreaInput!
+}
+
+input PetUpsertWithWhereUniqueWithoutFavorite_foodInput {
+  where: PetWhereUniqueInput!
+  update: PetUpdateWithoutFavorite_foodDataInput!
+  create: PetCreateWithoutFavorite_foodInput!
+}
+
+input PetWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  element_one: ElementWhereInput
+  element_one_value: Int
+  element_one_value_not: Int
+  element_one_value_in: [Int!]
+  element_one_value_not_in: [Int!]
+  element_one_value_lt: Int
+  element_one_value_lte: Int
+  element_one_value_gt: Int
+  element_one_value_gte: Int
+  element_two: ElementWhereInput
+  element_two_value: Int
+  element_two_value_not: Int
+  element_two_value_in: [Int!]
+  element_two_value_not_in: [Int!]
+  element_two_value_lt: Int
+  element_two_value_lte: Int
+  element_two_value_gt: Int
+  element_two_value_gte: Int
+  talent_cap: Float
+  talent_cap_not: Float
+  talent_cap_in: [Float!]
+  talent_cap_not_in: [Float!]
+  talent_cap_lt: Float
+  talent_cap_lte: Float
+  talent_cap_gt: Float
+  talent_cap_gte: Float
+  type: PetType
+  type_not: PetType
+  type_in: [PetType!]
+  type_not_in: [PetType!]
+  favorite_food: FoodWhereInput
+  area: MapWhereInput
+  imageurl: String
+  imageurl_not: String
+  imageurl_in: [String!]
+  imageurl_not_in: [String!]
+  imageurl_lt: String
+  imageurl_lte: String
+  imageurl_gt: String
+  imageurl_gte: String
+  imageurl_contains: String
+  imageurl_not_contains: String
+  imageurl_starts_with: String
+  imageurl_not_starts_with: String
+  imageurl_ends_with: String
+  imageurl_not_ends_with: String
+  AND: [PetWhereInput!]
+  OR: [PetWhereInput!]
+  NOT: [PetWhereInput!]
+}
+
+input PetWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 type Query {
   boss(where: BossWhereUniqueInput!): Boss
   bosses(where: BossWhereInput, orderBy: BossOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Boss]!
@@ -2630,18 +2957,15 @@ type Query {
   class(where: ClassWhereUniqueInput!): Class
   classes(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Class]!
   classesConnection(where: ClassWhereInput, orderBy: ClassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClassConnection!
-  connectContinent(where: ConnectContinentWhereUniqueInput!): ConnectContinent
-  connectContinents(where: ConnectContinentWhereInput, orderBy: ConnectContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ConnectContinent]!
-  connectContinentsConnection(where: ConnectContinentWhereInput, orderBy: ConnectContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectContinentConnection!
-  connectedMap(where: ConnectedMapWhereUniqueInput!): ConnectedMap
-  connectedMaps(where: ConnectedMapWhereInput, orderBy: ConnectedMapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ConnectedMap]!
-  connectedMapsConnection(where: ConnectedMapWhereInput, orderBy: ConnectedMapOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ConnectedMapConnection!
   continent(where: ContinentWhereUniqueInput!): Continent
   continents(where: ContinentWhereInput, orderBy: ContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Continent]!
   continentsConnection(where: ContinentWhereInput, orderBy: ContinentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContinentConnection!
   element(where: ElementWhereUniqueInput!): Element
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
+  food(where: FoodWhereUniqueInput!): Food
+  foods(where: FoodWhereInput, orderBy: FoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Food]!
+  foodsConnection(where: FoodWhereInput, orderBy: FoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FoodConnection!
   guide(where: GuideWhereUniqueInput!): Guide
   guides(where: GuideWhereInput, orderBy: GuideOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Guide]!
   guidesConnection(where: GuideWhereInput, orderBy: GuideOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GuideConnection!
@@ -2651,12 +2975,12 @@ type Query {
   monsterSkill(where: MonsterSkillWhereUniqueInput!): MonsterSkill
   monsterSkills(where: MonsterSkillWhereInput, orderBy: MonsterSkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MonsterSkill]!
   monsterSkillsConnection(where: MonsterSkillWhereInput, orderBy: MonsterSkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MonsterSkillConnection!
+  pet(where: PetWhereUniqueInput!): Pet
+  pets(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pet]!
+  petsConnection(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PetConnection!
   skill(where: SkillWhereUniqueInput!): Skill
   skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill]!
   skillsConnection(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SkillConnection!
-  stageStruct(where: StageStructWhereUniqueInput!): StageStruct
-  stageStructs(where: StageStructWhereInput, orderBy: StageStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StageStruct]!
-  stageStructsConnection(where: StageStructWhereInput, orderBy: StageStructOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StageStructConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -2836,20 +3160,7 @@ input SkillSubscriptionWhereInput {
 
 enum SkillType {
   UNKNOWN
-  BUFF
-  BUFF_AOE
-  DAMAGE_TARGET
-  DAMAGE_AOE
-  DAMAGE_DOT
-  HEAL_TARGET
-  HEAL_AOE
-  HEAL_DOT
-  CROWD_CONTROL
-  SUMMON
-  DEBUFF
-  DISPELL
-  ABSORB
-  STEALTH
+  ACTIVE
   PASSIVE
 }
 
@@ -3019,308 +3330,31 @@ input SkillWhereUniqueInput {
   name: String
 }
 
-type StageStruct {
-  id: ID!
-  stage_number: Int!
-  map: Map!
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStruct
-}
-
-type StageStructConnection {
-  pageInfo: PageInfo!
-  edges: [StageStructEdge]!
-  aggregate: AggregateStageStruct!
-}
-
-input StageStructCreateInput {
-  id: ID
-  stage_number: Int!
-  map: MapCreateOneWithoutField_stagesInput!
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStructCreateOneWithoutLocationInput
-}
-
-input StageStructCreateManyWithoutMapInput {
-  create: [StageStructCreateWithoutMapInput!]
-  connect: [StageStructWhereUniqueInput!]
-}
-
-input StageStructCreateOneWithoutBoss_foundInput {
-  create: StageStructCreateWithoutBoss_foundInput
-  connect: StageStructWhereUniqueInput
-}
-
-input StageStructCreateWithoutBoss_foundInput {
-  id: ID
-  stage_number: Int!
-  map: MapCreateOneWithoutField_stagesInput!
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-}
-
-input StageStructCreateWithoutMapInput {
-  id: ID
-  stage_number: Int!
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStructCreateOneWithoutLocationInput
-}
-
-type StageStructEdge {
-  node: StageStruct!
-  cursor: String!
-}
-
-enum StageStructOrderByInput {
-  id_ASC
-  id_DESC
-  stage_number_ASC
-  stage_number_DESC
-  base_exp_ASC
-  base_exp_DESC
-  gear_level_ASC
-  gear_level_DESC
-  base_shell_ASC
-  base_shell_DESC
-}
-
-type StageStructPreviousValues {
-  id: ID!
-  stage_number: Int!
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-}
-
-input StageStructScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  stage_number: Int
-  stage_number_not: Int
-  stage_number_in: [Int!]
-  stage_number_not_in: [Int!]
-  stage_number_lt: Int
-  stage_number_lte: Int
-  stage_number_gt: Int
-  stage_number_gte: Int
-  base_exp: Int
-  base_exp_not: Int
-  base_exp_in: [Int!]
-  base_exp_not_in: [Int!]
-  base_exp_lt: Int
-  base_exp_lte: Int
-  base_exp_gt: Int
-  base_exp_gte: Int
-  gear_level: Int
-  gear_level_not: Int
-  gear_level_in: [Int!]
-  gear_level_not_in: [Int!]
-  gear_level_lt: Int
-  gear_level_lte: Int
-  gear_level_gt: Int
-  gear_level_gte: Int
-  base_shell: Int
-  base_shell_not: Int
-  base_shell_in: [Int!]
-  base_shell_not_in: [Int!]
-  base_shell_lt: Int
-  base_shell_lte: Int
-  base_shell_gt: Int
-  base_shell_gte: Int
-  AND: [StageStructScalarWhereInput!]
-  OR: [StageStructScalarWhereInput!]
-  NOT: [StageStructScalarWhereInput!]
-}
-
-type StageStructSubscriptionPayload {
-  mutation: MutationType!
-  node: StageStruct
-  updatedFields: [String!]
-  previousValues: StageStructPreviousValues
-}
-
-input StageStructSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: StageStructWhereInput
-  AND: [StageStructSubscriptionWhereInput!]
-  OR: [StageStructSubscriptionWhereInput!]
-  NOT: [StageStructSubscriptionWhereInput!]
-}
-
-input StageStructUpdateInput {
-  stage_number: Int
-  map: MapUpdateOneRequiredWithoutField_stagesInput
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStructUpdateOneWithoutLocationInput
-}
-
-input StageStructUpdateManyDataInput {
-  stage_number: Int
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-}
-
-input StageStructUpdateManyMutationInput {
-  stage_number: Int
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-}
-
-input StageStructUpdateManyWithoutMapInput {
-  create: [StageStructCreateWithoutMapInput!]
-  delete: [StageStructWhereUniqueInput!]
-  connect: [StageStructWhereUniqueInput!]
-  set: [StageStructWhereUniqueInput!]
-  disconnect: [StageStructWhereUniqueInput!]
-  update: [StageStructUpdateWithWhereUniqueWithoutMapInput!]
-  upsert: [StageStructUpsertWithWhereUniqueWithoutMapInput!]
-  deleteMany: [StageStructScalarWhereInput!]
-  updateMany: [StageStructUpdateManyWithWhereNestedInput!]
-}
-
-input StageStructUpdateManyWithWhereNestedInput {
-  where: StageStructScalarWhereInput!
-  data: StageStructUpdateManyDataInput!
-}
-
-input StageStructUpdateOneWithoutBoss_foundInput {
-  create: StageStructCreateWithoutBoss_foundInput
-  update: StageStructUpdateWithoutBoss_foundDataInput
-  upsert: StageStructUpsertWithoutBoss_foundInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: StageStructWhereUniqueInput
-}
-
-input StageStructUpdateWithoutBoss_foundDataInput {
-  stage_number: Int
-  map: MapUpdateOneRequiredWithoutField_stagesInput
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-}
-
-input StageStructUpdateWithoutMapDataInput {
-  stage_number: Int
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStructUpdateOneWithoutLocationInput
-}
-
-input StageStructUpdateWithWhereUniqueWithoutMapInput {
-  where: StageStructWhereUniqueInput!
-  data: StageStructUpdateWithoutMapDataInput!
-}
-
-input StageStructUpsertWithoutBoss_foundInput {
-  update: StageStructUpdateWithoutBoss_foundDataInput!
-  create: StageStructCreateWithoutBoss_foundInput!
-}
-
-input StageStructUpsertWithWhereUniqueWithoutMapInput {
-  where: StageStructWhereUniqueInput!
-  update: StageStructUpdateWithoutMapDataInput!
-  create: StageStructCreateWithoutMapInput!
-}
-
-input StageStructWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  stage_number: Int
-  stage_number_not: Int
-  stage_number_in: [Int!]
-  stage_number_not_in: [Int!]
-  stage_number_lt: Int
-  stage_number_lte: Int
-  stage_number_gt: Int
-  stage_number_gte: Int
-  map: MapWhereInput
-  base_exp: Int
-  base_exp_not: Int
-  base_exp_in: [Int!]
-  base_exp_not_in: [Int!]
-  base_exp_lt: Int
-  base_exp_lte: Int
-  base_exp_gt: Int
-  base_exp_gte: Int
-  gear_level: Int
-  gear_level_not: Int
-  gear_level_in: [Int!]
-  gear_level_not_in: [Int!]
-  gear_level_lt: Int
-  gear_level_lte: Int
-  gear_level_gt: Int
-  gear_level_gte: Int
-  base_shell: Int
-  base_shell_not: Int
-  base_shell_in: [Int!]
-  base_shell_not_in: [Int!]
-  base_shell_lt: Int
-  base_shell_lte: Int
-  base_shell_gt: Int
-  base_shell_gte: Int
-  boss_found: BossStructWhereInput
-  AND: [StageStructWhereInput!]
-  OR: [StageStructWhereInput!]
-  NOT: [StageStructWhereInput!]
-}
-
-input StageStructWhereUniqueInput {
-  id: ID
+enum Stat {
+  ATTACK
+  HP
+  ARMOR
+  ATK_SPD
+  HIT
+  EVASION
+  CRIT
+  TENACITY
+  BLOCK
+  IMPALE
 }
 
 type Subscription {
   boss(where: BossSubscriptionWhereInput): BossSubscriptionPayload
   bossStruct(where: BossStructSubscriptionWhereInput): BossStructSubscriptionPayload
   class(where: ClassSubscriptionWhereInput): ClassSubscriptionPayload
-  connectContinent(where: ConnectContinentSubscriptionWhereInput): ConnectContinentSubscriptionPayload
-  connectedMap(where: ConnectedMapSubscriptionWhereInput): ConnectedMapSubscriptionPayload
   continent(where: ContinentSubscriptionWhereInput): ContinentSubscriptionPayload
   element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
+  food(where: FoodSubscriptionWhereInput): FoodSubscriptionPayload
   guide(where: GuideSubscriptionWhereInput): GuideSubscriptionPayload
   map(where: MapSubscriptionWhereInput): MapSubscriptionPayload
   monsterSkill(where: MonsterSkillSubscriptionWhereInput): MonsterSkillSubscriptionPayload
+  pet(where: PetSubscriptionWhereInput): PetSubscriptionPayload
   skill(where: SkillSubscriptionWhereInput): SkillSubscriptionPayload
-  stageStruct(where: StageStructSubscriptionWhereInput): StageStructSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

@@ -36,9 +36,9 @@ type MonsterSkill {
   id: ID! @id
   name: String! @unique
   description: String!
-  skill_type: SkillType
-  combat_type: CombatType
-  energy: Int! @default(value: 0)
+  skill_type: [SkillType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
+  combat_type: [CombatType!]! @scalarList(strategy: RELATION) @default(value: UNKNOWN)
+  energy: Int @default(value: 0)
 }
 
 # The predetermine class type with enum ClassType
@@ -58,33 +58,18 @@ type Boss {
   element_one_value: Int
   element_two: Element @relation(name: "ElementEffectivenessTwo")
   element_two_value: Int
-  locations_found: [Map!]! @relation(link: TABLE)
+  map_found: [Map!]! @relation(link: TABLE)
   continent_found: [Continent!]! @relation(link: TABLE)
 }
 
-# 'BossStruct' Type is a struct of different boss stage attribute indicating specific boss location
+# 'Stage Struct' is a struct of different stage attributes indicating the location of specfic boss.
 type BossStruct {
   id: ID! @id
-  createdAt: DateTime! @createdAt
-  monster_found: Boss!
-  minion_present: Boolean @default(value: false) 
-  location: StageStruct @relation(link: TABLE) @unique
-  HP: Int!
-  ATK: Int!
-  Armor: Int!
-  AtkSpd: Float!
-  skills: [MonsterSkill!]! @relation(link: TABLE)
-}
-
-# 'Stage Struct' is a struct of different stage attributes indicating the location of specfic boss.
-type StageStruct {
-  id: ID! @id
-  stage_number: Int!
   map: Map! @relation(link: INLINE)
-  base_exp: Int
-  gear_level: Int
-  base_shell: Int
-  boss_found: BossStruct 
+  boss: Boss!
+  minion_present: Boolean @default(value: false)
+  AtkSpd: Float @default(value: 1.8)
+  skills: [MonsterSkill!]! @relation(link: TABLE)
 }
 
 # 'Map' type is a type of unique maps available in the game with different array attributes
@@ -93,19 +78,15 @@ type Map {
   name: String! @unique
   total_stage: Int
   native_boss: [Boss!]!
+  obtainable_skills: [Skill!]!
+  bosses_found: [BossStruct!]!
   #previous_map: Map @relation(name: "LastMapRelation")
   #next_map: Map @relation(name: "NextMapRelation")
-  connected_maps: ConnectedMap @relation(name: "LastMapRelation" name: "NextMapRelation" link: TABLE)
+  previous_map: String
+  next_map: String
+  pet_unlock: [Pet!]!
   continent: Continent! @relation(link: INLINE)
-  obtainable_skills: [Skill!]!
-  boss_stages: [BossStruct!]!
-  field_stages: [StageStruct!]!
-}
-
-type ConnectedMap {
-  id: ID! @id
-  next_map: Map! @relation(name: "NextMapRelation")
-  previous_map: Map! @relation(name: "LastMapRelation")
+  imageurl: String
 }
 
 # 'Continent' type is a type of unique continent in the game containing multiple map types
@@ -116,14 +97,30 @@ type Continent {
   maps: [Map!]!
   # next_continent: Continent @relation(name: "NextContinentRelation")
   # previous_continent: Continent @relation(name: "LastContinentRelation")
-  connected_continent: ConnectContinent @relation(name: "LastContinentRelation" name: "NextContinentRelation" link: TABLE)
+  next_continent: String
+  previous_continent: String
 }
 
-type ConnectContinent {
+type Pet {
   id: ID! @id
-  current_continent: Continent! @relation(name: "CurrentContinent")
-  next_continent: Continent @relation(name: "NextContinentRelation")
-  previous_continent: Continent @relation(name: "LastContinentRelation")
+  name: String! @unique
+  element_one: Element @relation(name: "PetElementOne")
+  element_one_value: Int
+  element_two: Element @relation(name: "PetElementTwo")
+  element_two_value: Int
+  talent_cap: Float
+  type: PetType
+  favorite_food: Food @relation(link: INLINE)
+  area: Map @relation(link: INLINE)
+  imageurl: String
+}
+
+type Food {
+  id: ID! @id
+  name: String! @unique
+  pet_favorite: [Pet!]!
+  buff: Stat
+  imageurl: String
 }
 
 # Element is a type that contain predetermine enum ElementType to define the types in the game.
@@ -134,30 +131,27 @@ type Element {
   effective: ElementType
 }
 
-#Below are different predertermined types for some types.
+#Below are different predertermined scalar value for some types.
+enum SkillType {
+  UNKNOWN
+  ACTIVE
+  PASSIVE
+}
 
 enum CombatType {
   UNKNOWN
-  RANGE
-  MEELEE
-  SELF
-  TEAM
-}
-
-enum SkillType {
-  UNKNOWN
   BUFF
-  BUFF_AOE
-  DAMAGE_TARGET
-  DAMAGE_AOE
-  DAMAGE_DOT
-  HEAL_TARGET
-  HEAL_AOE
-  HEAL_DOT
+  DAMAGE
+  HEAL
+  CONTINUOUS
+  OVER_TIME
+  AREA_OF_EFFECT
+  TARGET
   CROWD_CONTROL
   SUMMON
   DEBUFF
   DISPELL
+  RANDOM
   ABSORB
   STEALTH
   PASSIVE
@@ -170,15 +164,16 @@ enum ElementType {
   EARTH
 }
 
-enum PetTalent {
-  ATK
-  SYMBIOSIS
+enum PetType {
   ASSIST
+  SYMBIOSIS
+  ATTACK
   GUARDIAN
 }
 
 enum Rarity {
   NORMAL
+  UNCOMMON
   RARE
   EPIC
   LEGENDARY
@@ -193,6 +188,19 @@ enum Hero {
   MAGE
   GLADIATOR
   WARRIOR
+}
+
+enum Stat {
+  ATTACK
+  HP
+  ARMOR
+  ATK_SPD
+  HIT
+  EVASION
+  CRIT
+  TENACITY
+  BLOCK
+  IMPALE
 }
 
 # Permission role which determine access level.

@@ -33,15 +33,7 @@ var models = [
     embedded: false
   },
   {
-    name: "StageStruct",
-    embedded: false
-  },
-  {
     name: "Map",
-    embedded: false
-  },
-  {
-    name: "ConnectedMap",
     embedded: false
   },
   {
@@ -49,7 +41,11 @@ var models = [
     embedded: false
   },
   {
-    name: "ConnectContinent",
+    name: "Pet",
+    embedded: false
+  },
+  {
+    name: "Food",
     embedded: false
   },
   {
@@ -57,11 +53,11 @@ var models = [
     embedded: false
   },
   {
-    name: "CombatType",
+    name: "SkillType",
     embedded: false
   },
   {
-    name: "SkillType",
+    name: "CombatType",
     embedded: false
   },
   {
@@ -69,7 +65,7 @@ var models = [
     embedded: false
   },
   {
-    name: "PetTalent",
+    name: "PetType",
     embedded: false
   },
   {
@@ -78,6 +74,10 @@ var models = [
   },
   {
     name: "Hero",
+    embedded: false
+  },
+  {
+    name: "Stat",
     embedded: false
   },
   {

@@ -19,15 +19,14 @@ export interface Exists {
   boss: (where?: BossWhereInput) => Promise<boolean>;
   bossStruct: (where?: BossStructWhereInput) => Promise<boolean>;
   class: (where?: ClassWhereInput) => Promise<boolean>;
-  connectContinent: (where?: ConnectContinentWhereInput) => Promise<boolean>;
-  connectedMap: (where?: ConnectedMapWhereInput) => Promise<boolean>;
   continent: (where?: ContinentWhereInput) => Promise<boolean>;
   element: (where?: ElementWhereInput) => Promise<boolean>;
+  food: (where?: FoodWhereInput) => Promise<boolean>;
   guide: (where?: GuideWhereInput) => Promise<boolean>;
   map: (where?: MapWhereInput) => Promise<boolean>;
   monsterSkill: (where?: MonsterSkillWhereInput) => Promise<boolean>;
+  pet: (where?: PetWhereInput) => Promise<boolean>;
   skill: (where?: SkillWhereInput) => Promise<boolean>;
-  stageStruct: (where?: StageStructWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -107,48 +106,6 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ClassConnectionPromise;
-  connectContinent: (
-    where: ConnectContinentWhereUniqueInput
-  ) => ConnectContinentNullablePromise;
-  connectContinents: (args?: {
-    where?: ConnectContinentWhereInput;
-    orderBy?: ConnectContinentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<ConnectContinent>;
-  connectContinentsConnection: (args?: {
-    where?: ConnectContinentWhereInput;
-    orderBy?: ConnectContinentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => ConnectContinentConnectionPromise;
-  connectedMap: (
-    where: ConnectedMapWhereUniqueInput
-  ) => ConnectedMapNullablePromise;
-  connectedMaps: (args?: {
-    where?: ConnectedMapWhereInput;
-    orderBy?: ConnectedMapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<ConnectedMap>;
-  connectedMapsConnection: (args?: {
-    where?: ConnectedMapWhereInput;
-    orderBy?: ConnectedMapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => ConnectedMapConnectionPromise;
   continent: (where: ContinentWhereUniqueInput) => ContinentNullablePromise;
   continents: (args?: {
     where?: ContinentWhereInput;
@@ -187,6 +144,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ElementConnectionPromise;
+  food: (where: FoodWhereUniqueInput) => FoodNullablePromise;
+  foods: (args?: {
+    where?: FoodWhereInput;
+    orderBy?: FoodOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Food>;
+  foodsConnection: (args?: {
+    where?: FoodWhereInput;
+    orderBy?: FoodOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FoodConnectionPromise;
   guide: (where: GuideWhereUniqueInput) => GuideNullablePromise;
   guides: (args?: {
     where?: GuideWhereInput;
@@ -246,6 +222,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => MonsterSkillConnectionPromise;
+  pet: (where: PetWhereUniqueInput) => PetNullablePromise;
+  pets: (args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Pet>;
+  petsConnection: (args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PetConnectionPromise;
   skill: (where: SkillWhereUniqueInput) => SkillNullablePromise;
   skills: (args?: {
     where?: SkillWhereInput;
@@ -265,27 +260,6 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => SkillConnectionPromise;
-  stageStruct: (
-    where: StageStructWhereUniqueInput
-  ) => StageStructNullablePromise;
-  stageStructs: (args?: {
-    where?: StageStructWhereInput;
-    orderBy?: StageStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<StageStruct>;
-  stageStructsConnection: (args?: {
-    where?: StageStructWhereInput;
-    orderBy?: StageStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => StageStructConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -359,40 +333,6 @@ export interface Prisma {
   }) => ClassPromise;
   deleteClass: (where: ClassWhereUniqueInput) => ClassPromise;
   deleteManyClasses: (where?: ClassWhereInput) => BatchPayloadPromise;
-  createConnectContinent: (
-    data: ConnectContinentCreateInput
-  ) => ConnectContinentPromise;
-  updateConnectContinent: (args: {
-    data: ConnectContinentUpdateInput;
-    where: ConnectContinentWhereUniqueInput;
-  }) => ConnectContinentPromise;
-  upsertConnectContinent: (args: {
-    where: ConnectContinentWhereUniqueInput;
-    create: ConnectContinentCreateInput;
-    update: ConnectContinentUpdateInput;
-  }) => ConnectContinentPromise;
-  deleteConnectContinent: (
-    where: ConnectContinentWhereUniqueInput
-  ) => ConnectContinentPromise;
-  deleteManyConnectContinents: (
-    where?: ConnectContinentWhereInput
-  ) => BatchPayloadPromise;
-  createConnectedMap: (data: ConnectedMapCreateInput) => ConnectedMapPromise;
-  updateConnectedMap: (args: {
-    data: ConnectedMapUpdateInput;
-    where: ConnectedMapWhereUniqueInput;
-  }) => ConnectedMapPromise;
-  upsertConnectedMap: (args: {
-    where: ConnectedMapWhereUniqueInput;
-    create: ConnectedMapCreateInput;
-    update: ConnectedMapUpdateInput;
-  }) => ConnectedMapPromise;
-  deleteConnectedMap: (
-    where: ConnectedMapWhereUniqueInput
-  ) => ConnectedMapPromise;
-  deleteManyConnectedMaps: (
-    where?: ConnectedMapWhereInput
-  ) => BatchPayloadPromise;
   createContinent: (data: ContinentCreateInput) => ContinentPromise;
   updateContinent: (args: {
     data: ContinentUpdateInput;
@@ -425,6 +365,22 @@ export interface Prisma {
   }) => ElementPromise;
   deleteElement: (where: ElementWhereUniqueInput) => ElementPromise;
   deleteManyElements: (where?: ElementWhereInput) => BatchPayloadPromise;
+  createFood: (data: FoodCreateInput) => FoodPromise;
+  updateFood: (args: {
+    data: FoodUpdateInput;
+    where: FoodWhereUniqueInput;
+  }) => FoodPromise;
+  updateManyFoods: (args: {
+    data: FoodUpdateManyMutationInput;
+    where?: FoodWhereInput;
+  }) => BatchPayloadPromise;
+  upsertFood: (args: {
+    where: FoodWhereUniqueInput;
+    create: FoodCreateInput;
+    update: FoodUpdateInput;
+  }) => FoodPromise;
+  deleteFood: (where: FoodWhereUniqueInput) => FoodPromise;
+  deleteManyFoods: (where?: FoodWhereInput) => BatchPayloadPromise;
   createGuide: (data: GuideCreateInput) => GuidePromise;
   updateGuide: (args: {
     data: GuideUpdateInput;
@@ -477,6 +433,22 @@ export interface Prisma {
   deleteManyMonsterSkills: (
     where?: MonsterSkillWhereInput
   ) => BatchPayloadPromise;
+  createPet: (data: PetCreateInput) => PetPromise;
+  updatePet: (args: {
+    data: PetUpdateInput;
+    where: PetWhereUniqueInput;
+  }) => PetPromise;
+  updateManyPets: (args: {
+    data: PetUpdateManyMutationInput;
+    where?: PetWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPet: (args: {
+    where: PetWhereUniqueInput;
+    create: PetCreateInput;
+    update: PetUpdateInput;
+  }) => PetPromise;
+  deletePet: (where: PetWhereUniqueInput) => PetPromise;
+  deleteManyPets: (where?: PetWhereInput) => BatchPayloadPromise;
   createSkill: (data: SkillCreateInput) => SkillPromise;
   updateSkill: (args: {
     data: SkillUpdateInput;
@@ -493,24 +465,6 @@ export interface Prisma {
   }) => SkillPromise;
   deleteSkill: (where: SkillWhereUniqueInput) => SkillPromise;
   deleteManySkills: (where?: SkillWhereInput) => BatchPayloadPromise;
-  createStageStruct: (data: StageStructCreateInput) => StageStructPromise;
-  updateStageStruct: (args: {
-    data: StageStructUpdateInput;
-    where: StageStructWhereUniqueInput;
-  }) => StageStructPromise;
-  updateManyStageStructs: (args: {
-    data: StageStructUpdateManyMutationInput;
-    where?: StageStructWhereInput;
-  }) => BatchPayloadPromise;
-  upsertStageStruct: (args: {
-    where: StageStructWhereUniqueInput;
-    create: StageStructCreateInput;
-    update: StageStructUpdateInput;
-  }) => StageStructPromise;
-  deleteStageStruct: (where: StageStructWhereUniqueInput) => StageStructPromise;
-  deleteManyStageStructs: (
-    where?: StageStructWhereInput
-  ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -545,18 +499,15 @@ export interface Subscription {
   class: (
     where?: ClassSubscriptionWhereInput
   ) => ClassSubscriptionPayloadSubscription;
-  connectContinent: (
-    where?: ConnectContinentSubscriptionWhereInput
-  ) => ConnectContinentSubscriptionPayloadSubscription;
-  connectedMap: (
-    where?: ConnectedMapSubscriptionWhereInput
-  ) => ConnectedMapSubscriptionPayloadSubscription;
   continent: (
     where?: ContinentSubscriptionWhereInput
   ) => ContinentSubscriptionPayloadSubscription;
   element: (
     where?: ElementSubscriptionWhereInput
   ) => ElementSubscriptionPayloadSubscription;
+  food: (
+    where?: FoodSubscriptionWhereInput
+  ) => FoodSubscriptionPayloadSubscription;
   guide: (
     where?: GuideSubscriptionWhereInput
   ) => GuideSubscriptionPayloadSubscription;
@@ -566,12 +517,12 @@ export interface Subscription {
   monsterSkill: (
     where?: MonsterSkillSubscriptionWhereInput
   ) => MonsterSkillSubscriptionPayloadSubscription;
+  pet: (
+    where?: PetSubscriptionWhereInput
+  ) => PetSubscriptionPayloadSubscription;
   skill: (
     where?: SkillSubscriptionWhereInput
   ) => SkillSubscriptionPayloadSubscription;
-  stageStruct: (
-    where?: StageStructSubscriptionWhereInput
-  ) => StageStructSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -585,41 +536,43 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type ContinentOrderByInput =
+export type PetOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
-  | "name_DESC";
+  | "name_DESC"
+  | "element_one_value_ASC"
+  | "element_one_value_DESC"
+  | "element_two_value_ASC"
+  | "element_two_value_DESC"
+  | "talent_cap_ASC"
+  | "talent_cap_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "imageurl_ASC"
+  | "imageurl_DESC";
 
-export type SkillType =
-  | "UNKNOWN"
-  | "BUFF"
-  | "BUFF_AOE"
-  | "DAMAGE_TARGET"
-  | "DAMAGE_AOE"
-  | "DAMAGE_DOT"
-  | "HEAL_TARGET"
-  | "HEAL_AOE"
-  | "HEAL_DOT"
-  | "CROWD_CONTROL"
-  | "SUMMON"
-  | "DEBUFF"
-  | "DISPELL"
-  | "ABSORB"
-  | "STEALTH"
-  | "PASSIVE";
+export type Stat =
+  | "ATTACK"
+  | "HP"
+  | "ARMOR"
+  | "ATK_SPD"
+  | "HIT"
+  | "EVASION"
+  | "CRIT"
+  | "TENACITY"
+  | "BLOCK"
+  | "IMPALE";
 
-export type StageStructOrderByInput =
+export type MonsterSkillOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "stage_number_ASC"
-  | "stage_number_DESC"
-  | "base_exp_ASC"
-  | "base_exp_DESC"
-  | "gear_level_ASC"
-  | "gear_level_DESC"
-  | "base_shell_ASC"
-  | "base_shell_DESC";
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "energy_ASC"
+  | "energy_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -637,48 +590,6 @@ export type UserOrderByInput =
   | "password_ASC"
   | "password_DESC";
 
-export type MonsterSkillOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "skill_type_ASC"
-  | "skill_type_DESC"
-  | "combat_type_ASC"
-  | "combat_type_DESC"
-  | "energy_ASC"
-  | "energy_DESC";
-
-export type ElementType = "FIRE" | "LIGHTNING" | "FROST" | "EARTH";
-
-export type BossStructOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "minion_present_ASC"
-  | "minion_present_DESC"
-  | "HP_ASC"
-  | "HP_DESC"
-  | "ATK_ASC"
-  | "ATK_DESC"
-  | "Armor_ASC"
-  | "Armor_DESC"
-  | "AtkSpd_ASC"
-  | "AtkSpd_DESC";
-
-export type ElementOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "weakness_ASC"
-  | "weakness_DESC"
-  | "effective_ASC"
-  | "effective_DESC";
-
 export type Hero =
   | "WARLOCK"
   | "SHAMAN"
@@ -689,9 +600,57 @@ export type Hero =
   | "GLADIATOR"
   | "WARRIOR";
 
-export type ConnectContinentOrderByInput = "id_ASC" | "id_DESC";
+export type ElementType = "FIRE" | "LIGHTNING" | "FROST" | "EARTH";
 
-export type CombatType = "UNKNOWN" | "RANGE" | "MEELEE" | "SELF" | "TEAM";
+export type BossStructOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "minion_present_ASC"
+  | "minion_present_DESC"
+  | "AtkSpd_ASC"
+  | "AtkSpd_DESC";
+
+export type FoodOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "buff_ASC"
+  | "buff_DESC"
+  | "imageurl_ASC"
+  | "imageurl_DESC";
+
+export type CombatType =
+  | "UNKNOWN"
+  | "BUFF"
+  | "DAMAGE"
+  | "HEAL"
+  | "CONTINUOUS"
+  | "OVER_TIME"
+  | "AREA_OF_EFFECT"
+  | "TARGET"
+  | "CROWD_CONTROL"
+  | "SUMMON"
+  | "DEBUFF"
+  | "DISPELL"
+  | "RANDOM"
+  | "ABSORB"
+  | "STEALTH"
+  | "PASSIVE";
+
+export type ClassOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "weapon_ASC"
+  | "weapon_DESC";
+
+export type SkillType = "UNKNOWN" | "ACTIVE" | "PASSIVE";
+
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type MapOrderByInput =
   | "id_ASC"
@@ -699,7 +658,15 @@ export type MapOrderByInput =
   | "name_ASC"
   | "name_DESC"
   | "total_stage_ASC"
-  | "total_stage_DESC";
+  | "total_stage_DESC"
+  | "previous_map_ASC"
+  | "previous_map_DESC"
+  | "next_map_ASC"
+  | "next_map_DESC"
+  | "imageurl_ASC"
+  | "imageurl_DESC";
+
+export type PetType = "ASSIST" | "SYMBIOSIS" | "ATTACK" | "GUARDIAN";
 
 export type BossOrderByInput =
   | "id_ASC"
@@ -721,20 +688,6 @@ export type SkillOrderByInput =
   | "energy_ASC"
   | "energy_DESC";
 
-export type ClassOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "weapon_ASC"
-  | "weapon_DESC";
-
-export type ConnectedMapOrderByInput = "id_ASC" | "id_DESC";
-
-export type Role = "ADMIN" | "MODERATOR" | "USER";
-
 export type GuideOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -747,11 +700,38 @@ export type GuideOrderByInput =
   | "body_ASC"
   | "body_DESC";
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export type ContinentOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "next_continent_ASC"
+  | "next_continent_DESC"
+  | "previous_continent_ASC"
+  | "previous_continent_DESC";
 
-export interface ClassUpsertWithoutSkillsInput {
-  update: ClassUpdateWithoutSkillsDataInput;
-  create: ClassCreateWithoutSkillsInput;
+export type ElementOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "weakness_ASC"
+  | "weakness_DESC"
+  | "effective_ASC"
+  | "effective_DESC";
+
+export type Role = "ADMIN" | "MODERATOR" | "USER";
+
+export interface MapUpdateWithoutContinentDataInput {
+  name?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossUpdateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructUpdateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetUpdateManyWithoutAreaInput>;
+  imageurl?: Maybe<String>;
 }
 
 export type BossWhereUniqueInput = AtLeastOne<{
@@ -759,12 +739,16 @@ export type BossWhereUniqueInput = AtLeastOne<{
   name?: Maybe<String>;
 }>;
 
-export interface BossUpsertNestedInput {
-  update: BossUpdateDataInput;
-  create: BossCreateInput;
+export interface FoodUpdateOneWithoutPet_favoriteInput {
+  create?: Maybe<FoodCreateWithoutPet_favoriteInput>;
+  update?: Maybe<FoodUpdateWithoutPet_favoriteDataInput>;
+  upsert?: Maybe<FoodUpsertWithoutPet_favoriteInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<FoodWhereUniqueInput>;
 }
 
-export interface MonsterSkillWhereInput {
+export interface FoodWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -793,170 +777,39 @@ export interface MonsterSkillWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  skill_type_not?: Maybe<SkillType>;
-  skill_type_in?: Maybe<SkillType[] | SkillType>;
-  skill_type_not_in?: Maybe<SkillType[] | SkillType>;
-  combat_type?: Maybe<CombatType>;
-  combat_type_not?: Maybe<CombatType>;
-  combat_type_in?: Maybe<CombatType[] | CombatType>;
-  combat_type_not_in?: Maybe<CombatType[] | CombatType>;
-  energy?: Maybe<Int>;
-  energy_not?: Maybe<Int>;
-  energy_in?: Maybe<Int[] | Int>;
-  energy_not_in?: Maybe<Int[] | Int>;
-  energy_lt?: Maybe<Int>;
-  energy_lte?: Maybe<Int>;
-  energy_gt?: Maybe<Int>;
-  energy_gte?: Maybe<Int>;
-  AND?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
-  OR?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
-  NOT?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
+  pet_favorite_every?: Maybe<PetWhereInput>;
+  pet_favorite_some?: Maybe<PetWhereInput>;
+  pet_favorite_none?: Maybe<PetWhereInput>;
+  buff?: Maybe<Stat>;
+  buff_not?: Maybe<Stat>;
+  buff_in?: Maybe<Stat[] | Stat>;
+  buff_not_in?: Maybe<Stat[] | Stat>;
+  imageurl?: Maybe<String>;
+  imageurl_not?: Maybe<String>;
+  imageurl_in?: Maybe<String[] | String>;
+  imageurl_not_in?: Maybe<String[] | String>;
+  imageurl_lt?: Maybe<String>;
+  imageurl_lte?: Maybe<String>;
+  imageurl_gt?: Maybe<String>;
+  imageurl_gte?: Maybe<String>;
+  imageurl_contains?: Maybe<String>;
+  imageurl_not_contains?: Maybe<String>;
+  imageurl_starts_with?: Maybe<String>;
+  imageurl_not_starts_with?: Maybe<String>;
+  imageurl_ends_with?: Maybe<String>;
+  imageurl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<FoodWhereInput[] | FoodWhereInput>;
+  OR?: Maybe<FoodWhereInput[] | FoodWhereInput>;
+  NOT?: Maybe<FoodWhereInput[] | FoodWhereInput>;
 }
 
-export interface StageStructUpdateOneWithoutBoss_foundInput {
-  create?: Maybe<StageStructCreateWithoutBoss_foundInput>;
-  update?: Maybe<StageStructUpdateWithoutBoss_foundDataInput>;
-  upsert?: Maybe<StageStructUpsertWithoutBoss_foundInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<StageStructWhereUniqueInput>;
-}
-
-export interface StageStructWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  stage_number?: Maybe<Int>;
-  stage_number_not?: Maybe<Int>;
-  stage_number_in?: Maybe<Int[] | Int>;
-  stage_number_not_in?: Maybe<Int[] | Int>;
-  stage_number_lt?: Maybe<Int>;
-  stage_number_lte?: Maybe<Int>;
-  stage_number_gt?: Maybe<Int>;
-  stage_number_gte?: Maybe<Int>;
-  map?: Maybe<MapWhereInput>;
-  base_exp?: Maybe<Int>;
-  base_exp_not?: Maybe<Int>;
-  base_exp_in?: Maybe<Int[] | Int>;
-  base_exp_not_in?: Maybe<Int[] | Int>;
-  base_exp_lt?: Maybe<Int>;
-  base_exp_lte?: Maybe<Int>;
-  base_exp_gt?: Maybe<Int>;
-  base_exp_gte?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  gear_level_not?: Maybe<Int>;
-  gear_level_in?: Maybe<Int[] | Int>;
-  gear_level_not_in?: Maybe<Int[] | Int>;
-  gear_level_lt?: Maybe<Int>;
-  gear_level_lte?: Maybe<Int>;
-  gear_level_gt?: Maybe<Int>;
-  gear_level_gte?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  base_shell_not?: Maybe<Int>;
-  base_shell_in?: Maybe<Int[] | Int>;
-  base_shell_not_in?: Maybe<Int[] | Int>;
-  base_shell_lt?: Maybe<Int>;
-  base_shell_lte?: Maybe<Int>;
-  base_shell_gt?: Maybe<Int>;
-  base_shell_gte?: Maybe<Int>;
-  boss_found?: Maybe<BossStructWhereInput>;
-  AND?: Maybe<StageStructWhereInput[] | StageStructWhereInput>;
-  OR?: Maybe<StageStructWhereInput[] | StageStructWhereInput>;
-  NOT?: Maybe<StageStructWhereInput[] | StageStructWhereInput>;
-}
-
-export interface StageStructCreateWithoutMapInput {
-  id?: Maybe<ID_Input>;
-  stage_number: Int;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  boss_found?: Maybe<BossStructCreateOneWithoutLocationInput>;
-}
-
-export interface ContinentCreateOneWithoutConnected_continentInput {
-  create?: Maybe<ContinentCreateWithoutConnected_continentInput>;
-  connect?: Maybe<ContinentWhereUniqueInput>;
-}
-
-export interface BossStructCreateOneWithoutLocationInput {
-  create?: Maybe<BossStructCreateWithoutLocationInput>;
-  connect?: Maybe<BossStructWhereUniqueInput>;
-}
-
-export interface StageStructUpdateWithoutBoss_foundDataInput {
-  stage_number?: Maybe<Int>;
-  map?: Maybe<MapUpdateOneRequiredWithoutField_stagesInput>;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-}
-
-export interface BossStructCreateWithoutLocationInput {
-  id?: Maybe<ID_Input>;
-  monster_found: BossCreateOneInput;
-  minion_present?: Maybe<Boolean>;
-  HP: Int;
-  ATK: Int;
-  Armor: Int;
-  AtkSpd: Float;
-  skills?: Maybe<MonsterSkillCreateManyInput>;
-}
-
-export interface StageStructSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<StageStructWhereInput>;
-  AND?: Maybe<
-    StageStructSubscriptionWhereInput[] | StageStructSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    StageStructSubscriptionWhereInput[] | StageStructSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    StageStructSubscriptionWhereInput[] | StageStructSubscriptionWhereInput
-  >;
-}
-
-export interface BossUpdateInput {
+export interface FoodUpdateWithoutPet_favoriteDataInput {
   name?: Maybe<String>;
-  element_one?: Maybe<ElementUpdateOneInput>;
-  element_one_value?: Maybe<Int>;
-  element_two?: Maybe<ElementUpdateOneInput>;
-  element_two_value?: Maybe<Int>;
-  locations_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
-  continent_found?: Maybe<ContinentUpdateManyWithoutBossesInput>;
+  buff?: Maybe<Stat>;
+  imageurl?: Maybe<String>;
 }
 
-export interface BossStructWhereInput {
+export interface PetWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -971,76 +824,69 @@ export interface BossStructWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  monster_found?: Maybe<BossWhereInput>;
-  minion_present?: Maybe<Boolean>;
-  minion_present_not?: Maybe<Boolean>;
-  location?: Maybe<StageStructWhereInput>;
-  HP?: Maybe<Int>;
-  HP_not?: Maybe<Int>;
-  HP_in?: Maybe<Int[] | Int>;
-  HP_not_in?: Maybe<Int[] | Int>;
-  HP_lt?: Maybe<Int>;
-  HP_lte?: Maybe<Int>;
-  HP_gt?: Maybe<Int>;
-  HP_gte?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  ATK_not?: Maybe<Int>;
-  ATK_in?: Maybe<Int[] | Int>;
-  ATK_not_in?: Maybe<Int[] | Int>;
-  ATK_lt?: Maybe<Int>;
-  ATK_lte?: Maybe<Int>;
-  ATK_gt?: Maybe<Int>;
-  ATK_gte?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  Armor_not?: Maybe<Int>;
-  Armor_in?: Maybe<Int[] | Int>;
-  Armor_not_in?: Maybe<Int[] | Int>;
-  Armor_lt?: Maybe<Int>;
-  Armor_lte?: Maybe<Int>;
-  Armor_gt?: Maybe<Int>;
-  Armor_gte?: Maybe<Int>;
-  AtkSpd?: Maybe<Float>;
-  AtkSpd_not?: Maybe<Float>;
-  AtkSpd_in?: Maybe<Float[] | Float>;
-  AtkSpd_not_in?: Maybe<Float[] | Float>;
-  AtkSpd_lt?: Maybe<Float>;
-  AtkSpd_lte?: Maybe<Float>;
-  AtkSpd_gt?: Maybe<Float>;
-  AtkSpd_gte?: Maybe<Float>;
-  skills_every?: Maybe<MonsterSkillWhereInput>;
-  skills_some?: Maybe<MonsterSkillWhereInput>;
-  skills_none?: Maybe<MonsterSkillWhereInput>;
-  AND?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
-  OR?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
-  NOT?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
-}
-
-export interface ElementUpdateOneInput {
-  create?: Maybe<ElementCreateInput>;
-  update?: Maybe<ElementUpdateDataInput>;
-  upsert?: Maybe<ElementUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ElementWhereUniqueInput>;
-}
-
-export interface MapSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MapWhereInput>;
-  AND?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
-  OR?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
-  NOT?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  element_one?: Maybe<ElementWhereInput>;
+  element_one_value?: Maybe<Int>;
+  element_one_value_not?: Maybe<Int>;
+  element_one_value_in?: Maybe<Int[] | Int>;
+  element_one_value_not_in?: Maybe<Int[] | Int>;
+  element_one_value_lt?: Maybe<Int>;
+  element_one_value_lte?: Maybe<Int>;
+  element_one_value_gt?: Maybe<Int>;
+  element_one_value_gte?: Maybe<Int>;
+  element_two?: Maybe<ElementWhereInput>;
+  element_two_value?: Maybe<Int>;
+  element_two_value_not?: Maybe<Int>;
+  element_two_value_in?: Maybe<Int[] | Int>;
+  element_two_value_not_in?: Maybe<Int[] | Int>;
+  element_two_value_lt?: Maybe<Int>;
+  element_two_value_lte?: Maybe<Int>;
+  element_two_value_gt?: Maybe<Int>;
+  element_two_value_gte?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  talent_cap_not?: Maybe<Float>;
+  talent_cap_in?: Maybe<Float[] | Float>;
+  talent_cap_not_in?: Maybe<Float[] | Float>;
+  talent_cap_lt?: Maybe<Float>;
+  talent_cap_lte?: Maybe<Float>;
+  talent_cap_gt?: Maybe<Float>;
+  talent_cap_gte?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  type_not?: Maybe<PetType>;
+  type_in?: Maybe<PetType[] | PetType>;
+  type_not_in?: Maybe<PetType[] | PetType>;
+  favorite_food?: Maybe<FoodWhereInput>;
+  area?: Maybe<MapWhereInput>;
+  imageurl?: Maybe<String>;
+  imageurl_not?: Maybe<String>;
+  imageurl_in?: Maybe<String[] | String>;
+  imageurl_not_in?: Maybe<String[] | String>;
+  imageurl_lt?: Maybe<String>;
+  imageurl_lte?: Maybe<String>;
+  imageurl_gt?: Maybe<String>;
+  imageurl_gte?: Maybe<String>;
+  imageurl_contains?: Maybe<String>;
+  imageurl_not_contains?: Maybe<String>;
+  imageurl_starts_with?: Maybe<String>;
+  imageurl_not_starts_with?: Maybe<String>;
+  imageurl_ends_with?: Maybe<String>;
+  imageurl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<PetWhereInput[] | PetWhereInput>;
+  OR?: Maybe<PetWhereInput[] | PetWhereInput>;
+  NOT?: Maybe<PetWhereInput[] | PetWhereInput>;
 }
 
 export interface ElementUpdateDataInput {
@@ -1049,15 +895,11 @@ export interface ElementUpdateDataInput {
   effective?: Maybe<ElementType>;
 }
 
-export interface GuideSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<GuideWhereInput>;
-  AND?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
-  OR?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
-  NOT?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
+export interface PetCreateManyWithoutFavorite_foodInput {
+  create?: Maybe<
+    PetCreateWithoutFavorite_foodInput[] | PetCreateWithoutFavorite_foodInput
+  >;
+  connect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
 }
 
 export interface ElementUpsertNestedInput {
@@ -1065,62 +907,9 @@ export interface ElementUpsertNestedInput {
   create: ElementCreateInput;
 }
 
-export interface SkillWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  energy?: Maybe<Int>;
-  energy_not?: Maybe<Int>;
-  energy_in?: Maybe<Int[] | Int>;
-  energy_not_in?: Maybe<Int[] | Int>;
-  energy_lt?: Maybe<Int>;
-  energy_lte?: Maybe<Int>;
-  energy_gt?: Maybe<Int>;
-  energy_gte?: Maybe<Int>;
-  location?: Maybe<MapWhereInput>;
-  class?: Maybe<ClassWhereInput>;
-  AND?: Maybe<SkillWhereInput[] | SkillWhereInput>;
-  OR?: Maybe<SkillWhereInput[] | SkillWhereInput>;
-  NOT?: Maybe<SkillWhereInput[] | SkillWhereInput>;
+export interface FoodUpsertWithoutPet_favoriteInput {
+  update: FoodUpdateWithoutPet_favoriteDataInput;
+  create: FoodCreateWithoutPet_favoriteInput;
 }
 
 export interface MapUpdateManyWithoutNative_bossInput {
@@ -1145,26 +934,15 @@ export interface MapUpdateManyWithoutNative_bossInput {
   >;
 }
 
-export interface ConnectedMapWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  next_map?: Maybe<MapWhereInput>;
-  previous_map?: Maybe<MapWhereInput>;
-  AND?: Maybe<ConnectedMapWhereInput[] | ConnectedMapWhereInput>;
-  OR?: Maybe<ConnectedMapWhereInput[] | ConnectedMapWhereInput>;
-  NOT?: Maybe<ConnectedMapWhereInput[] | ConnectedMapWhereInput>;
+export interface SkillSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SkillWhereInput>;
+  AND?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
+  OR?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
+  NOT?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
 }
 
 export interface MapUpdateWithWhereUniqueWithoutNative_bossInput {
@@ -1172,31 +950,117 @@ export interface MapUpdateWithWhereUniqueWithoutNative_bossInput {
   data: MapUpdateWithoutNative_bossDataInput;
 }
 
-export interface ConnectedMapSubscriptionWhereInput {
+export interface PetSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ConnectedMapWhereInput>;
-  AND?: Maybe<
-    ConnectedMapSubscriptionWhereInput[] | ConnectedMapSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    ConnectedMapSubscriptionWhereInput[] | ConnectedMapSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    ConnectedMapSubscriptionWhereInput[] | ConnectedMapSubscriptionWhereInput
-  >;
+  node?: Maybe<PetWhereInput>;
+  AND?: Maybe<PetSubscriptionWhereInput[] | PetSubscriptionWhereInput>;
+  OR?: Maybe<PetSubscriptionWhereInput[] | PetSubscriptionWhereInput>;
+  NOT?: Maybe<PetSubscriptionWhereInput[] | PetSubscriptionWhereInput>;
 }
 
 export interface MapUpdateWithoutNative_bossDataInput {
   name?: Maybe<String>;
   total_stage?: Maybe<Int>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
   obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
+  bosses_found?: Maybe<BossStructUpdateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetUpdateManyWithoutAreaInput>;
+  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface MonsterSkillSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MonsterSkillWhereInput>;
+  AND?: Maybe<
+    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
+  >;
+}
+
+export interface SkillUpdateManyWithoutLocationInput {
+  create?: Maybe<
+    SkillCreateWithoutLocationInput[] | SkillCreateWithoutLocationInput
+  >;
+  delete?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  set?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  disconnect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  update?: Maybe<
+    | SkillUpdateWithWhereUniqueWithoutLocationInput[]
+    | SkillUpdateWithWhereUniqueWithoutLocationInput
+  >;
+  upsert?: Maybe<
+    | SkillUpsertWithWhereUniqueWithoutLocationInput[]
+    | SkillUpsertWithWhereUniqueWithoutLocationInput
+  >;
+  deleteMany?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
+  updateMany?: Maybe<
+    SkillUpdateManyWithWhereNestedInput[] | SkillUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface MapSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MapWhereInput>;
+  AND?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
+  OR?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
+  NOT?: Maybe<MapSubscriptionWhereInput[] | MapSubscriptionWhereInput>;
+}
+
+export interface SkillUpdateWithWhereUniqueWithoutLocationInput {
+  where: SkillWhereUniqueInput;
+  data: SkillUpdateWithoutLocationDataInput;
+}
+
+export interface FoodSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<FoodWhereInput>;
+  AND?: Maybe<FoodSubscriptionWhereInput[] | FoodSubscriptionWhereInput>;
+  OR?: Maybe<FoodSubscriptionWhereInput[] | FoodSubscriptionWhereInput>;
+  NOT?: Maybe<FoodSubscriptionWhereInput[] | FoodSubscriptionWhereInput>;
+}
+
+export interface SkillUpdateWithoutLocationDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<SkillUpdateskill_typeInput>;
+  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  class?: Maybe<ClassUpdateOneWithoutSkillsInput>;
+}
+
+export interface ElementSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ElementWhereInput>;
+  AND?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
+  OR?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
+  NOT?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
+}
+
+export interface SkillUpdateskill_typeInput {
+  set?: Maybe<SkillType[] | SkillType>;
 }
 
 export interface ClassSubscriptionWhereInput {
@@ -1210,21 +1074,21 @@ export interface ClassSubscriptionWhereInput {
   NOT?: Maybe<ClassSubscriptionWhereInput[] | ClassSubscriptionWhereInput>;
 }
 
-export interface ConnectedMapUpdateOneWithoutPrevious_mapInput {
-  create?: Maybe<ConnectedMapCreateWithoutPrevious_mapInput>;
-  update?: Maybe<ConnectedMapUpdateWithoutPrevious_mapDataInput>;
-  upsert?: Maybe<ConnectedMapUpsertWithoutPrevious_mapInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ConnectedMapWhereUniqueInput>;
+export interface SkillUpdatecombat_typeInput {
+  set?: Maybe<CombatType[] | CombatType>;
 }
 
 export type BossStructWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface ConnectedMapUpdateWithoutPrevious_mapDataInput {
-  next_map?: Maybe<MapUpdateOneRequiredInput>;
+export interface ClassUpdateOneWithoutSkillsInput {
+  create?: Maybe<ClassCreateWithoutSkillsInput>;
+  update?: Maybe<ClassUpdateWithoutSkillsDataInput>;
+  upsert?: Maybe<ClassUpsertWithoutSkillsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ClassWhereUniqueInput>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -1235,11 +1099,10 @@ export interface UserUpdateManyMutationInput {
   password?: Maybe<String>;
 }
 
-export interface MapUpdateOneRequiredInput {
-  create?: Maybe<MapCreateInput>;
-  update?: Maybe<MapUpdateDataInput>;
-  upsert?: Maybe<MapUpsertNestedInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
+export interface ClassUpdateWithoutSkillsDataInput {
+  name?: Maybe<Hero>;
+  description?: Maybe<String>;
+  weapon?: Maybe<String>;
 }
 
 export type ClassWhereUniqueInput = AtLeastOne<{
@@ -1247,15 +1110,9 @@ export type ClassWhereUniqueInput = AtLeastOne<{
   name?: Maybe<Hero>;
 }>;
 
-export interface MapUpdateDataInput {
-  name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
-  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
+export interface ClassUpsertWithoutSkillsInput {
+  update: ClassUpdateWithoutSkillsDataInput;
+  create: ClassCreateWithoutSkillsInput;
 }
 
 export interface GuideUpdateManyWithWhereNestedInput {
@@ -1263,27 +1120,10 @@ export interface GuideUpdateManyWithWhereNestedInput {
   data: GuideUpdateManyDataInput;
 }
 
-export interface BossUpdateManyWithoutLocations_foundInput {
-  create?: Maybe<
-    | BossCreateWithoutLocations_foundInput[]
-    | BossCreateWithoutLocations_foundInput
-  >;
-  delete?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  set?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  disconnect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  update?: Maybe<
-    | BossUpdateWithWhereUniqueWithoutLocations_foundInput[]
-    | BossUpdateWithWhereUniqueWithoutLocations_foundInput
-  >;
-  upsert?: Maybe<
-    | BossUpsertWithWhereUniqueWithoutLocations_foundInput[]
-    | BossUpsertWithWhereUniqueWithoutLocations_foundInput
-  >;
-  deleteMany?: Maybe<BossScalarWhereInput[] | BossScalarWhereInput>;
-  updateMany?: Maybe<
-    BossUpdateManyWithWhereNestedInput[] | BossUpdateManyWithWhereNestedInput
-  >;
+export interface SkillUpsertWithWhereUniqueWithoutLocationInput {
+  where: SkillWhereUniqueInput;
+  update: SkillUpdateWithoutLocationDataInput;
+  create: SkillCreateWithoutLocationInput;
 }
 
 export interface GuideUpsertWithWhereUniqueWithoutOwnerInput {
@@ -1292,12 +1132,7 @@ export interface GuideUpsertWithWhereUniqueWithoutOwnerInput {
   create: GuideCreateWithoutOwnerInput;
 }
 
-export interface BossUpdateWithWhereUniqueWithoutLocations_foundInput {
-  where: BossWhereUniqueInput;
-  data: BossUpdateWithoutLocations_foundDataInput;
-}
-
-export interface ElementWhereInput {
+export interface SkillScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1312,35 +1147,237 @@ export interface ElementWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<ElementType>;
-  name_not?: Maybe<ElementType>;
-  name_in?: Maybe<ElementType[] | ElementType>;
-  name_not_in?: Maybe<ElementType[] | ElementType>;
-  weakness?: Maybe<ElementType>;
-  weakness_not?: Maybe<ElementType>;
-  weakness_in?: Maybe<ElementType[] | ElementType>;
-  weakness_not_in?: Maybe<ElementType[] | ElementType>;
-  effective?: Maybe<ElementType>;
-  effective_not?: Maybe<ElementType>;
-  effective_in?: Maybe<ElementType[] | ElementType>;
-  effective_not_in?: Maybe<ElementType[] | ElementType>;
-  AND?: Maybe<ElementWhereInput[] | ElementWhereInput>;
-  OR?: Maybe<ElementWhereInput[] | ElementWhereInput>;
-  NOT?: Maybe<ElementWhereInput[] | ElementWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  energy?: Maybe<Int>;
+  energy_not?: Maybe<Int>;
+  energy_in?: Maybe<Int[] | Int>;
+  energy_not_in?: Maybe<Int[] | Int>;
+  energy_lt?: Maybe<Int>;
+  energy_lte?: Maybe<Int>;
+  energy_gt?: Maybe<Int>;
+  energy_gte?: Maybe<Int>;
+  AND?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
+  OR?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
+  NOT?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
 }
 
-export interface BossUpdateWithoutLocations_foundDataInput {
+export interface GuideUpdateWithoutOwnerDataInput {
+  updateAt?: Maybe<DateTimeInput>;
+  title?: Maybe<String>;
+  body?: Maybe<String>;
+}
+
+export interface SkillUpdateManyWithWhereNestedInput {
+  where: SkillScalarWhereInput;
+  data: SkillUpdateManyDataInput;
+}
+
+export interface GuideUpdateManyWithoutOwnerInput {
+  create?: Maybe<GuideCreateWithoutOwnerInput[] | GuideCreateWithoutOwnerInput>;
+  delete?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
+  connect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
+  set?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
+  disconnect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
+  update?: Maybe<
+    | GuideUpdateWithWhereUniqueWithoutOwnerInput[]
+    | GuideUpdateWithWhereUniqueWithoutOwnerInput
+  >;
+  upsert?: Maybe<
+    | GuideUpsertWithWhereUniqueWithoutOwnerInput[]
+    | GuideUpsertWithWhereUniqueWithoutOwnerInput
+  >;
+  deleteMany?: Maybe<GuideScalarWhereInput[] | GuideScalarWhereInput>;
+  updateMany?: Maybe<
+    GuideUpdateManyWithWhereNestedInput[] | GuideUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface SkillUpdateManyDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<SkillUpdateskill_typeInput>;
+  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+}
+
+export interface BossWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  element_one?: Maybe<ElementWhereInput>;
+  element_one_value?: Maybe<Int>;
+  element_one_value_not?: Maybe<Int>;
+  element_one_value_in?: Maybe<Int[] | Int>;
+  element_one_value_not_in?: Maybe<Int[] | Int>;
+  element_one_value_lt?: Maybe<Int>;
+  element_one_value_lte?: Maybe<Int>;
+  element_one_value_gt?: Maybe<Int>;
+  element_one_value_gte?: Maybe<Int>;
+  element_two?: Maybe<ElementWhereInput>;
+  element_two_value?: Maybe<Int>;
+  element_two_value_not?: Maybe<Int>;
+  element_two_value_in?: Maybe<Int[] | Int>;
+  element_two_value_not_in?: Maybe<Int[] | Int>;
+  element_two_value_lt?: Maybe<Int>;
+  element_two_value_lte?: Maybe<Int>;
+  element_two_value_gt?: Maybe<Int>;
+  element_two_value_gte?: Maybe<Int>;
+  map_found_every?: Maybe<MapWhereInput>;
+  map_found_some?: Maybe<MapWhereInput>;
+  map_found_none?: Maybe<MapWhereInput>;
+  continent_found_every?: Maybe<ContinentWhereInput>;
+  continent_found_some?: Maybe<ContinentWhereInput>;
+  continent_found_none?: Maybe<ContinentWhereInput>;
+  AND?: Maybe<BossWhereInput[] | BossWhereInput>;
+  OR?: Maybe<BossWhereInput[] | BossWhereInput>;
+  NOT?: Maybe<BossWhereInput[] | BossWhereInput>;
+}
+
+export interface BossStructUpdateManyWithoutMapInput {
+  create?: Maybe<
+    BossStructCreateWithoutMapInput[] | BossStructCreateWithoutMapInput
+  >;
+  delete?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
+  connect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
+  set?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
+  disconnect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
+  update?: Maybe<
+    | BossStructUpdateWithWhereUniqueWithoutMapInput[]
+    | BossStructUpdateWithWhereUniqueWithoutMapInput
+  >;
+  upsert?: Maybe<
+    | BossStructUpsertWithWhereUniqueWithoutMapInput[]
+    | BossStructUpsertWithWhereUniqueWithoutMapInput
+  >;
+  deleteMany?: Maybe<BossStructScalarWhereInput[] | BossStructScalarWhereInput>;
+  updateMany?: Maybe<
+    | BossStructUpdateManyWithWhereNestedInput[]
+    | BossStructUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface GuideCreateWithoutOwnerInput {
+  id?: Maybe<ID_Input>;
+  updateAt?: Maybe<DateTimeInput>;
+  title: String;
+  body: String;
+}
+
+export interface BossStructUpdateWithWhereUniqueWithoutMapInput {
+  where: BossStructWhereUniqueInput;
+  data: BossStructUpdateWithoutMapDataInput;
+}
+
+export type FoodWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
+
+export interface BossStructUpdateWithoutMapDataInput {
+  boss?: Maybe<BossUpdateOneRequiredInput>;
+  minion_present?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+  skills?: Maybe<MonsterSkillUpdateManyInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  updateAt?: Maybe<DateTimeInput>;
+  handle: String;
+  email: String;
+  role?: Maybe<Role>;
+  password: String;
+  guides?: Maybe<GuideCreateManyWithoutOwnerInput>;
+}
+
+export interface BossUpdateOneRequiredInput {
+  create?: Maybe<BossCreateInput>;
+  update?: Maybe<BossUpdateDataInput>;
+  upsert?: Maybe<BossUpsertNestedInput>;
+  connect?: Maybe<BossWhereUniqueInput>;
+}
+
+export interface SkillUpdateInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<SkillUpdateskill_typeInput>;
+  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  location?: Maybe<MapUpdateOneWithoutObtainable_skillsInput>;
+  class?: Maybe<ClassUpdateOneWithoutSkillsInput>;
+}
+
+export interface BossUpdateDataInput {
   name?: Maybe<String>;
   element_one?: Maybe<ElementUpdateOneInput>;
   element_one_value?: Maybe<Int>;
   element_two?: Maybe<ElementUpdateOneInput>;
   element_two_value?: Maybe<Int>;
+  map_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
   continent_found?: Maybe<ContinentUpdateManyWithoutBossesInput>;
 }
 
-export interface GuideUpdateWithWhereUniqueWithoutOwnerInput {
-  where: GuideWhereUniqueInput;
-  data: GuideUpdateWithoutOwnerDataInput;
+export interface SkillCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description: String;
+  skill_type?: Maybe<SkillCreateskill_typeInput>;
+  combat_type?: Maybe<SkillCreatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  location?: Maybe<MapCreateOneWithoutObtainable_skillsInput>;
+  class?: Maybe<ClassCreateOneWithoutSkillsInput>;
 }
 
 export interface ContinentUpdateManyWithoutBossesInput {
@@ -1366,207 +1403,22 @@ export interface ContinentUpdateManyWithoutBossesInput {
   >;
 }
 
-export type ConnectedMapWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface PetUpdateInput {
+  name?: Maybe<String>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  favorite_food?: Maybe<FoodUpdateOneWithoutPet_favoriteInput>;
+  area?: Maybe<MapUpdateOneWithoutPet_unlockInput>;
+  imageurl?: Maybe<String>;
+}
 
 export interface ContinentUpdateWithWhereUniqueWithoutBossesInput {
   where: ContinentWhereUniqueInput;
   data: ContinentUpdateWithoutBossesDataInput;
-}
-
-export interface UserUpdateInput {
-  updateAt?: Maybe<DateTimeInput>;
-  handle?: Maybe<String>;
-  email?: Maybe<String>;
-  role?: Maybe<Role>;
-  password?: Maybe<String>;
-  guides?: Maybe<GuideUpdateManyWithoutOwnerInput>;
-}
-
-export interface ContinentUpdateWithoutBossesDataInput {
-  name?: Maybe<String>;
-  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
-  connected_continent?: Maybe<
-    ConnectContinentUpdateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface GuideCreateManyWithoutOwnerInput {
-  create?: Maybe<GuideCreateWithoutOwnerInput[] | GuideCreateWithoutOwnerInput>;
-  connect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
-}
-
-export interface MapUpdateManyWithoutContinentInput {
-  create?: Maybe<
-    MapCreateWithoutContinentInput[] | MapCreateWithoutContinentInput
-  >;
-  delete?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-  set?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-  disconnect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-  update?: Maybe<
-    | MapUpdateWithWhereUniqueWithoutContinentInput[]
-    | MapUpdateWithWhereUniqueWithoutContinentInput
-  >;
-  upsert?: Maybe<
-    | MapUpsertWithWhereUniqueWithoutContinentInput[]
-    | MapUpsertWithWhereUniqueWithoutContinentInput
-  >;
-  deleteMany?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
-  updateMany?: Maybe<
-    MapUpdateManyWithWhereNestedInput[] | MapUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  updateAt?: Maybe<DateTimeInput>;
-  handle: String;
-  email: String;
-  role?: Maybe<Role>;
-  password: String;
-  guides?: Maybe<GuideCreateManyWithoutOwnerInput>;
-}
-
-export interface MapUpdateWithWhereUniqueWithoutContinentInput {
-  where: MapWhereUniqueInput;
-  data: MapUpdateWithoutContinentDataInput;
-}
-
-export interface StageStructUpdateInput {
-  stage_number?: Maybe<Int>;
-  map?: Maybe<MapUpdateOneRequiredWithoutField_stagesInput>;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  boss_found?: Maybe<BossStructUpdateOneWithoutLocationInput>;
-}
-
-export interface MapUpdateWithoutContinentDataInput {
-  name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
-}
-
-export interface MapWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  total_stage_not?: Maybe<Int>;
-  total_stage_in?: Maybe<Int[] | Int>;
-  total_stage_not_in?: Maybe<Int[] | Int>;
-  total_stage_lt?: Maybe<Int>;
-  total_stage_lte?: Maybe<Int>;
-  total_stage_gt?: Maybe<Int>;
-  total_stage_gte?: Maybe<Int>;
-  native_boss_every?: Maybe<BossWhereInput>;
-  native_boss_some?: Maybe<BossWhereInput>;
-  native_boss_none?: Maybe<BossWhereInput>;
-  connected_maps?: Maybe<ConnectedMapWhereInput>;
-  continent?: Maybe<ContinentWhereInput>;
-  obtainable_skills_every?: Maybe<SkillWhereInput>;
-  obtainable_skills_some?: Maybe<SkillWhereInput>;
-  obtainable_skills_none?: Maybe<SkillWhereInput>;
-  boss_stages_every?: Maybe<BossStructWhereInput>;
-  boss_stages_some?: Maybe<BossStructWhereInput>;
-  boss_stages_none?: Maybe<BossStructWhereInput>;
-  field_stages_every?: Maybe<StageStructWhereInput>;
-  field_stages_some?: Maybe<StageStructWhereInput>;
-  field_stages_none?: Maybe<StageStructWhereInput>;
-  AND?: Maybe<MapWhereInput[] | MapWhereInput>;
-  OR?: Maybe<MapWhereInput[] | MapWhereInput>;
-  NOT?: Maybe<MapWhereInput[] | MapWhereInput>;
-}
-
-export interface SkillUpdateManyWithoutLocationInput {
-  create?: Maybe<
-    SkillCreateWithoutLocationInput[] | SkillCreateWithoutLocationInput
-  >;
-  delete?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  set?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  disconnect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  update?: Maybe<
-    | SkillUpdateWithWhereUniqueWithoutLocationInput[]
-    | SkillUpdateWithWhereUniqueWithoutLocationInput
-  >;
-  upsert?: Maybe<
-    | SkillUpsertWithWhereUniqueWithoutLocationInput[]
-    | SkillUpsertWithWhereUniqueWithoutLocationInput
-  >;
-  deleteMany?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
-  updateMany?: Maybe<
-    SkillUpdateManyWithWhereNestedInput[] | SkillUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface SkillUpdateManyMutationInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillUpdateskill_typeInput>;
-  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
-  energy?: Maybe<Int>;
-}
-
-export interface SkillUpdateWithWhereUniqueWithoutLocationInput {
-  where: SkillWhereUniqueInput;
-  data: SkillUpdateWithoutLocationDataInput;
-}
-
-export type GuideWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface SkillUpdateWithoutLocationDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillUpdateskill_typeInput>;
-  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
-  energy?: Maybe<Int>;
-  class?: Maybe<ClassUpdateOneWithoutSkillsInput>;
-}
-
-export interface MonsterSkillUpdateManyMutationInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  combat_type?: Maybe<CombatType>;
-  energy?: Maybe<Int>;
-}
-
-export interface SkillUpdateskill_typeInput {
-  set?: Maybe<SkillType[] | SkillType>;
 }
 
 export interface GuideWhereInput {
@@ -1634,22 +1486,81 @@ export interface GuideWhereInput {
   NOT?: Maybe<GuideWhereInput[] | GuideWhereInput>;
 }
 
-export interface SkillUpdatecombat_typeInput {
-  set?: Maybe<CombatType[] | CombatType>;
+export interface ContinentUpdateWithoutBossesDataInput {
+  name?: Maybe<String>;
+  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface MonsterSkillUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<MonsterSkillUpdateskill_typeInput>;
+  combat_type?: Maybe<MonsterSkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+}
+
+export interface MapUpdateManyWithoutContinentInput {
+  create?: Maybe<
+    MapCreateWithoutContinentInput[] | MapCreateWithoutContinentInput
+  >;
+  delete?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
+  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
+  set?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
+  disconnect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
+  update?: Maybe<
+    | MapUpdateWithWhereUniqueWithoutContinentInput[]
+    | MapUpdateWithWhereUniqueWithoutContinentInput
+  >;
+  upsert?: Maybe<
+    | MapUpsertWithWhereUniqueWithoutContinentInput[]
+    | MapUpsertWithWhereUniqueWithoutContinentInput
+  >;
+  deleteMany?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
+  updateMany?: Maybe<
+    MapUpdateManyWithWhereNestedInput[] | MapUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface MapUpdateManyMutationInput {
   name?: Maybe<String>;
   total_stage?: Maybe<Int>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  imageurl?: Maybe<String>;
 }
 
-export interface ClassUpdateOneWithoutSkillsInput {
-  create?: Maybe<ClassCreateWithoutSkillsInput>;
-  update?: Maybe<ClassUpdateWithoutSkillsDataInput>;
-  upsert?: Maybe<ClassUpsertWithoutSkillsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ClassWhereUniqueInput>;
+export interface MapUpdateWithWhereUniqueWithoutContinentInput {
+  where: MapWhereUniqueInput;
+  data: MapUpdateWithoutContinentDataInput;
+}
+
+export type MapWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
+
+export interface PetUpdateManyWithoutFavorite_foodInput {
+  create?: Maybe<
+    PetCreateWithoutFavorite_foodInput[] | PetCreateWithoutFavorite_foodInput
+  >;
+  delete?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  connect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  set?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  disconnect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  update?: Maybe<
+    | PetUpdateWithWhereUniqueWithoutFavorite_foodInput[]
+    | PetUpdateWithWhereUniqueWithoutFavorite_foodInput
+  >;
+  upsert?: Maybe<
+    | PetUpsertWithWhereUniqueWithoutFavorite_foodInput[]
+    | PetUpsertWithWhereUniqueWithoutFavorite_foodInput
+  >;
+  deleteMany?: Maybe<PetScalarWhereInput[] | PetScalarWhereInput>;
+  updateMany?: Maybe<
+    PetUpdateManyWithWhereNestedInput[] | PetUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface GuideUpdateManyMutationInput {
@@ -1658,21 +1569,36 @@ export interface GuideUpdateManyMutationInput {
   body?: Maybe<String>;
 }
 
-export interface ClassUpdateWithoutSkillsDataInput {
-  name?: Maybe<Hero>;
-  description?: Maybe<String>;
-  weapon?: Maybe<String>;
+export interface BossUpdateManyWithoutMap_foundInput {
+  create?: Maybe<
+    BossCreateWithoutMap_foundInput[] | BossCreateWithoutMap_foundInput
+  >;
+  delete?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  set?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  disconnect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  update?: Maybe<
+    | BossUpdateWithWhereUniqueWithoutMap_foundInput[]
+    | BossUpdateWithWhereUniqueWithoutMap_foundInput
+  >;
+  upsert?: Maybe<
+    | BossUpsertWithWhereUniqueWithoutMap_foundInput[]
+    | BossUpsertWithWhereUniqueWithoutMap_foundInput
+  >;
+  deleteMany?: Maybe<BossScalarWhereInput[] | BossScalarWhereInput>;
+  updateMany?: Maybe<
+    BossUpdateManyWithWhereNestedInput[] | BossUpdateManyWithWhereNestedInput
+  >;
 }
 
-export type MapWhereUniqueInput = AtLeastOne<{
+export type MonsterSkillWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   name?: Maybe<String>;
 }>;
 
-export interface ConnectedMapCreateInput {
-  id?: Maybe<ID_Input>;
-  next_map: MapCreateOneInput;
-  previous_map: MapCreateOneWithoutConnected_mapsInput;
+export interface BossUpdateWithWhereUniqueWithoutMap_foundInput {
+  where: BossWhereUniqueInput;
+  data: BossUpdateWithoutMap_foundDataInput;
 }
 
 export interface UserUpdateOneRequiredWithoutGuidesInput {
@@ -1682,371 +1608,29 @@ export interface UserUpdateOneRequiredWithoutGuidesInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface SkillUpsertWithWhereUniqueWithoutLocationInput {
-  where: SkillWhereUniqueInput;
-  update: SkillUpdateWithoutLocationDataInput;
-  create: SkillCreateWithoutLocationInput;
+export interface BossUpdateWithoutMap_foundDataInput {
+  name?: Maybe<String>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  continent_found?: Maybe<ContinentUpdateManyWithoutBossesInput>;
 }
 
-export type MonsterSkillWhereUniqueInput = AtLeastOne<{
+export type PetWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   name?: Maybe<String>;
 }>;
 
-export interface SkillScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  energy?: Maybe<Int>;
-  energy_not?: Maybe<Int>;
-  energy_in?: Maybe<Int[] | Int>;
-  energy_not_in?: Maybe<Int[] | Int>;
-  energy_lt?: Maybe<Int>;
-  energy_lte?: Maybe<Int>;
-  energy_gt?: Maybe<Int>;
-  energy_gte?: Maybe<Int>;
-  AND?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
-  OR?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
-  NOT?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
+export interface BossUpsertWithWhereUniqueWithoutMap_foundInput {
+  where: BossWhereUniqueInput;
+  update: BossUpdateWithoutMap_foundDataInput;
+  create: BossCreateWithoutMap_foundInput;
 }
 
 export interface UserCreateOneWithoutGuidesInput {
   create?: Maybe<UserCreateWithoutGuidesInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface SkillUpdateManyWithWhereNestedInput {
-  where: SkillScalarWhereInput;
-  data: SkillUpdateManyDataInput;
-}
-
-export type SkillWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  name?: Maybe<String>;
-}>;
-
-export interface SkillUpdateManyDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillUpdateskill_typeInput>;
-  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
-  energy?: Maybe<Int>;
-}
-
-export interface ElementUpdateInput {
-  name?: Maybe<ElementType>;
-  weakness?: Maybe<ElementType>;
-  effective?: Maybe<ElementType>;
-}
-
-export interface BossStructUpdateManyInput {
-  create?: Maybe<BossStructCreateInput[] | BossStructCreateInput>;
-  update?: Maybe<
-    | BossStructUpdateWithWhereUniqueNestedInput[]
-    | BossStructUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | BossStructUpsertWithWhereUniqueNestedInput[]
-    | BossStructUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
-  connect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
-  set?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
-  disconnect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
-  deleteMany?: Maybe<BossStructScalarWhereInput[] | BossStructScalarWhereInput>;
-  updateMany?: Maybe<
-    | BossStructUpdateManyWithWhereNestedInput[]
-    | BossStructUpdateManyWithWhereNestedInput
-  >;
-}
-
-export type StageStructWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface BossStructUpdateWithWhereUniqueNestedInput {
-  where: BossStructWhereUniqueInput;
-  data: BossStructUpdateDataInput;
-}
-
-export interface MapUpsertWithoutConnected_mapsInput {
-  update: MapUpdateWithoutConnected_mapsDataInput;
-  create: MapCreateWithoutConnected_mapsInput;
-}
-
-export interface BossStructUpdateDataInput {
-  monster_found?: Maybe<BossUpdateOneRequiredInput>;
-  minion_present?: Maybe<Boolean>;
-  location?: Maybe<StageStructUpdateOneWithoutBoss_foundInput>;
-  HP?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  AtkSpd?: Maybe<Float>;
-  skills?: Maybe<MonsterSkillUpdateManyInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  handle?: Maybe<String>;
-  email?: Maybe<String>;
-}>;
-
-export interface BossUpdateOneRequiredInput {
-  create?: Maybe<BossCreateInput>;
-  update?: Maybe<BossUpdateDataInput>;
-  upsert?: Maybe<BossUpsertNestedInput>;
-  connect?: Maybe<BossWhereUniqueInput>;
-}
-
-export interface ConnectedMapUpdateInput {
-  next_map?: Maybe<MapUpdateOneRequiredInput>;
-  previous_map?: Maybe<MapUpdateOneRequiredWithoutConnected_mapsInput>;
-}
-
-export interface BossUpdateDataInput {
-  name?: Maybe<String>;
-  element_one?: Maybe<ElementUpdateOneInput>;
-  element_one_value?: Maybe<Int>;
-  element_two?: Maybe<ElementUpdateOneInput>;
-  element_two_value?: Maybe<Int>;
-  locations_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
-  continent_found?: Maybe<ContinentUpdateManyWithoutBossesInput>;
-}
-
-export interface MapCreateOneWithoutConnected_mapsInput {
-  create?: Maybe<MapCreateWithoutConnected_mapsInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
-}
-
-export interface ContinentUpsertWithoutConnected_continentInput {
-  update: ContinentUpdateWithoutConnected_continentDataInput;
-  create: ContinentCreateWithoutConnected_continentInput;
-}
-
-export interface BossCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  element_one?: Maybe<ElementCreateOneInput>;
-  element_one_value?: Maybe<Int>;
-  element_two?: Maybe<ElementCreateOneInput>;
-  element_two_value?: Maybe<Int>;
-  locations_found?: Maybe<MapCreateManyWithoutNative_bossInput>;
-  continent_found?: Maybe<ContinentCreateManyWithoutBossesInput>;
-}
-
-export interface ContinentUpdateWithoutConnected_continentDataInput {
-  name?: Maybe<String>;
-  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
-  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
-}
-
-export interface ElementCreateInput {
-  id?: Maybe<ID_Input>;
-  name: ElementType;
-  weakness?: Maybe<ElementType>;
-  effective?: Maybe<ElementType>;
-}
-
-export interface ContinentUpdateOneWithoutConnected_continentInput {
-  create?: Maybe<ContinentCreateWithoutConnected_continentInput>;
-  update?: Maybe<ContinentUpdateWithoutConnected_continentDataInput>;
-  upsert?: Maybe<ContinentUpsertWithoutConnected_continentInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ContinentWhereUniqueInput>;
-}
-
-export interface MapCreateWithoutNative_bossInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  total_stage?: Maybe<Int>;
-  connected_maps?: Maybe<ConnectedMapCreateOneWithoutPrevious_mapInput>;
-  continent: ContinentCreateOneWithoutMapsInput;
-  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
-  field_stages?: Maybe<StageStructCreateManyWithoutMapInput>;
-}
-
-export interface MapUpdateOneRequiredWithoutField_stagesInput {
-  create?: Maybe<MapCreateWithoutField_stagesInput>;
-  update?: Maybe<MapUpdateWithoutField_stagesDataInput>;
-  upsert?: Maybe<MapUpsertWithoutField_stagesInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
-}
-
-export interface ConnectedMapCreateWithoutPrevious_mapInput {
-  id?: Maybe<ID_Input>;
-  next_map: MapCreateOneInput;
-}
-
-export interface MapUpdateWithoutField_stagesDataInput {
-  name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
-  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-}
-
-export interface MapCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossCreateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapCreateOneWithoutPrevious_mapInput>;
-  continent: ContinentCreateOneWithoutMapsInput;
-  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
-  field_stages?: Maybe<StageStructCreateManyWithoutMapInput>;
-}
-
-export interface ContinentUpdateOneRequiredWithoutMapsInput {
-  create?: Maybe<ContinentCreateWithoutMapsInput>;
-  update?: Maybe<ContinentUpdateWithoutMapsDataInput>;
-  upsert?: Maybe<ContinentUpsertWithoutMapsInput>;
-  connect?: Maybe<ContinentWhereUniqueInput>;
-}
-
-export interface BossCreateWithoutLocations_foundInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  element_one?: Maybe<ElementCreateOneInput>;
-  element_one_value?: Maybe<Int>;
-  element_two?: Maybe<ElementCreateOneInput>;
-  element_two_value?: Maybe<Int>;
-  continent_found?: Maybe<ContinentCreateManyWithoutBossesInput>;
-}
-
-export interface ContinentUpdateWithoutMapsDataInput {
-  name?: Maybe<String>;
-  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
-  connected_continent?: Maybe<
-    ConnectContinentUpdateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface ContinentCreateWithoutBossesInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  maps?: Maybe<MapCreateManyWithoutContinentInput>;
-  connected_continent?: Maybe<
-    ConnectContinentCreateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface BossUpdateManyWithoutContinent_foundInput {
-  create?: Maybe<
-    | BossCreateWithoutContinent_foundInput[]
-    | BossCreateWithoutContinent_foundInput
-  >;
-  delete?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  set?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  disconnect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-  update?: Maybe<
-    | BossUpdateWithWhereUniqueWithoutContinent_foundInput[]
-    | BossUpdateWithWhereUniqueWithoutContinent_foundInput
-  >;
-  upsert?: Maybe<
-    | BossUpsertWithWhereUniqueWithoutContinent_foundInput[]
-    | BossUpsertWithWhereUniqueWithoutContinent_foundInput
-  >;
-  deleteMany?: Maybe<BossScalarWhereInput[] | BossScalarWhereInput>;
-  updateMany?: Maybe<
-    BossUpdateManyWithWhereNestedInput[] | BossUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface MapCreateWithoutContinentInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossCreateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapCreateOneWithoutPrevious_mapInput>;
-  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
-  field_stages?: Maybe<StageStructCreateManyWithoutMapInput>;
-}
-
-export interface BossUpdateWithWhereUniqueWithoutContinent_foundInput {
-  where: BossWhereUniqueInput;
-  data: BossUpdateWithoutContinent_foundDataInput;
-}
-
-export interface SkillCreateWithoutLocationInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  skill_type?: Maybe<SkillCreateskill_typeInput>;
-  combat_type?: Maybe<SkillCreatecombat_typeInput>;
-  energy?: Maybe<Int>;
-  class?: Maybe<ClassCreateOneWithoutSkillsInput>;
-}
-
-export interface BossUpdateWithoutContinent_foundDataInput {
-  name?: Maybe<String>;
-  element_one?: Maybe<ElementUpdateOneInput>;
-  element_one_value?: Maybe<Int>;
-  element_two?: Maybe<ElementUpdateOneInput>;
-  element_two_value?: Maybe<Int>;
-  locations_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
-}
-
-export interface SkillCreatecombat_typeInput {
-  set?: Maybe<CombatType[] | CombatType>;
-}
-
-export interface BossUpsertWithWhereUniqueWithoutContinent_foundInput {
-  where: BossWhereUniqueInput;
-  update: BossUpdateWithoutContinent_foundDataInput;
-  create: BossCreateWithoutContinent_foundInput;
-}
-
-export interface ClassCreateWithoutSkillsInput {
-  id?: Maybe<ID_Input>;
-  name: Hero;
-  description: String;
-  weapon: String;
 }
 
 export interface BossScalarWhereInput {
@@ -2099,26 +1683,20 @@ export interface BossScalarWhereInput {
   NOT?: Maybe<BossScalarWhereInput[] | BossScalarWhereInput>;
 }
 
-export interface BossStructCreateInput {
-  id?: Maybe<ID_Input>;
-  monster_found: BossCreateOneInput;
-  minion_present?: Maybe<Boolean>;
-  location?: Maybe<StageStructCreateOneWithoutBoss_foundInput>;
-  HP: Int;
-  ATK: Int;
-  Armor: Int;
-  AtkSpd: Float;
-  skills?: Maybe<MonsterSkillCreateManyInput>;
-}
+export type SkillWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
 
 export interface BossUpdateManyWithWhereNestedInput {
   where: BossScalarWhereInput;
   data: BossUpdateManyDataInput;
 }
 
-export interface StageStructCreateOneWithoutBoss_foundInput {
-  create?: Maybe<StageStructCreateWithoutBoss_foundInput>;
-  connect?: Maybe<StageStructWhereUniqueInput>;
+export interface PetUpsertWithWhereUniqueWithoutFavorite_foodInput {
+  where: PetWhereUniqueInput;
+  update: PetUpdateWithoutFavorite_foodDataInput;
+  create: PetCreateWithoutFavorite_foodInput;
 }
 
 export interface BossUpdateManyDataInput {
@@ -2127,18 +1705,417 @@ export interface BossUpdateManyDataInput {
   element_two_value?: Maybe<Int>;
 }
 
-export interface MapCreateOneWithoutField_stagesInput {
-  create?: Maybe<MapCreateWithoutField_stagesInput>;
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  handle?: Maybe<String>;
+  email?: Maybe<String>;
+}>;
+
+export interface PetUpdateManyWithoutAreaInput {
+  create?: Maybe<PetCreateWithoutAreaInput[] | PetCreateWithoutAreaInput>;
+  delete?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  connect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  set?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  disconnect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+  update?: Maybe<
+    | PetUpdateWithWhereUniqueWithoutAreaInput[]
+    | PetUpdateWithWhereUniqueWithoutAreaInput
+  >;
+  upsert?: Maybe<
+    | PetUpsertWithWhereUniqueWithoutAreaInput[]
+    | PetUpsertWithWhereUniqueWithoutAreaInput
+  >;
+  deleteMany?: Maybe<PetScalarWhereInput[] | PetScalarWhereInput>;
+  updateMany?: Maybe<
+    PetUpdateManyWithWhereNestedInput[] | PetUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface MapUpdateOneWithoutPet_unlockInput {
+  create?: Maybe<MapCreateWithoutPet_unlockInput>;
+  update?: Maybe<MapUpdateWithoutPet_unlockDataInput>;
+  upsert?: Maybe<MapUpsertWithoutPet_unlockInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<MapWhereUniqueInput>;
 }
 
-export interface ConnectContinentUpdateOneWithoutPrevious_continentInput {
-  create?: Maybe<ConnectContinentCreateWithoutPrevious_continentInput>;
-  update?: Maybe<ConnectContinentUpdateWithoutPrevious_continentDataInput>;
-  upsert?: Maybe<ConnectContinentUpsertWithoutPrevious_continentInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ConnectContinentWhereUniqueInput>;
+export interface PetUpdateWithWhereUniqueWithoutAreaInput {
+  where: PetWhereUniqueInput;
+  data: PetUpdateWithoutAreaDataInput;
+}
+
+export interface PetUpdateWithWhereUniqueWithoutFavorite_foodInput {
+  where: PetWhereUniqueInput;
+  data: PetUpdateWithoutFavorite_foodDataInput;
+}
+
+export interface PetUpdateWithoutAreaDataInput {
+  name?: Maybe<String>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  favorite_food?: Maybe<FoodUpdateOneWithoutPet_favoriteInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface BossCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  element_one?: Maybe<ElementCreateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementCreateOneInput>;
+  element_two_value?: Maybe<Int>;
+  map_found?: Maybe<MapCreateManyWithoutNative_bossInput>;
+  continent_found?: Maybe<ContinentCreateManyWithoutBossesInput>;
+}
+
+export interface FoodUpdateInput {
+  name?: Maybe<String>;
+  pet_favorite?: Maybe<PetUpdateManyWithoutFavorite_foodInput>;
+  buff?: Maybe<Stat>;
+  imageurl?: Maybe<String>;
+}
+
+export interface ElementCreateInput {
+  id?: Maybe<ID_Input>;
+  name: ElementType;
+  weakness?: Maybe<ElementType>;
+  effective?: Maybe<ElementType>;
+}
+
+export interface MonsterSkillWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  energy?: Maybe<Int>;
+  energy_not?: Maybe<Int>;
+  energy_in?: Maybe<Int[] | Int>;
+  energy_not_in?: Maybe<Int[] | Int>;
+  energy_lt?: Maybe<Int>;
+  energy_lte?: Maybe<Int>;
+  energy_gt?: Maybe<Int>;
+  energy_gte?: Maybe<Int>;
+  AND?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
+  OR?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
+  NOT?: Maybe<MonsterSkillWhereInput[] | MonsterSkillWhereInput>;
+}
+
+export interface MapCreateWithoutNative_bossInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  total_stage?: Maybe<Int>;
+  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructCreateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetCreateManyWithoutAreaInput>;
+  continent: ContinentCreateOneWithoutMapsInput;
+  imageurl?: Maybe<String>;
+}
+
+export interface MapCreateWithoutPet_unlockInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossCreateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructCreateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  continent: ContinentCreateOneWithoutMapsInput;
+  imageurl?: Maybe<String>;
+}
+
+export interface SkillCreateWithoutLocationInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description: String;
+  skill_type?: Maybe<SkillCreateskill_typeInput>;
+  combat_type?: Maybe<SkillCreatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  class?: Maybe<ClassCreateOneWithoutSkillsInput>;
+}
+
+export interface PetUpsertWithWhereUniqueWithoutAreaInput {
+  where: PetWhereUniqueInput;
+  update: PetUpdateWithoutAreaDataInput;
+  create: PetCreateWithoutAreaInput;
+}
+
+export interface SkillCreatecombat_typeInput {
+  set?: Maybe<CombatType[] | CombatType>;
+}
+
+export interface PetScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  element_one_value?: Maybe<Int>;
+  element_one_value_not?: Maybe<Int>;
+  element_one_value_in?: Maybe<Int[] | Int>;
+  element_one_value_not_in?: Maybe<Int[] | Int>;
+  element_one_value_lt?: Maybe<Int>;
+  element_one_value_lte?: Maybe<Int>;
+  element_one_value_gt?: Maybe<Int>;
+  element_one_value_gte?: Maybe<Int>;
+  element_two_value?: Maybe<Int>;
+  element_two_value_not?: Maybe<Int>;
+  element_two_value_in?: Maybe<Int[] | Int>;
+  element_two_value_not_in?: Maybe<Int[] | Int>;
+  element_two_value_lt?: Maybe<Int>;
+  element_two_value_lte?: Maybe<Int>;
+  element_two_value_gt?: Maybe<Int>;
+  element_two_value_gte?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  talent_cap_not?: Maybe<Float>;
+  talent_cap_in?: Maybe<Float[] | Float>;
+  talent_cap_not_in?: Maybe<Float[] | Float>;
+  talent_cap_lt?: Maybe<Float>;
+  talent_cap_lte?: Maybe<Float>;
+  talent_cap_gt?: Maybe<Float>;
+  talent_cap_gte?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  type_not?: Maybe<PetType>;
+  type_in?: Maybe<PetType[] | PetType>;
+  type_not_in?: Maybe<PetType[] | PetType>;
+  imageurl?: Maybe<String>;
+  imageurl_not?: Maybe<String>;
+  imageurl_in?: Maybe<String[] | String>;
+  imageurl_not_in?: Maybe<String[] | String>;
+  imageurl_lt?: Maybe<String>;
+  imageurl_lte?: Maybe<String>;
+  imageurl_gt?: Maybe<String>;
+  imageurl_gte?: Maybe<String>;
+  imageurl_contains?: Maybe<String>;
+  imageurl_not_contains?: Maybe<String>;
+  imageurl_starts_with?: Maybe<String>;
+  imageurl_not_starts_with?: Maybe<String>;
+  imageurl_ends_with?: Maybe<String>;
+  imageurl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<PetScalarWhereInput[] | PetScalarWhereInput>;
+  OR?: Maybe<PetScalarWhereInput[] | PetScalarWhereInput>;
+  NOT?: Maybe<PetScalarWhereInput[] | PetScalarWhereInput>;
+}
+
+export interface ClassCreateWithoutSkillsInput {
+  id?: Maybe<ID_Input>;
+  name: Hero;
+  description: String;
+  weapon: String;
+}
+
+export interface PetUpdateManyWithWhereNestedInput {
+  where: PetScalarWhereInput;
+  data: PetUpdateManyDataInput;
+}
+
+export interface BossStructCreateWithoutMapInput {
+  id?: Maybe<ID_Input>;
+  boss: BossCreateOneInput;
+  minion_present?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+  skills?: Maybe<MonsterSkillCreateManyInput>;
+}
+
+export interface PetUpdateManyDataInput {
+  name?: Maybe<String>;
+  element_one_value?: Maybe<Int>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  imageurl?: Maybe<String>;
+}
+
+export interface MonsterSkillCreateManyInput {
+  create?: Maybe<MonsterSkillCreateInput[] | MonsterSkillCreateInput>;
+  connect?: Maybe<
+    MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput
+  >;
+}
+
+export interface MapUpsertWithWhereUniqueWithoutContinentInput {
+  where: MapWhereUniqueInput;
+  update: MapUpdateWithoutContinentDataInput;
+  create: MapCreateWithoutContinentInput;
+}
+
+export interface MonsterSkillCreateskill_typeInput {
+  set?: Maybe<SkillType[] | SkillType>;
+}
+
+export interface MapScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  total_stage_not?: Maybe<Int>;
+  total_stage_in?: Maybe<Int[] | Int>;
+  total_stage_not_in?: Maybe<Int[] | Int>;
+  total_stage_lt?: Maybe<Int>;
+  total_stage_lte?: Maybe<Int>;
+  total_stage_gt?: Maybe<Int>;
+  total_stage_gte?: Maybe<Int>;
+  previous_map?: Maybe<String>;
+  previous_map_not?: Maybe<String>;
+  previous_map_in?: Maybe<String[] | String>;
+  previous_map_not_in?: Maybe<String[] | String>;
+  previous_map_lt?: Maybe<String>;
+  previous_map_lte?: Maybe<String>;
+  previous_map_gt?: Maybe<String>;
+  previous_map_gte?: Maybe<String>;
+  previous_map_contains?: Maybe<String>;
+  previous_map_not_contains?: Maybe<String>;
+  previous_map_starts_with?: Maybe<String>;
+  previous_map_not_starts_with?: Maybe<String>;
+  previous_map_ends_with?: Maybe<String>;
+  previous_map_not_ends_with?: Maybe<String>;
+  next_map?: Maybe<String>;
+  next_map_not?: Maybe<String>;
+  next_map_in?: Maybe<String[] | String>;
+  next_map_not_in?: Maybe<String[] | String>;
+  next_map_lt?: Maybe<String>;
+  next_map_lte?: Maybe<String>;
+  next_map_gt?: Maybe<String>;
+  next_map_gte?: Maybe<String>;
+  next_map_contains?: Maybe<String>;
+  next_map_not_contains?: Maybe<String>;
+  next_map_starts_with?: Maybe<String>;
+  next_map_not_starts_with?: Maybe<String>;
+  next_map_ends_with?: Maybe<String>;
+  next_map_not_ends_with?: Maybe<String>;
+  imageurl?: Maybe<String>;
+  imageurl_not?: Maybe<String>;
+  imageurl_in?: Maybe<String[] | String>;
+  imageurl_not_in?: Maybe<String[] | String>;
+  imageurl_lt?: Maybe<String>;
+  imageurl_lte?: Maybe<String>;
+  imageurl_gt?: Maybe<String>;
+  imageurl_gte?: Maybe<String>;
+  imageurl_contains?: Maybe<String>;
+  imageurl_not_contains?: Maybe<String>;
+  imageurl_starts_with?: Maybe<String>;
+  imageurl_not_starts_with?: Maybe<String>;
+  imageurl_ends_with?: Maybe<String>;
+  imageurl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
+  OR?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
+  NOT?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
+}
+
+export interface PetCreateManyWithoutAreaInput {
+  create?: Maybe<PetCreateWithoutAreaInput[] | PetCreateWithoutAreaInput>;
+  connect?: Maybe<PetWhereUniqueInput[] | PetWhereUniqueInput>;
+}
+
+export interface MapUpdateManyWithWhereNestedInput {
+  where: MapScalarWhereInput;
+  data: MapUpdateManyDataInput;
+}
+
+export interface FoodCreateOneWithoutPet_favoriteInput {
+  create?: Maybe<FoodCreateWithoutPet_favoriteInput>;
+  connect?: Maybe<FoodWhereUniqueInput>;
+}
+
+export interface MapUpdateManyDataInput {
+  name?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  imageurl?: Maybe<String>;
 }
 
 export interface ContinentCreateOneWithoutMapsInput {
@@ -2146,8 +2123,10 @@ export interface ContinentCreateOneWithoutMapsInput {
   connect?: Maybe<ContinentWhereUniqueInput>;
 }
 
-export interface ConnectContinentUpdateWithoutPrevious_continentDataInput {
-  next_continent?: Maybe<ContinentUpdateOneInput>;
+export interface ContinentUpsertWithWhereUniqueWithoutBossesInput {
+  where: ContinentWhereUniqueInput;
+  update: ContinentUpdateWithoutBossesDataInput;
+  create: ContinentCreateWithoutBossesInput;
 }
 
 export interface BossCreateManyWithoutContinent_foundInput {
@@ -2158,77 +2137,156 @@ export interface BossCreateManyWithoutContinent_foundInput {
   connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
 }
 
-export interface ContinentUpdateOneInput {
-  create?: Maybe<ContinentCreateInput>;
-  update?: Maybe<ContinentUpdateDataInput>;
-  upsert?: Maybe<ContinentUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ContinentWhereUniqueInput>;
-}
-
-export interface ConnectContinentCreateOneWithoutPrevious_continentInput {
-  create?: Maybe<ConnectContinentCreateWithoutPrevious_continentInput>;
-  connect?: Maybe<ConnectContinentWhereUniqueInput>;
-}
-
-export interface ContinentUpdateDataInput {
+export interface ContinentScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
   name?: Maybe<String>;
-  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
-  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
-  connected_continent?: Maybe<
-    ConnectContinentUpdateOneWithoutPrevious_continentInput
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  next_continent?: Maybe<String>;
+  next_continent_not?: Maybe<String>;
+  next_continent_in?: Maybe<String[] | String>;
+  next_continent_not_in?: Maybe<String[] | String>;
+  next_continent_lt?: Maybe<String>;
+  next_continent_lte?: Maybe<String>;
+  next_continent_gt?: Maybe<String>;
+  next_continent_gte?: Maybe<String>;
+  next_continent_contains?: Maybe<String>;
+  next_continent_not_contains?: Maybe<String>;
+  next_continent_starts_with?: Maybe<String>;
+  next_continent_not_starts_with?: Maybe<String>;
+  next_continent_ends_with?: Maybe<String>;
+  next_continent_not_ends_with?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+  previous_continent_not?: Maybe<String>;
+  previous_continent_in?: Maybe<String[] | String>;
+  previous_continent_not_in?: Maybe<String[] | String>;
+  previous_continent_lt?: Maybe<String>;
+  previous_continent_lte?: Maybe<String>;
+  previous_continent_gt?: Maybe<String>;
+  previous_continent_gte?: Maybe<String>;
+  previous_continent_contains?: Maybe<String>;
+  previous_continent_not_contains?: Maybe<String>;
+  previous_continent_starts_with?: Maybe<String>;
+  previous_continent_not_starts_with?: Maybe<String>;
+  previous_continent_ends_with?: Maybe<String>;
+  previous_continent_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
+  OR?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
+  NOT?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
+}
+
+export interface ContinentCreateManyWithoutBossesInput {
+  create?: Maybe<
+    ContinentCreateWithoutBossesInput[] | ContinentCreateWithoutBossesInput
   >;
+  connect?: Maybe<ContinentWhereUniqueInput[] | ContinentWhereUniqueInput>;
 }
 
-export interface ContinentCreateOneInput {
-  create?: Maybe<ContinentCreateInput>;
-  connect?: Maybe<ContinentWhereUniqueInput>;
+export interface ContinentUpdateManyWithWhereNestedInput {
+  where: ContinentScalarWhereInput;
+  data: ContinentUpdateManyDataInput;
 }
 
-export interface ContinentUpsertNestedInput {
-  update: ContinentUpdateDataInput;
-  create: ContinentCreateInput;
+export interface MapCreateManyWithoutContinentInput {
+  create?: Maybe<
+    MapCreateWithoutContinentInput[] | MapCreateWithoutContinentInput
+  >;
+  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
 }
 
-export interface MonsterSkillCreateManyInput {
+export interface ContinentUpdateManyDataInput {
+  name?: Maybe<String>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface BossCreateManyWithoutMap_foundInput {
+  create?: Maybe<
+    BossCreateWithoutMap_foundInput[] | BossCreateWithoutMap_foundInput
+  >;
+  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+}
+
+export interface BossUpsertNestedInput {
+  update: BossUpdateDataInput;
+  create: BossCreateInput;
+}
+
+export interface BossUpdateInput {
+  name?: Maybe<String>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  map_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
+  continent_found?: Maybe<ContinentUpdateManyWithoutBossesInput>;
+}
+
+export interface MonsterSkillUpdateManyInput {
   create?: Maybe<MonsterSkillCreateInput[] | MonsterSkillCreateInput>;
+  update?: Maybe<
+    | MonsterSkillUpdateWithWhereUniqueNestedInput[]
+    | MonsterSkillUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | MonsterSkillUpsertWithWhereUniqueNestedInput[]
+    | MonsterSkillUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput>;
   connect?: Maybe<
     MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput
   >;
-}
-
-export interface ConnectContinentUpsertWithoutPrevious_continentInput {
-  update: ConnectContinentUpdateWithoutPrevious_continentDataInput;
-  create: ConnectContinentCreateWithoutPrevious_continentInput;
-}
-
-export interface StageStructCreateManyWithoutMapInput {
-  create?: Maybe<
-    StageStructCreateWithoutMapInput[] | StageStructCreateWithoutMapInput
+  set?: Maybe<MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput>;
+  disconnect?: Maybe<
+    MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput
   >;
-  connect?: Maybe<StageStructWhereUniqueInput[] | StageStructWhereUniqueInput>;
+  deleteMany?: Maybe<
+    MonsterSkillScalarWhereInput[] | MonsterSkillScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | MonsterSkillUpdateManyWithWhereNestedInput[]
+    | MonsterSkillUpdateManyWithWhereNestedInput
+  >;
 }
 
-export interface ContinentUpsertWithoutMapsInput {
-  update: ContinentUpdateWithoutMapsDataInput;
-  create: ContinentCreateWithoutMapsInput;
-}
-
-export interface SkillSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<SkillWhereInput>;
-  AND?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
-  OR?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
-  NOT?: Maybe<SkillSubscriptionWhereInput[] | SkillSubscriptionWhereInput>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface MapUpsertWithoutField_stagesInput {
-  update: MapUpdateWithoutField_stagesDataInput;
-  create: MapCreateWithoutField_stagesInput;
+export interface MonsterSkillUpdateWithWhereUniqueNestedInput {
+  where: MonsterSkillWhereUniqueInput;
+  data: MonsterSkillUpdateDataInput;
 }
 
 export interface ClassWhereInput {
@@ -2286,9 +2344,27 @@ export interface ClassWhereInput {
   NOT?: Maybe<ClassWhereInput[] | ClassWhereInput>;
 }
 
-export interface StageStructUpsertWithoutBoss_foundInput {
-  update: StageStructUpdateWithoutBoss_foundDataInput;
-  create: StageStructCreateWithoutBoss_foundInput;
+export interface MonsterSkillUpdateDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<MonsterSkillUpdateskill_typeInput>;
+  combat_type?: Maybe<MonsterSkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+}
+
+export interface GuideSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<GuideWhereInput>;
+  AND?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
+  OR?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
+  NOT?: Maybe<GuideSubscriptionWhereInput[] | GuideSubscriptionWhereInput>;
+}
+
+export interface MonsterSkillUpdateskill_typeInput {
+  set?: Maybe<SkillType[] | SkillType>;
 }
 
 export interface ContinentSubscriptionWhereInput {
@@ -2308,56 +2384,8 @@ export interface ContinentSubscriptionWhereInput {
   >;
 }
 
-export interface MonsterSkillUpdateManyInput {
-  create?: Maybe<MonsterSkillCreateInput[] | MonsterSkillCreateInput>;
-  update?: Maybe<
-    | MonsterSkillUpdateWithWhereUniqueNestedInput[]
-    | MonsterSkillUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | MonsterSkillUpsertWithWhereUniqueNestedInput[]
-    | MonsterSkillUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput>;
-  connect?: Maybe<
-    MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput
-  >;
-  set?: Maybe<MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput>;
-  disconnect?: Maybe<
-    MonsterSkillWhereUniqueInput[] | MonsterSkillWhereUniqueInput
-  >;
-  deleteMany?: Maybe<
-    MonsterSkillScalarWhereInput[] | MonsterSkillScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | MonsterSkillUpdateManyWithWhereNestedInput[]
-    | MonsterSkillUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ConnectContinentSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ConnectContinentWhereInput>;
-  AND?: Maybe<
-    | ConnectContinentSubscriptionWhereInput[]
-    | ConnectContinentSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | ConnectContinentSubscriptionWhereInput[]
-    | ConnectContinentSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | ConnectContinentSubscriptionWhereInput[]
-    | ConnectContinentSubscriptionWhereInput
-  >;
-}
-
-export interface MonsterSkillUpdateWithWhereUniqueNestedInput {
-  where: MonsterSkillWhereUniqueInput;
-  data: MonsterSkillUpdateDataInput;
+export interface MonsterSkillUpdatecombat_typeInput {
+  set?: Maybe<CombatType[] | CombatType>;
 }
 
 export interface BossSubscriptionWhereInput {
@@ -2371,15 +2399,13 @@ export interface BossSubscriptionWhereInput {
   NOT?: Maybe<BossSubscriptionWhereInput[] | BossSubscriptionWhereInput>;
 }
 
-export interface MonsterSkillUpdateDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  combat_type?: Maybe<CombatType>;
-  energy?: Maybe<Int>;
+export interface MonsterSkillUpsertWithWhereUniqueNestedInput {
+  where: MonsterSkillWhereUniqueInput;
+  update: MonsterSkillUpdateDataInput;
+  create: MonsterSkillCreateInput;
 }
 
-export interface ContinentWhereInput {
+export interface ElementWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -2394,41 +2420,22 @@ export interface ContinentWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  bosses_every?: Maybe<BossWhereInput>;
-  bosses_some?: Maybe<BossWhereInput>;
-  bosses_none?: Maybe<BossWhereInput>;
-  maps_every?: Maybe<MapWhereInput>;
-  maps_some?: Maybe<MapWhereInput>;
-  maps_none?: Maybe<MapWhereInput>;
-  connected_continent?: Maybe<ConnectContinentWhereInput>;
-  AND?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
-  OR?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
-  NOT?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
+  name?: Maybe<ElementType>;
+  name_not?: Maybe<ElementType>;
+  name_in?: Maybe<ElementType[] | ElementType>;
+  name_not_in?: Maybe<ElementType[] | ElementType>;
+  weakness?: Maybe<ElementType>;
+  weakness_not?: Maybe<ElementType>;
+  weakness_in?: Maybe<ElementType[] | ElementType>;
+  weakness_not_in?: Maybe<ElementType[] | ElementType>;
+  effective?: Maybe<ElementType>;
+  effective_not?: Maybe<ElementType>;
+  effective_in?: Maybe<ElementType[] | ElementType>;
+  effective_not_in?: Maybe<ElementType[] | ElementType>;
+  AND?: Maybe<ElementWhereInput[] | ElementWhereInput>;
+  OR?: Maybe<ElementWhereInput[] | ElementWhereInput>;
+  NOT?: Maybe<ElementWhereInput[] | ElementWhereInput>;
 }
-
-export interface MonsterSkillUpsertWithWhereUniqueNestedInput {
-  where: MonsterSkillWhereUniqueInput;
-  update: MonsterSkillUpdateDataInput;
-  create: MonsterSkillCreateInput;
-}
-
-export type ConnectContinentWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
 
 export interface MonsterSkillScalarWhereInput {
   id?: Maybe<ID_Input>;
@@ -2473,14 +2480,6 @@ export interface MonsterSkillScalarWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  skill_type_not?: Maybe<SkillType>;
-  skill_type_in?: Maybe<SkillType[] | SkillType>;
-  skill_type_not_in?: Maybe<SkillType[] | SkillType>;
-  combat_type?: Maybe<CombatType>;
-  combat_type_not?: Maybe<CombatType>;
-  combat_type_in?: Maybe<CombatType[] | CombatType>;
-  combat_type_not_in?: Maybe<CombatType[] | CombatType>;
   energy?: Maybe<Int>;
   energy_not?: Maybe<Int>;
   energy_in?: Maybe<Int[] | Int>;
@@ -2494,67 +2493,46 @@ export interface MonsterSkillScalarWhereInput {
   NOT?: Maybe<MonsterSkillScalarWhereInput[] | MonsterSkillScalarWhereInput>;
 }
 
-export interface GuideUpdateManyWithoutOwnerInput {
-  create?: Maybe<GuideCreateWithoutOwnerInput[] | GuideCreateWithoutOwnerInput>;
-  delete?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
-  connect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
-  set?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
-  disconnect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
-  update?: Maybe<
-    | GuideUpdateWithWhereUniqueWithoutOwnerInput[]
-    | GuideUpdateWithWhereUniqueWithoutOwnerInput
-  >;
-  upsert?: Maybe<
-    | GuideUpsertWithWhereUniqueWithoutOwnerInput[]
-    | GuideUpsertWithWhereUniqueWithoutOwnerInput
-  >;
-  deleteMany?: Maybe<GuideScalarWhereInput[] | GuideScalarWhereInput>;
-  updateMany?: Maybe<
-    GuideUpdateManyWithWhereNestedInput[] | GuideUpdateManyWithWhereNestedInput
-  >;
-}
+export type ContinentWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
 
 export interface MonsterSkillUpdateManyWithWhereNestedInput {
   where: MonsterSkillScalarWhereInput;
   data: MonsterSkillUpdateManyDataInput;
 }
 
-export interface GuideCreateWithoutOwnerInput {
-  id?: Maybe<ID_Input>;
-  updateAt?: Maybe<DateTimeInput>;
-  title: String;
-  body: String;
-}
+export type ElementWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<ElementType>;
+}>;
 
 export interface MonsterSkillUpdateManyDataInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  combat_type?: Maybe<CombatType>;
+  skill_type?: Maybe<MonsterSkillUpdateskill_typeInput>;
+  combat_type?: Maybe<MonsterSkillUpdatecombat_typeInput>;
   energy?: Maybe<Int>;
 }
 
-export interface StageStructUpdateManyMutationInput {
-  stage_number?: Maybe<Int>;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
+export interface GuideCreateManyWithoutOwnerInput {
+  create?: Maybe<GuideCreateWithoutOwnerInput[] | GuideCreateWithoutOwnerInput>;
+  connect?: Maybe<GuideWhereUniqueInput[] | GuideWhereUniqueInput>;
 }
 
-export interface BossStructUpsertWithWhereUniqueNestedInput {
+export interface BossStructUpsertWithWhereUniqueWithoutMapInput {
   where: BossStructWhereUniqueInput;
-  update: BossStructUpdateDataInput;
-  create: BossStructCreateInput;
+  update: BossStructUpdateWithoutMapDataInput;
+  create: BossStructCreateWithoutMapInput;
 }
 
-export interface StageStructCreateInput {
-  id?: Maybe<ID_Input>;
-  stage_number: Int;
-  map: MapCreateOneWithoutField_stagesInput;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  boss_found?: Maybe<BossStructCreateOneWithoutLocationInput>;
+export interface SkillUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<SkillUpdateskill_typeInput>;
+  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
 }
 
 export interface BossStructScalarWhereInput {
@@ -2572,40 +2550,8 @@ export interface BossStructScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
   minion_present?: Maybe<Boolean>;
   minion_present_not?: Maybe<Boolean>;
-  HP?: Maybe<Int>;
-  HP_not?: Maybe<Int>;
-  HP_in?: Maybe<Int[] | Int>;
-  HP_not_in?: Maybe<Int[] | Int>;
-  HP_lt?: Maybe<Int>;
-  HP_lte?: Maybe<Int>;
-  HP_gt?: Maybe<Int>;
-  HP_gte?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  ATK_not?: Maybe<Int>;
-  ATK_in?: Maybe<Int[] | Int>;
-  ATK_not_in?: Maybe<Int[] | Int>;
-  ATK_lt?: Maybe<Int>;
-  ATK_lte?: Maybe<Int>;
-  ATK_gt?: Maybe<Int>;
-  ATK_gte?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  Armor_not?: Maybe<Int>;
-  Armor_in?: Maybe<Int[] | Int>;
-  Armor_not_in?: Maybe<Int[] | Int>;
-  Armor_lt?: Maybe<Int>;
-  Armor_lte?: Maybe<Int>;
-  Armor_gt?: Maybe<Int>;
-  Armor_gte?: Maybe<Int>;
   AtkSpd?: Maybe<Float>;
   AtkSpd_not?: Maybe<Float>;
   AtkSpd_in?: Maybe<Float[] | Float>;
@@ -2619,15 +2565,13 @@ export interface BossStructScalarWhereInput {
   NOT?: Maybe<BossStructScalarWhereInput[] | BossStructScalarWhereInput>;
 }
 
-export interface SkillCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  skill_type?: Maybe<SkillCreateskill_typeInput>;
-  combat_type?: Maybe<SkillCreatecombat_typeInput>;
-  energy?: Maybe<Int>;
-  location?: Maybe<MapCreateOneWithoutObtainable_skillsInput>;
-  class?: Maybe<ClassCreateOneWithoutSkillsInput>;
+export interface PetUpdateManyMutationInput {
+  name?: Maybe<String>;
+  element_one_value?: Maybe<Int>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  imageurl?: Maybe<String>;
 }
 
 export interface BossStructUpdateManyWithWhereNestedInput {
@@ -2722,10 +2666,27 @@ export interface UserWhereInput {
 
 export interface BossStructUpdateManyDataInput {
   minion_present?: Maybe<Boolean>;
-  HP?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  Armor?: Maybe<Int>;
   AtkSpd?: Maybe<Float>;
+}
+
+export interface MapUpdateInput {
+  name?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossUpdateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructUpdateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetUpdateManyWithoutAreaInput>;
+  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface ContinentUpdateOneRequiredWithoutMapsInput {
+  create?: Maybe<ContinentCreateWithoutMapsInput>;
+  update?: Maybe<ContinentUpdateWithoutMapsDataInput>;
+  upsert?: Maybe<ContinentUpsertWithoutMapsInput>;
+  connect?: Maybe<ContinentWhereUniqueInput>;
 }
 
 export interface UserUpsertWithoutGuidesInput {
@@ -2733,31 +2694,11 @@ export interface UserUpsertWithoutGuidesInput {
   create: UserCreateWithoutGuidesInput;
 }
 
-export interface StageStructUpdateManyWithoutMapInput {
-  create?: Maybe<
-    StageStructCreateWithoutMapInput[] | StageStructCreateWithoutMapInput
-  >;
-  delete?: Maybe<StageStructWhereUniqueInput[] | StageStructWhereUniqueInput>;
-  connect?: Maybe<StageStructWhereUniqueInput[] | StageStructWhereUniqueInput>;
-  set?: Maybe<StageStructWhereUniqueInput[] | StageStructWhereUniqueInput>;
-  disconnect?: Maybe<
-    StageStructWhereUniqueInput[] | StageStructWhereUniqueInput
-  >;
-  update?: Maybe<
-    | StageStructUpdateWithWhereUniqueWithoutMapInput[]
-    | StageStructUpdateWithWhereUniqueWithoutMapInput
-  >;
-  upsert?: Maybe<
-    | StageStructUpsertWithWhereUniqueWithoutMapInput[]
-    | StageStructUpsertWithWhereUniqueWithoutMapInput
-  >;
-  deleteMany?: Maybe<
-    StageStructScalarWhereInput[] | StageStructScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | StageStructUpdateManyWithWhereNestedInput[]
-    | StageStructUpdateManyWithWhereNestedInput
-  >;
+export interface ContinentUpdateWithoutMapsDataInput {
+  name?: Maybe<String>;
+  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
 }
 
 export interface GuideUpdateInput {
@@ -2767,9 +2708,27 @@ export interface GuideUpdateInput {
   owner?: Maybe<UserUpdateOneRequiredWithoutGuidesInput>;
 }
 
-export interface StageStructUpdateWithWhereUniqueWithoutMapInput {
-  where: StageStructWhereUniqueInput;
-  data: StageStructUpdateWithoutMapDataInput;
+export interface BossUpdateManyWithoutContinent_foundInput {
+  create?: Maybe<
+    | BossCreateWithoutContinent_foundInput[]
+    | BossCreateWithoutContinent_foundInput
+  >;
+  delete?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  set?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  disconnect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
+  update?: Maybe<
+    | BossUpdateWithWhereUniqueWithoutContinent_foundInput[]
+    | BossUpdateWithWhereUniqueWithoutContinent_foundInput
+  >;
+  upsert?: Maybe<
+    | BossUpsertWithWhereUniqueWithoutContinent_foundInput[]
+    | BossUpsertWithWhereUniqueWithoutContinent_foundInput
+  >;
+  deleteMany?: Maybe<BossScalarWhereInput[] | BossScalarWhereInput>;
+  updateMany?: Maybe<
+    BossUpdateManyWithWhereNestedInput[] | BossUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface GuideCreateInput {
@@ -2780,61 +2739,41 @@ export interface GuideCreateInput {
   owner: UserCreateOneWithoutGuidesInput;
 }
 
-export interface StageStructUpdateWithoutMapDataInput {
-  stage_number?: Maybe<Int>;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  boss_found?: Maybe<BossStructUpdateOneWithoutLocationInput>;
+export interface BossUpdateWithWhereUniqueWithoutContinent_foundInput {
+  where: BossWhereUniqueInput;
+  data: BossUpdateWithoutContinent_foundDataInput;
 }
 
-export interface ContinentUpdateManyMutationInput {
+export interface MapUpsertWithoutPet_unlockInput {
+  update: MapUpdateWithoutPet_unlockDataInput;
+  create: MapCreateWithoutPet_unlockInput;
+}
+
+export interface BossUpdateWithoutContinent_foundDataInput {
   name?: Maybe<String>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  map_found?: Maybe<MapUpdateManyWithoutNative_bossInput>;
 }
 
-export interface BossStructUpdateOneWithoutLocationInput {
-  create?: Maybe<BossStructCreateWithoutLocationInput>;
-  update?: Maybe<BossStructUpdateWithoutLocationDataInput>;
-  upsert?: Maybe<BossStructUpsertWithoutLocationInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<BossStructWhereUniqueInput>;
-}
-
-export interface MapUpdateWithoutConnected_mapsDataInput {
+export interface PetUpdateWithoutFavorite_foodDataInput {
   name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
-  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
+  element_one?: Maybe<ElementUpdateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementUpdateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  area?: Maybe<MapUpdateOneWithoutPet_unlockInput>;
+  imageurl?: Maybe<String>;
 }
 
-export interface BossStructUpdateWithoutLocationDataInput {
-  monster_found?: Maybe<BossUpdateOneRequiredInput>;
-  minion_present?: Maybe<Boolean>;
-  HP?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  AtkSpd?: Maybe<Float>;
-  skills?: Maybe<MonsterSkillUpdateManyInput>;
-}
-
-export interface MapCreateWithoutConnected_mapsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossCreateManyWithoutLocations_foundInput>;
-  continent: ContinentCreateOneWithoutMapsInput;
-  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
-  field_stages?: Maybe<StageStructCreateManyWithoutMapInput>;
-}
-
-export interface BossStructUpsertWithoutLocationInput {
-  update: BossStructUpdateWithoutLocationDataInput;
-  create: BossStructCreateWithoutLocationInput;
+export interface BossUpsertWithWhereUniqueWithoutContinent_foundInput {
+  where: BossWhereUniqueInput;
+  update: BossUpdateWithoutContinent_foundDataInput;
+  create: BossCreateWithoutContinent_foundInput;
 }
 
 export interface ElementCreateOneInput {
@@ -2842,393 +2781,9 @@ export interface ElementCreateOneInput {
   connect?: Maybe<ElementWhereUniqueInput>;
 }
 
-export interface StageStructUpsertWithWhereUniqueWithoutMapInput {
-  where: StageStructWhereUniqueInput;
-  update: StageStructUpdateWithoutMapDataInput;
-  create: StageStructCreateWithoutMapInput;
-}
-
-export interface ConnectedMapCreateOneWithoutPrevious_mapInput {
-  create?: Maybe<ConnectedMapCreateWithoutPrevious_mapInput>;
-  connect?: Maybe<ConnectedMapWhereUniqueInput>;
-}
-
-export interface StageStructScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  stage_number?: Maybe<Int>;
-  stage_number_not?: Maybe<Int>;
-  stage_number_in?: Maybe<Int[] | Int>;
-  stage_number_not_in?: Maybe<Int[] | Int>;
-  stage_number_lt?: Maybe<Int>;
-  stage_number_lte?: Maybe<Int>;
-  stage_number_gt?: Maybe<Int>;
-  stage_number_gte?: Maybe<Int>;
-  base_exp?: Maybe<Int>;
-  base_exp_not?: Maybe<Int>;
-  base_exp_in?: Maybe<Int[] | Int>;
-  base_exp_not_in?: Maybe<Int[] | Int>;
-  base_exp_lt?: Maybe<Int>;
-  base_exp_lte?: Maybe<Int>;
-  base_exp_gt?: Maybe<Int>;
-  base_exp_gte?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  gear_level_not?: Maybe<Int>;
-  gear_level_in?: Maybe<Int[] | Int>;
-  gear_level_not_in?: Maybe<Int[] | Int>;
-  gear_level_lt?: Maybe<Int>;
-  gear_level_lte?: Maybe<Int>;
-  gear_level_gt?: Maybe<Int>;
-  gear_level_gte?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-  base_shell_not?: Maybe<Int>;
-  base_shell_in?: Maybe<Int[] | Int>;
-  base_shell_not_in?: Maybe<Int[] | Int>;
-  base_shell_lt?: Maybe<Int>;
-  base_shell_lte?: Maybe<Int>;
-  base_shell_gt?: Maybe<Int>;
-  base_shell_gte?: Maybe<Int>;
-  AND?: Maybe<StageStructScalarWhereInput[] | StageStructScalarWhereInput>;
-  OR?: Maybe<StageStructScalarWhereInput[] | StageStructScalarWhereInput>;
-  NOT?: Maybe<StageStructScalarWhereInput[] | StageStructScalarWhereInput>;
-}
-
-export interface BossCreateManyWithoutLocations_foundInput {
-  create?: Maybe<
-    | BossCreateWithoutLocations_foundInput[]
-    | BossCreateWithoutLocations_foundInput
-  >;
-  connect?: Maybe<BossWhereUniqueInput[] | BossWhereUniqueInput>;
-}
-
-export interface StageStructUpdateManyWithWhereNestedInput {
-  where: StageStructScalarWhereInput;
-  data: StageStructUpdateManyDataInput;
-}
-
-export interface MapCreateManyWithoutContinentInput {
-  create?: Maybe<
-    MapCreateWithoutContinentInput[] | MapCreateWithoutContinentInput
-  >;
-  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-}
-
-export interface StageStructUpdateManyDataInput {
-  stage_number?: Maybe<Int>;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-}
-
-export interface SkillCreateskill_typeInput {
-  set?: Maybe<SkillType[] | SkillType>;
-}
-
-export interface MapUpsertWithWhereUniqueWithoutContinentInput {
-  where: MapWhereUniqueInput;
-  update: MapUpdateWithoutContinentDataInput;
-  create: MapCreateWithoutContinentInput;
-}
-
-export interface BossStructCreateManyInput {
-  create?: Maybe<BossStructCreateInput[] | BossStructCreateInput>;
-  connect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
-}
-
-export interface MapScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  total_stage_not?: Maybe<Int>;
-  total_stage_in?: Maybe<Int[] | Int>;
-  total_stage_not_in?: Maybe<Int[] | Int>;
-  total_stage_lt?: Maybe<Int>;
-  total_stage_lte?: Maybe<Int>;
-  total_stage_gt?: Maybe<Int>;
-  total_stage_gte?: Maybe<Int>;
-  AND?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
-  OR?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
-  NOT?: Maybe<MapScalarWhereInput[] | MapScalarWhereInput>;
-}
-
-export interface StageStructCreateWithoutBoss_foundInput {
-  id?: Maybe<ID_Input>;
-  stage_number: Int;
-  map: MapCreateOneWithoutField_stagesInput;
-  base_exp?: Maybe<Int>;
-  gear_level?: Maybe<Int>;
-  base_shell?: Maybe<Int>;
-}
-
-export interface MapUpdateManyWithWhereNestedInput {
-  where: MapScalarWhereInput;
-  data: MapUpdateManyDataInput;
-}
-
-export interface ContinentCreateWithoutMapsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  bosses?: Maybe<BossCreateManyWithoutContinent_foundInput>;
-  connected_continent?: Maybe<
-    ConnectContinentCreateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface MapUpdateManyDataInput {
-  name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-}
-
-export interface ConnectContinentCreateWithoutPrevious_continentInput {
-  id?: Maybe<ID_Input>;
-  next_continent?: Maybe<ContinentCreateOneInput>;
-}
-
-export interface ContinentUpsertWithWhereUniqueWithoutBossesInput {
-  where: ContinentWhereUniqueInput;
-  update: ContinentUpdateWithoutBossesDataInput;
-  create: ContinentCreateWithoutBossesInput;
-}
-
-export interface MonsterSkillCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  skill_type?: Maybe<SkillType>;
-  combat_type?: Maybe<CombatType>;
-  energy?: Maybe<Int>;
-}
-
-export interface ContinentScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
-  OR?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
-  NOT?: Maybe<ContinentScalarWhereInput[] | ContinentScalarWhereInput>;
-}
-
-export interface MonsterSkillSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MonsterSkillWhereInput>;
-  AND?: Maybe<
-    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    MonsterSkillSubscriptionWhereInput[] | MonsterSkillSubscriptionWhereInput
-  >;
-}
-
-export interface ContinentUpdateManyWithWhereNestedInput {
-  where: ContinentScalarWhereInput;
-  data: ContinentUpdateManyDataInput;
-}
-
-export interface ConnectContinentWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  next_continent?: Maybe<ContinentWhereInput>;
-  previous_continent?: Maybe<ContinentWhereInput>;
-  AND?: Maybe<ConnectContinentWhereInput[] | ConnectContinentWhereInput>;
-  OR?: Maybe<ConnectContinentWhereInput[] | ConnectContinentWhereInput>;
-  NOT?: Maybe<ConnectContinentWhereInput[] | ConnectContinentWhereInput>;
-}
-
-export interface ContinentUpdateManyDataInput {
-  name?: Maybe<String>;
-}
-
-export interface GuideUpdateManyDataInput {
-  updateAt?: Maybe<DateTimeInput>;
-  title?: Maybe<String>;
-  body?: Maybe<String>;
-}
-
-export interface BossUpsertWithWhereUniqueWithoutLocations_foundInput {
-  where: BossWhereUniqueInput;
-  update: BossUpdateWithoutLocations_foundDataInput;
-  create: BossCreateWithoutLocations_foundInput;
-}
-
-export interface GuideUpdateWithoutOwnerDataInput {
-  updateAt?: Maybe<DateTimeInput>;
-  title?: Maybe<String>;
-  body?: Maybe<String>;
-}
-
-export interface MapUpsertNestedInput {
-  update: MapUpdateDataInput;
-  create: MapCreateInput;
-}
-
-export type ContinentWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  name?: Maybe<String>;
-}>;
-
-export interface ConnectedMapUpsertWithoutPrevious_mapInput {
-  update: ConnectedMapUpdateWithoutPrevious_mapDataInput;
-  create: ConnectedMapCreateWithoutPrevious_mapInput;
-}
-
-export interface SkillUpdateInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillUpdateskill_typeInput>;
-  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
-  energy?: Maybe<Int>;
-  location?: Maybe<MapUpdateOneWithoutObtainable_skillsInput>;
-  class?: Maybe<ClassUpdateOneWithoutSkillsInput>;
-}
-
-export interface MapUpsertWithWhereUniqueWithoutNative_bossInput {
-  where: MapWhereUniqueInput;
-  update: MapUpdateWithoutNative_bossDataInput;
-  create: MapCreateWithoutNative_bossInput;
-}
-
-export interface MapUpdateInput {
-  name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
-  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
-}
-
-export interface BossUpdateManyMutationInput {
-  name?: Maybe<String>;
-  element_one_value?: Maybe<Int>;
-  element_two_value?: Maybe<Int>;
-}
-
-export interface UserCreateWithoutGuidesInput {
-  id?: Maybe<ID_Input>;
-  updateAt?: Maybe<DateTimeInput>;
-  handle: String;
-  email: String;
-  role?: Maybe<Role>;
-  password: String;
-}
-
-export interface ConnectContinentUpdateInput {
-  next_continent?: Maybe<ContinentUpdateOneInput>;
-  previous_continent?: Maybe<ContinentUpdateOneWithoutConnected_continentInput>;
-}
-
-export interface ContinentUpdateInput {
-  name?: Maybe<String>;
-  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
-  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
-  connected_continent?: Maybe<
-    ConnectContinentUpdateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface ContinentCreateWithoutConnected_continentInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  bosses?: Maybe<BossCreateManyWithoutContinent_foundInput>;
-  maps?: Maybe<MapCreateManyWithoutContinentInput>;
-}
-
-export interface MapCreateOneInput {
-  create?: Maybe<MapCreateInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
-}
-
-export interface BossStructUpdateInput {
-  monster_found?: Maybe<BossUpdateOneRequiredInput>;
-  minion_present?: Maybe<Boolean>;
-  location?: Maybe<StageStructUpdateOneWithoutBoss_foundInput>;
-  HP?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  AtkSpd?: Maybe<Float>;
-  skills?: Maybe<MonsterSkillUpdateManyInput>;
+export interface ContinentUpsertWithoutMapsInput {
+  update: ContinentUpdateWithoutMapsDataInput;
+  create: ContinentCreateWithoutMapsInput;
 }
 
 export interface SkillCreateManyWithoutLocationInput {
@@ -3238,12 +2793,21 @@ export interface SkillCreateManyWithoutLocationInput {
   connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
 }
 
-export interface BossStructUpdateManyMutationInput {
-  minion_present?: Maybe<Boolean>;
-  HP?: Maybe<Int>;
-  ATK?: Maybe<Int>;
-  Armor?: Maybe<Int>;
-  AtkSpd?: Maybe<Float>;
+export interface MapUpsertWithWhereUniqueWithoutNative_bossInput {
+  where: MapWhereUniqueInput;
+  update: MapUpdateWithoutNative_bossDataInput;
+  create: MapCreateWithoutNative_bossInput;
+}
+
+export interface ClassCreateOneWithoutSkillsInput {
+  create?: Maybe<ClassCreateWithoutSkillsInput>;
+  connect?: Maybe<ClassWhereUniqueInput>;
+}
+
+export interface BossUpdateManyMutationInput {
+  name?: Maybe<String>;
+  element_one_value?: Maybe<Int>;
+  element_two_value?: Maybe<Int>;
 }
 
 export interface BossCreateOneInput {
@@ -3251,12 +2815,42 @@ export interface BossCreateOneInput {
   connect?: Maybe<BossWhereUniqueInput>;
 }
 
-export interface ClassCreateInput {
+export interface MapCreateOneWithoutPet_unlockInput {
+  create?: Maybe<MapCreateWithoutPet_unlockInput>;
+  connect?: Maybe<MapWhereUniqueInput>;
+}
+
+export interface MonsterSkillCreatecombat_typeInput {
+  set?: Maybe<CombatType[] | CombatType>;
+}
+
+export interface PetCreateWithoutFavorite_foodInput {
   id?: Maybe<ID_Input>;
-  name: Hero;
-  description: String;
-  weapon: String;
-  skills?: Maybe<SkillCreateManyWithoutClassInput>;
+  name: String;
+  element_one?: Maybe<ElementCreateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementCreateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  area?: Maybe<MapCreateOneWithoutPet_unlockInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface FoodCreateWithoutPet_favoriteInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  buff?: Maybe<Stat>;
+  imageurl?: Maybe<String>;
+}
+
+export interface BossStructCreateInput {
+  id?: Maybe<ID_Input>;
+  map: MapCreateOneWithoutBosses_foundInput;
+  boss: BossCreateOneInput;
+  minion_present?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+  skills?: Maybe<MonsterSkillCreateManyInput>;
 }
 
 export interface BossCreateWithoutContinent_foundInput {
@@ -3266,33 +2860,120 @@ export interface BossCreateWithoutContinent_foundInput {
   element_one_value?: Maybe<Int>;
   element_two?: Maybe<ElementCreateOneInput>;
   element_two_value?: Maybe<Int>;
-  locations_found?: Maybe<MapCreateManyWithoutNative_bossInput>;
+  map_found?: Maybe<MapCreateManyWithoutNative_bossInput>;
 }
 
-export interface SkillCreateManyWithoutClassInput {
-  create?: Maybe<SkillCreateWithoutClassInput[] | SkillCreateWithoutClassInput>;
-  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+export interface MapCreateOneWithoutBosses_foundInput {
+  create?: Maybe<MapCreateWithoutBosses_foundInput>;
+  connect?: Maybe<MapWhereUniqueInput>;
 }
 
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface SkillCreateWithoutClassInput {
+export interface MapCreateWithoutContinentInput {
   id?: Maybe<ID_Input>;
   name: String;
-  description: String;
-  skill_type?: Maybe<SkillCreateskill_typeInput>;
-  combat_type?: Maybe<SkillCreatecombat_typeInput>;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossCreateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructCreateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetCreateManyWithoutAreaInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface MapCreateWithoutBosses_foundInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossCreateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetCreateManyWithoutAreaInput>;
+  continent: ContinentCreateOneWithoutMapsInput;
+  imageurl?: Maybe<String>;
+}
+
+export interface ElementUpdateOneInput {
+  create?: Maybe<ElementCreateInput>;
+  update?: Maybe<ElementUpdateDataInput>;
+  upsert?: Maybe<ElementUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ElementWhereUniqueInput>;
+}
+
+export interface BossStructUpdateInput {
+  map?: Maybe<MapUpdateOneRequiredWithoutBosses_foundInput>;
+  boss?: Maybe<BossUpdateOneRequiredInput>;
+  minion_present?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+  skills?: Maybe<MonsterSkillUpdateManyInput>;
+}
+
+export interface SkillWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
   energy?: Maybe<Int>;
-  location?: Maybe<MapCreateOneWithoutObtainable_skillsInput>;
+  energy_not?: Maybe<Int>;
+  energy_in?: Maybe<Int[] | Int>;
+  energy_not_in?: Maybe<Int[] | Int>;
+  energy_lt?: Maybe<Int>;
+  energy_lte?: Maybe<Int>;
+  energy_gt?: Maybe<Int>;
+  energy_gte?: Maybe<Int>;
+  location?: Maybe<MapWhereInput>;
+  class?: Maybe<ClassWhereInput>;
+  AND?: Maybe<SkillWhereInput[] | SkillWhereInput>;
+  OR?: Maybe<SkillWhereInput[] | SkillWhereInput>;
+  NOT?: Maybe<SkillWhereInput[] | SkillWhereInput>;
+}
+
+export interface MapUpdateOneRequiredWithoutBosses_foundInput {
+  create?: Maybe<MapCreateWithoutBosses_foundInput>;
+  update?: Maybe<MapUpdateWithoutBosses_foundDataInput>;
+  upsert?: Maybe<MapUpsertWithoutBosses_foundInput>;
+  connect?: Maybe<MapWhereUniqueInput>;
 }
 
 export interface BossStructSubscriptionWhereInput {
@@ -3312,164 +2993,16 @@ export interface BossStructSubscriptionWhereInput {
   >;
 }
 
-export interface MapCreateOneWithoutObtainable_skillsInput {
-  create?: Maybe<MapCreateWithoutObtainable_skillsInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
-}
-
-export interface BossWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
+export interface MapUpdateWithoutBosses_foundDataInput {
   name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  element_one?: Maybe<ElementWhereInput>;
-  element_one_value?: Maybe<Int>;
-  element_one_value_not?: Maybe<Int>;
-  element_one_value_in?: Maybe<Int[] | Int>;
-  element_one_value_not_in?: Maybe<Int[] | Int>;
-  element_one_value_lt?: Maybe<Int>;
-  element_one_value_lte?: Maybe<Int>;
-  element_one_value_gt?: Maybe<Int>;
-  element_one_value_gte?: Maybe<Int>;
-  element_two?: Maybe<ElementWhereInput>;
-  element_two_value?: Maybe<Int>;
-  element_two_value_not?: Maybe<Int>;
-  element_two_value_in?: Maybe<Int[] | Int>;
-  element_two_value_not_in?: Maybe<Int[] | Int>;
-  element_two_value_lt?: Maybe<Int>;
-  element_two_value_lte?: Maybe<Int>;
-  element_two_value_gt?: Maybe<Int>;
-  element_two_value_gte?: Maybe<Int>;
-  locations_found_every?: Maybe<MapWhereInput>;
-  locations_found_some?: Maybe<MapWhereInput>;
-  locations_found_none?: Maybe<MapWhereInput>;
-  continent_found_every?: Maybe<ContinentWhereInput>;
-  continent_found_some?: Maybe<ContinentWhereInput>;
-  continent_found_none?: Maybe<ContinentWhereInput>;
-  AND?: Maybe<BossWhereInput[] | BossWhereInput>;
-  OR?: Maybe<BossWhereInput[] | BossWhereInput>;
-  NOT?: Maybe<BossWhereInput[] | BossWhereInput>;
-}
-
-export interface MapCreateWithoutObtainable_skillsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
   total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossCreateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapCreateOneWithoutPrevious_mapInput>;
-  continent: ContinentCreateOneWithoutMapsInput;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
-  field_stages?: Maybe<StageStructCreateManyWithoutMapInput>;
-}
-
-export interface MonsterSkillUpdateInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillType>;
-  combat_type?: Maybe<CombatType>;
-  energy?: Maybe<Int>;
-}
-
-export interface ClassUpdateInput {
-  name?: Maybe<Hero>;
-  description?: Maybe<String>;
-  weapon?: Maybe<String>;
-  skills?: Maybe<SkillUpdateManyWithoutClassInput>;
-}
-
-export interface ElementUpdateManyMutationInput {
-  name?: Maybe<ElementType>;
-  weakness?: Maybe<ElementType>;
-  effective?: Maybe<ElementType>;
-}
-
-export interface SkillUpdateManyWithoutClassInput {
-  create?: Maybe<SkillCreateWithoutClassInput[] | SkillCreateWithoutClassInput>;
-  delete?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  set?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  disconnect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
-  update?: Maybe<
-    | SkillUpdateWithWhereUniqueWithoutClassInput[]
-    | SkillUpdateWithWhereUniqueWithoutClassInput
-  >;
-  upsert?: Maybe<
-    | SkillUpsertWithWhereUniqueWithoutClassInput[]
-    | SkillUpsertWithWhereUniqueWithoutClassInput
-  >;
-  deleteMany?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
-  updateMany?: Maybe<
-    SkillUpdateManyWithWhereNestedInput[] | SkillUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface MapCreateManyWithoutNative_bossInput {
-  create?: Maybe<
-    MapCreateWithoutNative_bossInput[] | MapCreateWithoutNative_bossInput
-  >;
-  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
-}
-
-export interface SkillUpdateWithWhereUniqueWithoutClassInput {
-  where: SkillWhereUniqueInput;
-  data: SkillUpdateWithoutClassDataInput;
-}
-
-export interface ClassCreateOneWithoutSkillsInput {
-  create?: Maybe<ClassCreateWithoutSkillsInput>;
-  connect?: Maybe<ClassWhereUniqueInput>;
-}
-
-export interface SkillUpdateWithoutClassDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  skill_type?: Maybe<SkillUpdateskill_typeInput>;
-  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
-  energy?: Maybe<Int>;
-  location?: Maybe<MapUpdateOneWithoutObtainable_skillsInput>;
-}
-
-export interface ContinentCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  bosses?: Maybe<BossCreateManyWithoutContinent_foundInput>;
-  maps?: Maybe<MapCreateManyWithoutContinentInput>;
-  connected_continent?: Maybe<
-    ConnectContinentCreateOneWithoutPrevious_continentInput
-  >;
-}
-
-export interface MapUpdateOneWithoutObtainable_skillsInput {
-  create?: Maybe<MapCreateWithoutObtainable_skillsInput>;
-  update?: Maybe<MapUpdateWithoutObtainable_skillsDataInput>;
-  upsert?: Maybe<MapUpsertWithoutObtainable_skillsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<MapWhereUniqueInput>;
+  native_boss?: Maybe<BossUpdateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetUpdateManyWithoutAreaInput>;
+  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
+  imageurl?: Maybe<String>;
 }
 
 export interface GuideScalarWhereInput {
@@ -3536,14 +3069,48 @@ export interface GuideScalarWhereInput {
   NOT?: Maybe<GuideScalarWhereInput[] | GuideScalarWhereInput>;
 }
 
-export interface MapUpdateWithoutObtainable_skillsDataInput {
+export interface MapUpsertWithoutBosses_foundInput {
+  update: MapUpdateWithoutBosses_foundDataInput;
+  create: MapCreateWithoutBosses_foundInput;
+}
+
+export interface UserUpdateInput {
+  updateAt?: Maybe<DateTimeInput>;
+  handle?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<Role>;
+  password?: Maybe<String>;
+  guides?: Maybe<GuideUpdateManyWithoutOwnerInput>;
+}
+
+export interface BossStructUpdateManyMutationInput {
+  minion_present?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+}
+
+export type GuideWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ClassCreateInput {
+  id?: Maybe<ID_Input>;
+  name: Hero;
+  description: String;
+  weapon: String;
+  skills?: Maybe<SkillCreateManyWithoutClassInput>;
+}
+
+export interface MonsterSkillUpdateInput {
   name?: Maybe<String>;
-  total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossUpdateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapUpdateOneWithoutPrevious_mapInput>;
-  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
-  boss_stages?: Maybe<BossStructUpdateManyInput>;
-  field_stages?: Maybe<StageStructUpdateManyWithoutMapInput>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<MonsterSkillUpdateskill_typeInput>;
+  combat_type?: Maybe<MonsterSkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+}
+
+export interface SkillCreateManyWithoutClassInput {
+  create?: Maybe<SkillCreateWithoutClassInput[] | SkillCreateWithoutClassInput>;
+  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
 }
 
 export interface UserUpdateWithoutGuidesDataInput {
@@ -3554,16 +3121,239 @@ export interface UserUpdateWithoutGuidesDataInput {
   password?: Maybe<String>;
 }
 
-export interface ConnectContinentCreateInput {
+export interface SkillCreateWithoutClassInput {
   id?: Maybe<ID_Input>;
-  next_continent?: Maybe<ContinentCreateOneInput>;
-  previous_continent?: Maybe<ContinentCreateOneWithoutConnected_continentInput>;
+  name: String;
+  description: String;
+  skill_type?: Maybe<SkillCreateskill_typeInput>;
+  combat_type?: Maybe<SkillCreatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  location?: Maybe<MapCreateOneWithoutObtainable_skillsInput>;
 }
 
-export interface ClassUpdateManyMutationInput {
+export interface FoodUpdateManyMutationInput {
+  name?: Maybe<String>;
+  buff?: Maybe<Stat>;
+  imageurl?: Maybe<String>;
+}
+
+export interface MapCreateOneWithoutObtainable_skillsInput {
+  create?: Maybe<MapCreateWithoutObtainable_skillsInput>;
+  connect?: Maybe<MapWhereUniqueInput>;
+}
+
+export interface SkillCreateskill_typeInput {
+  set?: Maybe<SkillType[] | SkillType>;
+}
+
+export interface MapCreateWithoutObtainable_skillsInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossCreateManyWithoutMap_foundInput>;
+  bosses_found?: Maybe<BossStructCreateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetCreateManyWithoutAreaInput>;
+  continent: ContinentCreateOneWithoutMapsInput;
+  imageurl?: Maybe<String>;
+}
+
+export interface MonsterSkillCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description: String;
+  skill_type?: Maybe<MonsterSkillCreateskill_typeInput>;
+  combat_type?: Maybe<MonsterSkillCreatecombat_typeInput>;
+  energy?: Maybe<Int>;
+}
+
+export interface ClassUpdateInput {
   name?: Maybe<Hero>;
   description?: Maybe<String>;
   weapon?: Maybe<String>;
+  skills?: Maybe<SkillUpdateManyWithoutClassInput>;
+}
+
+export interface ContinentCreateWithoutMapsInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  bosses?: Maybe<BossCreateManyWithoutContinent_foundInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface SkillUpdateManyWithoutClassInput {
+  create?: Maybe<SkillCreateWithoutClassInput[] | SkillCreateWithoutClassInput>;
+  delete?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  connect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  set?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  disconnect?: Maybe<SkillWhereUniqueInput[] | SkillWhereUniqueInput>;
+  update?: Maybe<
+    | SkillUpdateWithWhereUniqueWithoutClassInput[]
+    | SkillUpdateWithWhereUniqueWithoutClassInput
+  >;
+  upsert?: Maybe<
+    | SkillUpsertWithWhereUniqueWithoutClassInput[]
+    | SkillUpsertWithWhereUniqueWithoutClassInput
+  >;
+  deleteMany?: Maybe<SkillScalarWhereInput[] | SkillScalarWhereInput>;
+  updateMany?: Maybe<
+    SkillUpdateManyWithWhereNestedInput[] | SkillUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface BossCreateWithoutMap_foundInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  element_one?: Maybe<ElementCreateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementCreateOneInput>;
+  element_two_value?: Maybe<Int>;
+  continent_found?: Maybe<ContinentCreateManyWithoutBossesInput>;
+}
+
+export interface SkillUpdateWithWhereUniqueWithoutClassInput {
+  where: SkillWhereUniqueInput;
+  data: SkillUpdateWithoutClassDataInput;
+}
+
+export interface ContinentWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  bosses_every?: Maybe<BossWhereInput>;
+  bosses_some?: Maybe<BossWhereInput>;
+  bosses_none?: Maybe<BossWhereInput>;
+  maps_every?: Maybe<MapWhereInput>;
+  maps_some?: Maybe<MapWhereInput>;
+  maps_none?: Maybe<MapWhereInput>;
+  next_continent?: Maybe<String>;
+  next_continent_not?: Maybe<String>;
+  next_continent_in?: Maybe<String[] | String>;
+  next_continent_not_in?: Maybe<String[] | String>;
+  next_continent_lt?: Maybe<String>;
+  next_continent_lte?: Maybe<String>;
+  next_continent_gt?: Maybe<String>;
+  next_continent_gte?: Maybe<String>;
+  next_continent_contains?: Maybe<String>;
+  next_continent_not_contains?: Maybe<String>;
+  next_continent_starts_with?: Maybe<String>;
+  next_continent_not_starts_with?: Maybe<String>;
+  next_continent_ends_with?: Maybe<String>;
+  next_continent_not_ends_with?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+  previous_continent_not?: Maybe<String>;
+  previous_continent_in?: Maybe<String[] | String>;
+  previous_continent_not_in?: Maybe<String[] | String>;
+  previous_continent_lt?: Maybe<String>;
+  previous_continent_lte?: Maybe<String>;
+  previous_continent_gt?: Maybe<String>;
+  previous_continent_gte?: Maybe<String>;
+  previous_continent_contains?: Maybe<String>;
+  previous_continent_not_contains?: Maybe<String>;
+  previous_continent_starts_with?: Maybe<String>;
+  previous_continent_not_starts_with?: Maybe<String>;
+  previous_continent_ends_with?: Maybe<String>;
+  previous_continent_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
+  OR?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
+  NOT?: Maybe<ContinentWhereInput[] | ContinentWhereInput>;
+}
+
+export interface SkillUpdateWithoutClassDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  skill_type?: Maybe<SkillUpdateskill_typeInput>;
+  combat_type?: Maybe<SkillUpdatecombat_typeInput>;
+  energy?: Maybe<Int>;
+  location?: Maybe<MapUpdateOneWithoutObtainable_skillsInput>;
+}
+
+export interface GuideUpdateWithWhereUniqueWithoutOwnerInput {
+  where: GuideWhereUniqueInput;
+  data: GuideUpdateWithoutOwnerDataInput;
+}
+
+export interface MapUpdateOneWithoutObtainable_skillsInput {
+  create?: Maybe<MapCreateWithoutObtainable_skillsInput>;
+  update?: Maybe<MapUpdateWithoutObtainable_skillsDataInput>;
+  upsert?: Maybe<MapUpsertWithoutObtainable_skillsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<MapWhereUniqueInput>;
+}
+
+export interface PetCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  element_one?: Maybe<ElementCreateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementCreateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  favorite_food?: Maybe<FoodCreateOneWithoutPet_favoriteInput>;
+  area?: Maybe<MapCreateOneWithoutPet_unlockInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface MapUpdateWithoutObtainable_skillsDataInput {
+  name?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossUpdateManyWithoutMap_foundInput>;
+  bosses_found?: Maybe<BossStructUpdateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetUpdateManyWithoutAreaInput>;
+  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface UserCreateWithoutGuidesInput {
+  id?: Maybe<ID_Input>;
+  updateAt?: Maybe<DateTimeInput>;
+  handle: String;
+  email: String;
+  role?: Maybe<Role>;
+  password: String;
+}
+
+export interface MapUpsertWithoutObtainable_skillsInput {
+  update: MapUpdateWithoutObtainable_skillsDataInput;
+  create: MapCreateWithoutObtainable_skillsInput;
+}
+
+export interface MapCreateManyWithoutNative_bossInput {
+  create?: Maybe<
+    MapCreateWithoutNative_bossInput[] | MapCreateWithoutNative_bossInput
+  >;
+  connect?: Maybe<MapWhereUniqueInput[] | MapWhereUniqueInput>;
 }
 
 export interface SkillUpsertWithWhereUniqueWithoutClassInput {
@@ -3572,50 +3362,245 @@ export interface SkillUpsertWithWhereUniqueWithoutClassInput {
   create: SkillCreateWithoutClassInput;
 }
 
-export interface MapUpsertWithoutObtainable_skillsInput {
-  update: MapUpdateWithoutObtainable_skillsDataInput;
-  create: MapCreateWithoutObtainable_skillsInput;
+export interface PetCreateWithoutAreaInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  element_one?: Maybe<ElementCreateOneInput>;
+  element_one_value?: Maybe<Int>;
+  element_two?: Maybe<ElementCreateOneInput>;
+  element_two_value?: Maybe<Int>;
+  talent_cap?: Maybe<Float>;
+  type?: Maybe<PetType>;
+  favorite_food?: Maybe<FoodCreateOneWithoutPet_favoriteInput>;
+  imageurl?: Maybe<String>;
 }
 
-export interface MapUpdateOneRequiredWithoutConnected_mapsInput {
-  create?: Maybe<MapCreateWithoutConnected_mapsInput>;
-  update?: Maybe<MapUpdateWithoutConnected_mapsDataInput>;
-  upsert?: Maybe<MapUpsertWithoutConnected_mapsInput>;
-  connect?: Maybe<MapWhereUniqueInput>;
+export interface ClassUpdateManyMutationInput {
+  name?: Maybe<Hero>;
+  description?: Maybe<String>;
+  weapon?: Maybe<String>;
 }
 
-export type ElementWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
+export interface BossStructWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  map?: Maybe<MapWhereInput>;
+  boss?: Maybe<BossWhereInput>;
+  minion_present?: Maybe<Boolean>;
+  minion_present_not?: Maybe<Boolean>;
+  AtkSpd?: Maybe<Float>;
+  AtkSpd_not?: Maybe<Float>;
+  AtkSpd_in?: Maybe<Float[] | Float>;
+  AtkSpd_not_in?: Maybe<Float[] | Float>;
+  AtkSpd_lt?: Maybe<Float>;
+  AtkSpd_lte?: Maybe<Float>;
+  AtkSpd_gt?: Maybe<Float>;
+  AtkSpd_gte?: Maybe<Float>;
+  skills_every?: Maybe<MonsterSkillWhereInput>;
+  skills_some?: Maybe<MonsterSkillWhereInput>;
+  skills_none?: Maybe<MonsterSkillWhereInput>;
+  AND?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
+  OR?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
+  NOT?: Maybe<BossStructWhereInput[] | BossStructWhereInput>;
+}
+
+export interface ContinentCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  bosses?: Maybe<BossCreateManyWithoutContinent_foundInput>;
+  maps?: Maybe<MapCreateManyWithoutContinentInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface MapWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  total_stage_not?: Maybe<Int>;
+  total_stage_in?: Maybe<Int[] | Int>;
+  total_stage_not_in?: Maybe<Int[] | Int>;
+  total_stage_lt?: Maybe<Int>;
+  total_stage_lte?: Maybe<Int>;
+  total_stage_gt?: Maybe<Int>;
+  total_stage_gte?: Maybe<Int>;
+  native_boss_every?: Maybe<BossWhereInput>;
+  native_boss_some?: Maybe<BossWhereInput>;
+  native_boss_none?: Maybe<BossWhereInput>;
+  obtainable_skills_every?: Maybe<SkillWhereInput>;
+  obtainable_skills_some?: Maybe<SkillWhereInput>;
+  obtainable_skills_none?: Maybe<SkillWhereInput>;
+  bosses_found_every?: Maybe<BossStructWhereInput>;
+  bosses_found_some?: Maybe<BossStructWhereInput>;
+  bosses_found_none?: Maybe<BossStructWhereInput>;
+  previous_map?: Maybe<String>;
+  previous_map_not?: Maybe<String>;
+  previous_map_in?: Maybe<String[] | String>;
+  previous_map_not_in?: Maybe<String[] | String>;
+  previous_map_lt?: Maybe<String>;
+  previous_map_lte?: Maybe<String>;
+  previous_map_gt?: Maybe<String>;
+  previous_map_gte?: Maybe<String>;
+  previous_map_contains?: Maybe<String>;
+  previous_map_not_contains?: Maybe<String>;
+  previous_map_starts_with?: Maybe<String>;
+  previous_map_not_starts_with?: Maybe<String>;
+  previous_map_ends_with?: Maybe<String>;
+  previous_map_not_ends_with?: Maybe<String>;
+  next_map?: Maybe<String>;
+  next_map_not?: Maybe<String>;
+  next_map_in?: Maybe<String[] | String>;
+  next_map_not_in?: Maybe<String[] | String>;
+  next_map_lt?: Maybe<String>;
+  next_map_lte?: Maybe<String>;
+  next_map_gt?: Maybe<String>;
+  next_map_gte?: Maybe<String>;
+  next_map_contains?: Maybe<String>;
+  next_map_not_contains?: Maybe<String>;
+  next_map_starts_with?: Maybe<String>;
+  next_map_not_starts_with?: Maybe<String>;
+  next_map_ends_with?: Maybe<String>;
+  next_map_not_ends_with?: Maybe<String>;
+  pet_unlock_every?: Maybe<PetWhereInput>;
+  pet_unlock_some?: Maybe<PetWhereInput>;
+  pet_unlock_none?: Maybe<PetWhereInput>;
+  continent?: Maybe<ContinentWhereInput>;
+  imageurl?: Maybe<String>;
+  imageurl_not?: Maybe<String>;
+  imageurl_in?: Maybe<String[] | String>;
+  imageurl_not_in?: Maybe<String[] | String>;
+  imageurl_lt?: Maybe<String>;
+  imageurl_lte?: Maybe<String>;
+  imageurl_gt?: Maybe<String>;
+  imageurl_gte?: Maybe<String>;
+  imageurl_contains?: Maybe<String>;
+  imageurl_not_contains?: Maybe<String>;
+  imageurl_starts_with?: Maybe<String>;
+  imageurl_not_starts_with?: Maybe<String>;
+  imageurl_ends_with?: Maybe<String>;
+  imageurl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<MapWhereInput[] | MapWhereInput>;
+  OR?: Maybe<MapWhereInput[] | MapWhereInput>;
+  NOT?: Maybe<MapWhereInput[] | MapWhereInput>;
+}
+
+export interface ContinentUpdateInput {
+  name?: Maybe<String>;
+  bosses?: Maybe<BossUpdateManyWithoutContinent_foundInput>;
+  maps?: Maybe<MapUpdateManyWithoutContinentInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface MapUpdateWithoutPet_unlockDataInput {
+  name?: Maybe<String>;
+  total_stage?: Maybe<Int>;
+  native_boss?: Maybe<BossUpdateManyWithoutMap_foundInput>;
+  obtainable_skills?: Maybe<SkillUpdateManyWithoutLocationInput>;
+  bosses_found?: Maybe<BossStructUpdateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  continent?: Maybe<ContinentUpdateOneRequiredWithoutMapsInput>;
+  imageurl?: Maybe<String>;
+}
+
+export interface FoodCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  pet_favorite?: Maybe<PetCreateManyWithoutFavorite_foodInput>;
+  buff?: Maybe<Stat>;
+  imageurl?: Maybe<String>;
+}
+
+export interface ElementUpdateManyMutationInput {
   name?: Maybe<ElementType>;
-}>;
-
-export interface ElementSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ElementWhereInput>;
-  AND?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
-  OR?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
-  NOT?: Maybe<ElementSubscriptionWhereInput[] | ElementSubscriptionWhereInput>;
+  weakness?: Maybe<ElementType>;
+  effective?: Maybe<ElementType>;
 }
 
-export interface MapCreateWithoutField_stagesInput {
+export interface ElementUpdateInput {
+  name?: Maybe<ElementType>;
+  weakness?: Maybe<ElementType>;
+  effective?: Maybe<ElementType>;
+}
+
+export interface ContinentUpdateManyMutationInput {
+  name?: Maybe<String>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
+}
+
+export interface BossStructCreateManyWithoutMapInput {
+  create?: Maybe<
+    BossStructCreateWithoutMapInput[] | BossStructCreateWithoutMapInput
+  >;
+  connect?: Maybe<BossStructWhereUniqueInput[] | BossStructWhereUniqueInput>;
+}
+
+export interface MapCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
   total_stage?: Maybe<Int>;
-  native_boss?: Maybe<BossCreateManyWithoutLocations_foundInput>;
-  connected_maps?: Maybe<ConnectedMapCreateOneWithoutPrevious_mapInput>;
-  continent: ContinentCreateOneWithoutMapsInput;
+  native_boss?: Maybe<BossCreateManyWithoutMap_foundInput>;
   obtainable_skills?: Maybe<SkillCreateManyWithoutLocationInput>;
-  boss_stages?: Maybe<BossStructCreateManyInput>;
+  bosses_found?: Maybe<BossStructCreateManyWithoutMapInput>;
+  previous_map?: Maybe<String>;
+  next_map?: Maybe<String>;
+  pet_unlock?: Maybe<PetCreateManyWithoutAreaInput>;
+  continent: ContinentCreateOneWithoutMapsInput;
+  imageurl?: Maybe<String>;
 }
 
-export interface ContinentCreateManyWithoutBossesInput {
-  create?: Maybe<
-    ContinentCreateWithoutBossesInput[] | ContinentCreateWithoutBossesInput
-  >;
-  connect?: Maybe<ContinentWhereUniqueInput[] | ContinentWhereUniqueInput>;
+export interface GuideUpdateManyDataInput {
+  updateAt?: Maybe<DateTimeInput>;
+  title?: Maybe<String>;
+  body?: Maybe<String>;
+}
+
+export interface ContinentCreateWithoutBossesInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  maps?: Maybe<MapCreateManyWithoutContinentInput>;
+  next_continent?: Maybe<String>;
+  previous_continent?: Maybe<String>;
 }
 
 export interface NodeNode {
@@ -3677,144 +3662,50 @@ export interface ClassConnectionSubscription
   aggregate: <T = AggregateClassSubscription>() => T;
 }
 
-export interface Map {
+export interface Skill {
   id: ID_Output;
   name: String;
-  total_stage?: Int;
+  description: String;
+  skill_type: SkillType[];
+  combat_type: CombatType[];
+  energy: Int;
 }
 
-export interface MapPromise extends Promise<Map>, Fragmentable {
+export interface SkillPromise extends Promise<Skill>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  total_stage: () => Promise<Int>;
-  native_boss: <T = FragmentableArray<Boss>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_maps: <T = ConnectedMapPromise>() => T;
-  continent: <T = ContinentPromise>() => T;
-  obtainable_skills: <T = FragmentableArray<Skill>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  boss_stages: <T = FragmentableArray<BossStruct>>(args?: {
-    where?: BossStructWhereInput;
-    orderBy?: BossStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  field_stages: <T = FragmentableArray<StageStruct>>(args?: {
-    where?: StageStructWhereInput;
-    orderBy?: StageStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  description: () => Promise<String>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
+  energy: () => Promise<Int>;
+  location: <T = MapPromise>() => T;
+  class: <T = ClassPromise>() => T;
 }
 
-export interface MapSubscription
-  extends Promise<AsyncIterator<Map>>,
+export interface SkillSubscription
+  extends Promise<AsyncIterator<Skill>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  total_stage: () => Promise<AsyncIterator<Int>>;
-  native_boss: <T = Promise<AsyncIterator<BossSubscription>>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_maps: <T = ConnectedMapSubscription>() => T;
-  continent: <T = ContinentSubscription>() => T;
-  obtainable_skills: <T = Promise<AsyncIterator<SkillSubscription>>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  boss_stages: <T = Promise<AsyncIterator<BossStructSubscription>>>(args?: {
-    where?: BossStructWhereInput;
-    orderBy?: BossStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  field_stages: <T = Promise<AsyncIterator<StageStructSubscription>>>(args?: {
-    where?: StageStructWhereInput;
-    orderBy?: StageStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  description: () => Promise<AsyncIterator<String>>;
+  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
+  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
+  energy: () => Promise<AsyncIterator<Int>>;
+  location: <T = MapSubscription>() => T;
+  class: <T = ClassSubscription>() => T;
 }
 
-export interface MapNullablePromise extends Promise<Map | null>, Fragmentable {
+export interface SkillNullablePromise
+  extends Promise<Skill | null>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  total_stage: () => Promise<Int>;
-  native_boss: <T = FragmentableArray<Boss>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_maps: <T = ConnectedMapPromise>() => T;
-  continent: <T = ContinentPromise>() => T;
-  obtainable_skills: <T = FragmentableArray<Skill>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  boss_stages: <T = FragmentableArray<BossStruct>>(args?: {
-    where?: BossStructWhereInput;
-    orderBy?: BossStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  field_stages: <T = FragmentableArray<StageStruct>>(args?: {
-    where?: StageStructWhereInput;
-    orderBy?: StageStructOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  description: () => Promise<String>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
+  energy: () => Promise<Int>;
+  location: <T = MapPromise>() => T;
+  class: <T = ClassPromise>() => T;
 }
 
 export interface AggregateClass {
@@ -3833,35 +3724,38 @@ export interface AggregateClassSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface SkillPreviousValues {
+export interface PetPreviousValues {
   id: ID_Output;
   name: String;
-  description: String;
-  skill_type: SkillType[];
-  combat_type: CombatType[];
-  energy: Int;
+  element_one_value?: Int;
+  element_two_value?: Int;
+  talent_cap?: Float;
+  type?: PetType;
+  imageurl?: String;
 }
 
-export interface SkillPreviousValuesPromise
-  extends Promise<SkillPreviousValues>,
+export interface PetPreviousValuesPromise
+  extends Promise<PetPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  description: () => Promise<String>;
-  skill_type: () => Promise<SkillType[]>;
-  combat_type: () => Promise<CombatType[]>;
-  energy: () => Promise<Int>;
+  element_one_value: () => Promise<Int>;
+  element_two_value: () => Promise<Int>;
+  talent_cap: () => Promise<Float>;
+  type: () => Promise<PetType>;
+  imageurl: () => Promise<String>;
 }
 
-export interface SkillPreviousValuesSubscription
-  extends Promise<AsyncIterator<SkillPreviousValues>>,
+export interface PetPreviousValuesSubscription
+  extends Promise<AsyncIterator<PetPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
-  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
-  energy: () => Promise<AsyncIterator<Int>>;
+  element_one_value: () => Promise<AsyncIterator<Int>>;
+  element_two_value: () => Promise<AsyncIterator<Int>>;
+  talent_cap: () => Promise<AsyncIterator<Float>>;
+  type: () => Promise<AsyncIterator<PetType>>;
+  imageurl: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ClassEdge {
@@ -3913,74 +3807,190 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface ConnectedMap {
-  id: ID_Output;
+export interface AggregateUser {
+  count: Int;
 }
 
-export interface ConnectedMapPromise
-  extends Promise<ConnectedMap>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  next_map: <T = MapPromise>() => T;
-  previous_map: <T = MapPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface ConnectedMapSubscription
-  extends Promise<AsyncIterator<ConnectedMap>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Map {
+  id: ID_Output;
+  name: String;
+  total_stage?: Int;
+  previous_map?: String;
+  next_map?: String;
+  imageurl?: String;
+}
+
+export interface MapPromise extends Promise<Map>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  total_stage: () => Promise<Int>;
+  native_boss: <T = FragmentableArray<Boss>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  obtainable_skills: <T = FragmentableArray<Skill>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  bosses_found: <T = FragmentableArray<BossStruct>>(args?: {
+    where?: BossStructWhereInput;
+    orderBy?: BossStructOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  previous_map: () => Promise<String>;
+  next_map: () => Promise<String>;
+  pet_unlock: <T = FragmentableArray<Pet>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent: <T = ContinentPromise>() => T;
+  imageurl: () => Promise<String>;
+}
+
+export interface MapSubscription
+  extends Promise<AsyncIterator<Map>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  next_map: <T = MapSubscription>() => T;
-  previous_map: <T = MapSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  total_stage: () => Promise<AsyncIterator<Int>>;
+  native_boss: <T = Promise<AsyncIterator<BossSubscription>>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  obtainable_skills: <T = Promise<AsyncIterator<SkillSubscription>>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  bosses_found: <T = Promise<AsyncIterator<BossStructSubscription>>>(args?: {
+    where?: BossStructWhereInput;
+    orderBy?: BossStructOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  previous_map: () => Promise<AsyncIterator<String>>;
+  next_map: () => Promise<AsyncIterator<String>>;
+  pet_unlock: <T = Promise<AsyncIterator<PetSubscription>>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent: <T = ContinentSubscription>() => T;
+  imageurl: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ConnectedMapNullablePromise
-  extends Promise<ConnectedMap | null>,
-    Fragmentable {
+export interface MapNullablePromise extends Promise<Map | null>, Fragmentable {
   id: () => Promise<ID_Output>;
-  next_map: <T = MapPromise>() => T;
-  previous_map: <T = MapPromise>() => T;
+  name: () => Promise<String>;
+  total_stage: () => Promise<Int>;
+  native_boss: <T = FragmentableArray<Boss>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  obtainable_skills: <T = FragmentableArray<Skill>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  bosses_found: <T = FragmentableArray<BossStruct>>(args?: {
+    where?: BossStructWhereInput;
+    orderBy?: BossStructOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  previous_map: () => Promise<String>;
+  next_map: () => Promise<String>;
+  pet_unlock: <T = FragmentableArray<Pet>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent: <T = ContinentPromise>() => T;
+  imageurl: () => Promise<String>;
 }
 
-export interface StageStructSubscriptionPayload {
-  mutation: MutationType;
-  node: StageStruct;
-  updatedFields: String[];
-  previousValues: StageStructPreviousValues;
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
 }
 
-export interface StageStructSubscriptionPayloadPromise
-  extends Promise<StageStructSubscriptionPayload>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = StageStructPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = StageStructPreviousValuesPromise>() => T;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface StageStructSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<StageStructSubscriptionPayload>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = StageStructSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = StageStructPreviousValuesSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface BossStructEdge {
@@ -4002,96 +4012,20 @@ export interface BossStructEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Boss {
-  id: ID_Output;
-  name: String;
-  element_one_value?: Int;
-  element_two_value?: Int;
+export interface AggregateSkill {
+  count: Int;
 }
 
-export interface BossPromise extends Promise<Boss>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  element_one: <T = ElementPromise>() => T;
-  element_one_value: () => Promise<Int>;
-  element_two: <T = ElementPromise>() => T;
-  element_two_value: () => Promise<Int>;
-  locations_found: <T = FragmentableArray<Map>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  continent_found: <T = FragmentableArray<Continent>>(args?: {
-    where?: ContinentWhereInput;
-    orderBy?: ContinentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface BossSubscription
-  extends Promise<AsyncIterator<Boss>>,
+export interface AggregateSkillPromise
+  extends Promise<AggregateSkill>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  element_one: <T = ElementSubscription>() => T;
-  element_one_value: () => Promise<AsyncIterator<Int>>;
-  element_two: <T = ElementSubscription>() => T;
-  element_two_value: () => Promise<AsyncIterator<Int>>;
-  locations_found: <T = Promise<AsyncIterator<MapSubscription>>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  continent_found: <T = Promise<AsyncIterator<ContinentSubscription>>>(args?: {
-    where?: ContinentWhereInput;
-    orderBy?: ContinentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  count: () => Promise<Int>;
 }
 
-export interface BossNullablePromise
-  extends Promise<Boss | null>,
+export interface AggregateSkillSubscription
+  extends Promise<AsyncIterator<AggregateSkill>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  element_one: <T = ElementPromise>() => T;
-  element_one_value: () => Promise<Int>;
-  element_two: <T = ElementPromise>() => T;
-  element_two_value: () => Promise<Int>;
-  locations_found: <T = FragmentableArray<Map>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  continent_found: <T = FragmentableArray<Continent>>(args?: {
-    where?: ContinentWhereInput;
-    orderBy?: ContinentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BossStructConnection {
@@ -4115,120 +4049,101 @@ export interface BossStructConnectionSubscription
   aggregate: <T = AggregateBossStructSubscription>() => T;
 }
 
-export interface StageStructEdge {
-  node: StageStruct;
+export interface SkillConnection {
+  pageInfo: PageInfo;
+  edges: SkillEdge[];
+}
+
+export interface SkillConnectionPromise
+  extends Promise<SkillConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SkillEdge>>() => T;
+  aggregate: <T = AggregateSkillPromise>() => T;
+}
+
+export interface SkillConnectionSubscription
+  extends Promise<AsyncIterator<SkillConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SkillEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSkillSubscription>() => T;
+}
+
+export interface Class {
+  id: ID_Output;
+  name: Hero;
+  description: String;
+  weapon: String;
+}
+
+export interface ClassPromise extends Promise<Class>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<Hero>;
+  description: () => Promise<String>;
+  weapon: () => Promise<String>;
+  skills: <T = FragmentableArray<Skill>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ClassSubscription
+  extends Promise<AsyncIterator<Class>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<Hero>>;
+  description: () => Promise<AsyncIterator<String>>;
+  weapon: () => Promise<AsyncIterator<String>>;
+  skills: <T = Promise<AsyncIterator<SkillSubscription>>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ClassNullablePromise
+  extends Promise<Class | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<Hero>;
+  description: () => Promise<String>;
+  weapon: () => Promise<String>;
+  skills: <T = FragmentableArray<Skill>>(args?: {
+    where?: SkillWhereInput;
+    orderBy?: SkillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PetEdge {
+  node: Pet;
   cursor: String;
 }
 
-export interface StageStructEdgePromise
-  extends Promise<StageStructEdge>,
-    Fragmentable {
-  node: <T = StageStructPromise>() => T;
+export interface PetEdgePromise extends Promise<PetEdge>, Fragmentable {
+  node: <T = PetPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface StageStructEdgeSubscription
-  extends Promise<AsyncIterator<StageStructEdge>>,
+export interface PetEdgeSubscription
+  extends Promise<AsyncIterator<PetEdge>>,
     Fragmentable {
-  node: <T = StageStructSubscription>() => T;
+  node: <T = PetSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Continent {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ContinentPromise extends Promise<Continent>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  bosses: <T = FragmentableArray<Boss>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  maps: <T = FragmentableArray<Map>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_continent: <T = ConnectContinentPromise>() => T;
-}
-
-export interface ContinentSubscription
-  extends Promise<AsyncIterator<Continent>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  bosses: <T = Promise<AsyncIterator<BossSubscription>>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  maps: <T = Promise<AsyncIterator<MapSubscription>>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_continent: <T = ConnectContinentSubscription>() => T;
-}
-
-export interface ContinentNullablePromise
-  extends Promise<Continent | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  bosses: <T = FragmentableArray<Boss>>(args?: {
-    where?: BossWhereInput;
-    orderBy?: BossOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  maps: <T = FragmentableArray<Map>>(args?: {
-    where?: MapWhereInput;
-    orderBy?: MapOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  connected_continent: <T = ConnectContinentPromise>() => T;
-}
-
-export interface AggregateSkill {
-  count: Int;
-}
-
-export interface AggregateSkillPromise
-  extends Promise<AggregateSkill>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateSkillSubscription
-  extends Promise<AsyncIterator<AggregateSkill>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BossSubscriptionPayload {
@@ -4256,25 +4171,20 @@ export interface BossSubscriptionPayloadSubscription
   previousValues: <T = BossPreviousValuesSubscription>() => T;
 }
 
-export interface SkillConnection {
-  pageInfo: PageInfo;
-  edges: SkillEdge[];
+export interface AggregateMonsterSkill {
+  count: Int;
 }
 
-export interface SkillConnectionPromise
-  extends Promise<SkillConnection>,
+export interface AggregateMonsterSkillPromise
+  extends Promise<AggregateMonsterSkill>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SkillEdge>>() => T;
-  aggregate: <T = AggregateSkillPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface SkillConnectionSubscription
-  extends Promise<AsyncIterator<SkillConnection>>,
+export interface AggregateMonsterSkillSubscription
+  extends Promise<AsyncIterator<AggregateMonsterSkill>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SkillEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSkillSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BossPreviousValues {
@@ -4302,23 +4212,25 @@ export interface BossPreviousValuesSubscription
   element_two_value: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface MonsterSkillEdge {
-  node: MonsterSkill;
-  cursor: String;
+export interface MonsterSkillConnection {
+  pageInfo: PageInfo;
+  edges: MonsterSkillEdge[];
 }
 
-export interface MonsterSkillEdgePromise
-  extends Promise<MonsterSkillEdge>,
+export interface MonsterSkillConnectionPromise
+  extends Promise<MonsterSkillConnection>,
     Fragmentable {
-  node: <T = MonsterSkillPromise>() => T;
-  cursor: () => Promise<String>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MonsterSkillEdge>>() => T;
+  aggregate: <T = AggregateMonsterSkillPromise>() => T;
 }
 
-export interface MonsterSkillEdgeSubscription
-  extends Promise<AsyncIterator<MonsterSkillEdge>>,
+export interface MonsterSkillConnectionSubscription
+  extends Promise<AsyncIterator<MonsterSkillConnection>>,
     Fragmentable {
-  node: <T = MonsterSkillSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MonsterSkillEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMonsterSkillSubscription>() => T;
 }
 
 export interface AggregateBoss {
@@ -4337,20 +4249,21 @@ export interface AggregateBossSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface AggregateMap {
-  count: Int;
+export interface MapEdge {
+  node: Map;
+  cursor: String;
 }
 
-export interface AggregateMapPromise
-  extends Promise<AggregateMap>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface MapEdgePromise extends Promise<MapEdge>, Fragmentable {
+  node: <T = MapPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateMapSubscription
-  extends Promise<AsyncIterator<AggregateMap>>,
+export interface MapEdgeSubscription
+  extends Promise<AsyncIterator<MapEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = MapSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface BossStructSubscriptionPayload {
@@ -4378,46 +4291,33 @@ export interface BossStructSubscriptionPayloadSubscription
   previousValues: <T = BossStructPreviousValuesSubscription>() => T;
 }
 
-export interface MapConnection {
-  pageInfo: PageInfo;
-  edges: MapEdge[];
+export interface AggregateGuide {
+  count: Int;
 }
 
-export interface MapConnectionPromise
-  extends Promise<MapConnection>,
+export interface AggregateGuidePromise
+  extends Promise<AggregateGuide>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MapEdge>>() => T;
-  aggregate: <T = AggregateMapPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface MapConnectionSubscription
-  extends Promise<AsyncIterator<MapConnection>>,
+export interface AggregateGuideSubscription
+  extends Promise<AsyncIterator<AggregateGuide>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MapEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMapSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BossStructPreviousValues {
   id: ID_Output;
-  createdAt: DateTimeOutput;
   minion_present?: Boolean;
-  HP: Int;
-  ATK: Int;
-  Armor: Int;
-  AtkSpd: Float;
+  AtkSpd?: Float;
 }
 
 export interface BossStructPreviousValuesPromise
   extends Promise<BossStructPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
   minion_present: () => Promise<Boolean>;
-  HP: () => Promise<Int>;
-  ATK: () => Promise<Int>;
-  Armor: () => Promise<Int>;
   AtkSpd: () => Promise<Float>;
 }
 
@@ -4425,29 +4325,29 @@ export interface BossStructPreviousValuesSubscription
   extends Promise<AsyncIterator<BossStructPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   minion_present: () => Promise<AsyncIterator<Boolean>>;
-  HP: () => Promise<AsyncIterator<Int>>;
-  ATK: () => Promise<AsyncIterator<Int>>;
-  Armor: () => Promise<AsyncIterator<Int>>;
   AtkSpd: () => Promise<AsyncIterator<Float>>;
 }
 
-export interface GuideEdge {
-  node: Guide;
-  cursor: String;
+export interface GuideConnection {
+  pageInfo: PageInfo;
+  edges: GuideEdge[];
 }
 
-export interface GuideEdgePromise extends Promise<GuideEdge>, Fragmentable {
-  node: <T = GuidePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface GuideEdgeSubscription
-  extends Promise<AsyncIterator<GuideEdge>>,
+export interface GuideConnectionPromise
+  extends Promise<GuideConnection>,
     Fragmentable {
-  node: <T = GuideSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GuideEdge>>() => T;
+  aggregate: <T = AggregateGuidePromise>() => T;
+}
+
+export interface GuideConnectionSubscription
+  extends Promise<AsyncIterator<GuideConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GuideEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGuideSubscription>() => T;
 }
 
 export interface BossEdge {
@@ -4467,36 +4367,35 @@ export interface BossEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface Element {
+export interface SkillPreviousValues {
   id: ID_Output;
-  name: ElementType;
-  weakness?: ElementType;
-  effective?: ElementType;
+  name: String;
+  description: String;
+  skill_type: SkillType[];
+  combat_type: CombatType[];
+  energy: Int;
 }
 
-export interface ElementPromise extends Promise<Element>, Fragmentable {
+export interface SkillPreviousValuesPromise
+  extends Promise<SkillPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<ElementType>;
-  weakness: () => Promise<ElementType>;
-  effective: () => Promise<ElementType>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
+  energy: () => Promise<Int>;
 }
 
-export interface ElementSubscription
-  extends Promise<AsyncIterator<Element>>,
+export interface SkillPreviousValuesSubscription
+  extends Promise<AsyncIterator<SkillPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<ElementType>>;
-  weakness: () => Promise<AsyncIterator<ElementType>>;
-  effective: () => Promise<AsyncIterator<ElementType>>;
-}
-
-export interface ElementNullablePromise
-  extends Promise<Element | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<ElementType>;
-  weakness: () => Promise<ElementType>;
-  effective: () => Promise<ElementType>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
+  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
+  energy: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ClassSubscriptionPayload {
@@ -4522,6 +4421,574 @@ export interface ClassSubscriptionPayloadSubscription
   node: <T = ClassSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
   previousValues: <T = ClassPreviousValuesSubscription>() => T;
+}
+
+export interface SkillSubscriptionPayload {
+  mutation: MutationType;
+  node: Skill;
+  updatedFields: String[];
+  previousValues: SkillPreviousValues;
+}
+
+export interface SkillSubscriptionPayloadPromise
+  extends Promise<SkillSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SkillPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SkillPreviousValuesPromise>() => T;
+}
+
+export interface SkillSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SkillSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SkillSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SkillPreviousValuesSubscription>() => T;
+}
+
+export interface ClassPreviousValues {
+  id: ID_Output;
+  name: Hero;
+  description: String;
+  weapon: String;
+}
+
+export interface ClassPreviousValuesPromise
+  extends Promise<ClassPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<Hero>;
+  description: () => Promise<String>;
+  weapon: () => Promise<String>;
+}
+
+export interface ClassPreviousValuesSubscription
+  extends Promise<AsyncIterator<ClassPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<Hero>>;
+  description: () => Promise<AsyncIterator<String>>;
+  weapon: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateFood {
+  count: Int;
+}
+
+export interface AggregateFoodPromise
+  extends Promise<AggregateFood>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateFoodSubscription
+  extends Promise<AsyncIterator<AggregateFood>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FoodConnection {
+  pageInfo: PageInfo;
+  edges: FoodEdge[];
+}
+
+export interface FoodConnectionPromise
+  extends Promise<FoodConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FoodEdge>>() => T;
+  aggregate: <T = AggregateFoodPromise>() => T;
+}
+
+export interface FoodConnectionSubscription
+  extends Promise<AsyncIterator<FoodConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<FoodEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateFoodSubscription>() => T;
+}
+
+export interface ContinentSubscriptionPayload {
+  mutation: MutationType;
+  node: Continent;
+  updatedFields: String[];
+  previousValues: ContinentPreviousValues;
+}
+
+export interface ContinentSubscriptionPayloadPromise
+  extends Promise<ContinentSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ContinentPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ContinentPreviousValuesPromise>() => T;
+}
+
+export interface ContinentSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ContinentSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ContinentSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ContinentPreviousValuesSubscription>() => T;
+}
+
+export interface ElementEdge {
+  node: Element;
+  cursor: String;
+}
+
+export interface ElementEdgePromise extends Promise<ElementEdge>, Fragmentable {
+  node: <T = ElementPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ElementEdgeSubscription
+  extends Promise<AsyncIterator<ElementEdge>>,
+    Fragmentable {
+  node: <T = ElementSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContinentPreviousValues {
+  id: ID_Output;
+  name: String;
+  next_continent?: String;
+  previous_continent?: String;
+}
+
+export interface ContinentPreviousValuesPromise
+  extends Promise<ContinentPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  next_continent: () => Promise<String>;
+  previous_continent: () => Promise<String>;
+}
+
+export interface ContinentPreviousValuesSubscription
+  extends Promise<AsyncIterator<ContinentPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  next_continent: () => Promise<AsyncIterator<String>>;
+  previous_continent: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateContinent {
+  count: Int;
+}
+
+export interface AggregateContinentPromise
+  extends Promise<AggregateContinent>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateContinentSubscription
+  extends Promise<AsyncIterator<AggregateContinent>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BossConnection {
+  pageInfo: PageInfo;
+  edges: BossEdge[];
+}
+
+export interface BossConnectionPromise
+  extends Promise<BossConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<BossEdge>>() => T;
+  aggregate: <T = AggregateBossPromise>() => T;
+}
+
+export interface BossConnectionSubscription
+  extends Promise<AsyncIterator<BossConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<BossEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateBossSubscription>() => T;
+}
+
+export interface ContinentConnection {
+  pageInfo: PageInfo;
+  edges: ContinentEdge[];
+}
+
+export interface ContinentConnectionPromise
+  extends Promise<ContinentConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ContinentEdge>>() => T;
+  aggregate: <T = AggregateContinentPromise>() => T;
+}
+
+export interface ContinentConnectionSubscription
+  extends Promise<AsyncIterator<ContinentConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ContinentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateContinentSubscription>() => T;
+}
+
+export interface ElementSubscriptionPayload {
+  mutation: MutationType;
+  node: Element;
+  updatedFields: String[];
+  previousValues: ElementPreviousValues;
+}
+
+export interface ElementSubscriptionPayloadPromise
+  extends Promise<ElementSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ElementPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ElementPreviousValuesPromise>() => T;
+}
+
+export interface ElementSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ElementSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ElementSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ElementPreviousValuesSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ElementPreviousValues {
+  id: ID_Output;
+  name: ElementType;
+  weakness?: ElementType;
+  effective?: ElementType;
+}
+
+export interface ElementPreviousValuesPromise
+  extends Promise<ElementPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<ElementType>;
+  weakness: () => Promise<ElementType>;
+  effective: () => Promise<ElementType>;
+}
+
+export interface ElementPreviousValuesSubscription
+  extends Promise<AsyncIterator<ElementPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<ElementType>>;
+  weakness: () => Promise<AsyncIterator<ElementType>>;
+  effective: () => Promise<AsyncIterator<ElementType>>;
+}
+
+export interface SkillEdge {
+  node: Skill;
+  cursor: String;
+}
+
+export interface SkillEdgePromise extends Promise<SkillEdge>, Fragmentable {
+  node: <T = SkillPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SkillEdgeSubscription
+  extends Promise<AsyncIterator<SkillEdge>>,
+    Fragmentable {
+  node: <T = SkillSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Continent {
+  id: ID_Output;
+  name: String;
+  next_continent?: String;
+  previous_continent?: String;
+}
+
+export interface ContinentPromise extends Promise<Continent>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  bosses: <T = FragmentableArray<Boss>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  maps: <T = FragmentableArray<Map>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  next_continent: () => Promise<String>;
+  previous_continent: () => Promise<String>;
+}
+
+export interface ContinentSubscription
+  extends Promise<AsyncIterator<Continent>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  bosses: <T = Promise<AsyncIterator<BossSubscription>>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  maps: <T = Promise<AsyncIterator<MapSubscription>>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  next_continent: () => Promise<AsyncIterator<String>>;
+  previous_continent: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContinentNullablePromise
+  extends Promise<Continent | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  bosses: <T = FragmentableArray<Boss>>(args?: {
+    where?: BossWhereInput;
+    orderBy?: BossOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  maps: <T = FragmentableArray<Map>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  next_continent: () => Promise<String>;
+  previous_continent: () => Promise<String>;
+}
+
+export interface PetConnection {
+  pageInfo: PageInfo;
+  edges: PetEdge[];
+}
+
+export interface PetConnectionPromise
+  extends Promise<PetConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PetEdge>>() => T;
+  aggregate: <T = AggregatePetPromise>() => T;
+}
+
+export interface PetConnectionSubscription
+  extends Promise<AsyncIterator<PetConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PetEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePetSubscription>() => T;
+}
+
+export interface FoodSubscriptionPayload {
+  mutation: MutationType;
+  node: Food;
+  updatedFields: String[];
+  previousValues: FoodPreviousValues;
+}
+
+export interface FoodSubscriptionPayloadPromise
+  extends Promise<FoodSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = FoodPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = FoodPreviousValuesPromise>() => T;
+}
+
+export interface FoodSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<FoodSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FoodSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = FoodPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateMap {
+  count: Int;
+}
+
+export interface AggregateMapPromise
+  extends Promise<AggregateMap>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMapSubscription
+  extends Promise<AsyncIterator<AggregateMap>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FoodPreviousValues {
+  id: ID_Output;
+  name: String;
+  buff?: Stat;
+  imageurl?: String;
+}
+
+export interface FoodPreviousValuesPromise
+  extends Promise<FoodPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  buff: () => Promise<Stat>;
+  imageurl: () => Promise<String>;
+}
+
+export interface FoodPreviousValuesSubscription
+  extends Promise<AsyncIterator<FoodPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  buff: () => Promise<AsyncIterator<Stat>>;
+  imageurl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GuideEdge {
+  node: Guide;
+  cursor: String;
+}
+
+export interface GuideEdgePromise extends Promise<GuideEdge>, Fragmentable {
+  node: <T = GuidePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface GuideEdgeSubscription
+  extends Promise<AsyncIterator<GuideEdge>>,
+    Fragmentable {
+  node: <T = GuideSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Food {
+  id: ID_Output;
+  name: String;
+  buff?: Stat;
+  imageurl?: String;
+}
+
+export interface FoodPromise extends Promise<Food>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  pet_favorite: <T = FragmentableArray<Pet>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  buff: () => Promise<Stat>;
+  imageurl: () => Promise<String>;
+}
+
+export interface FoodSubscription
+  extends Promise<AsyncIterator<Food>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  pet_favorite: <T = Promise<AsyncIterator<PetSubscription>>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  buff: () => Promise<AsyncIterator<Stat>>;
+  imageurl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FoodNullablePromise
+  extends Promise<Food | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  pet_favorite: <T = FragmentableArray<Pet>>(args?: {
+    where?: PetWhereInput;
+    orderBy?: PetOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  buff: () => Promise<Stat>;
+  imageurl: () => Promise<String>;
 }
 
 export interface User {
@@ -4595,68 +5062,74 @@ export interface UserNullablePromise
   }) => T;
 }
 
-export interface ClassPreviousValues {
-  id: ID_Output;
-  name: Hero;
-  description: String;
-  weapon: String;
+export interface GuideSubscriptionPayload {
+  mutation: MutationType;
+  node: Guide;
+  updatedFields: String[];
+  previousValues: GuidePreviousValues;
 }
 
-export interface ClassPreviousValuesPromise
-  extends Promise<ClassPreviousValues>,
+export interface GuideSubscriptionPayloadPromise
+  extends Promise<GuideSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = GuidePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GuidePreviousValuesPromise>() => T;
+}
+
+export interface GuideSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GuideSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GuideSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GuidePreviousValuesSubscription>() => T;
+}
+
+export interface FoodEdge {
+  node: Food;
+  cursor: String;
+}
+
+export interface FoodEdgePromise extends Promise<FoodEdge>, Fragmentable {
+  node: <T = FoodPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface FoodEdgeSubscription
+  extends Promise<AsyncIterator<FoodEdge>>,
+    Fragmentable {
+  node: <T = FoodSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GuidePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updateAt?: DateTimeOutput;
+  title: String;
+  body: String;
+}
+
+export interface GuidePreviousValuesPromise
+  extends Promise<GuidePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<Hero>;
-  description: () => Promise<String>;
-  weapon: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updateAt: () => Promise<DateTimeOutput>;
+  title: () => Promise<String>;
+  body: () => Promise<String>;
 }
 
-export interface ClassPreviousValuesSubscription
-  extends Promise<AsyncIterator<ClassPreviousValues>>,
+export interface GuidePreviousValuesSubscription
+  extends Promise<AsyncIterator<GuidePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<Hero>>;
-  description: () => Promise<AsyncIterator<String>>;
-  weapon: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateElement {
-  count: Int;
-}
-
-export interface AggregateElementPromise
-  extends Promise<AggregateElement>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateElementSubscription
-  extends Promise<AsyncIterator<AggregateElement>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updateAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  title: () => Promise<AsyncIterator<String>>;
+  body: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ElementConnection {
@@ -4680,182 +5153,58 @@ export interface ElementConnectionSubscription
   aggregate: <T = AggregateElementSubscription>() => T;
 }
 
-export interface ConnectContinentSubscriptionPayload {
-  mutation: MutationType;
-  node: ConnectContinent;
-  updatedFields: String[];
-  previousValues: ConnectContinentPreviousValues;
-}
-
-export interface ConnectContinentSubscriptionPayloadPromise
-  extends Promise<ConnectContinentSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ConnectContinentPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ConnectContinentPreviousValuesPromise>() => T;
-}
-
-export interface ConnectContinentSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ConnectContinentSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ConnectContinentSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ConnectContinentPreviousValuesSubscription>() => T;
-}
-
-export interface ContinentEdge {
-  node: Continent;
-  cursor: String;
-}
-
-export interface ContinentEdgePromise
-  extends Promise<ContinentEdge>,
-    Fragmentable {
-  node: <T = ContinentPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ContinentEdgeSubscription
-  extends Promise<AsyncIterator<ContinentEdge>>,
-    Fragmentable {
-  node: <T = ContinentSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ConnectContinentPreviousValues {
+export interface Pet {
   id: ID_Output;
+  name: String;
+  element_one_value?: Int;
+  element_two_value?: Int;
+  talent_cap?: Float;
+  type?: PetType;
+  imageurl?: String;
 }
 
-export interface ConnectContinentPreviousValuesPromise
-  extends Promise<ConnectContinentPreviousValues>,
-    Fragmentable {
+export interface PetPromise extends Promise<Pet>, Fragmentable {
   id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  element_one: <T = ElementPromise>() => T;
+  element_one_value: () => Promise<Int>;
+  element_two: <T = ElementPromise>() => T;
+  element_two_value: () => Promise<Int>;
+  talent_cap: () => Promise<Float>;
+  type: () => Promise<PetType>;
+  favorite_food: <T = FoodPromise>() => T;
+  area: <T = MapPromise>() => T;
+  imageurl: () => Promise<String>;
 }
 
-export interface ConnectContinentPreviousValuesSubscription
-  extends Promise<AsyncIterator<ConnectContinentPreviousValues>>,
+export interface PetSubscription
+  extends Promise<AsyncIterator<Pet>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  element_one: <T = ElementSubscription>() => T;
+  element_one_value: () => Promise<AsyncIterator<Int>>;
+  element_two: <T = ElementSubscription>() => T;
+  element_two_value: () => Promise<AsyncIterator<Int>>;
+  talent_cap: () => Promise<AsyncIterator<Float>>;
+  type: () => Promise<AsyncIterator<PetType>>;
+  favorite_food: <T = FoodSubscription>() => T;
+  area: <T = MapSubscription>() => T;
+  imageurl: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateConnectedMap {
-  count: Int;
-}
-
-export interface AggregateConnectedMapPromise
-  extends Promise<AggregateConnectedMap>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateConnectedMapSubscription
-  extends Promise<AsyncIterator<AggregateConnectedMap>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BossConnection {
-  pageInfo: PageInfo;
-  edges: BossEdge[];
-}
-
-export interface BossConnectionPromise
-  extends Promise<BossConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<BossEdge>>() => T;
-  aggregate: <T = AggregateBossPromise>() => T;
-}
-
-export interface BossConnectionSubscription
-  extends Promise<AsyncIterator<BossConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<BossEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateBossSubscription>() => T;
-}
-
-export interface ConnectedMapConnection {
-  pageInfo: PageInfo;
-  edges: ConnectedMapEdge[];
-}
-
-export interface ConnectedMapConnectionPromise
-  extends Promise<ConnectedMapConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ConnectedMapEdge>>() => T;
-  aggregate: <T = AggregateConnectedMapPromise>() => T;
-}
-
-export interface ConnectedMapConnectionSubscription
-  extends Promise<AsyncIterator<ConnectedMapConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ConnectedMapEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateConnectedMapSubscription>() => T;
-}
-
-export interface ConnectedMapSubscriptionPayload {
-  mutation: MutationType;
-  node: ConnectedMap;
-  updatedFields: String[];
-  previousValues: ConnectedMapPreviousValues;
-}
-
-export interface ConnectedMapSubscriptionPayloadPromise
-  extends Promise<ConnectedMapSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ConnectedMapPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ConnectedMapPreviousValuesPromise>() => T;
-}
-
-export interface ConnectedMapSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ConnectedMapSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ConnectedMapSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ConnectedMapPreviousValuesSubscription>() => T;
-}
-
-export interface ConnectContinentEdge {
-  node: ConnectContinent;
-  cursor: String;
-}
-
-export interface ConnectContinentEdgePromise
-  extends Promise<ConnectContinentEdge>,
-    Fragmentable {
-  node: <T = ConnectContinentPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ConnectContinentEdgeSubscription
-  extends Promise<AsyncIterator<ConnectContinentEdge>>,
-    Fragmentable {
-  node: <T = ConnectContinentSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ConnectedMapPreviousValues {
-  id: ID_Output;
-}
-
-export interface ConnectedMapPreviousValuesPromise
-  extends Promise<ConnectedMapPreviousValues>,
-    Fragmentable {
+export interface PetNullablePromise extends Promise<Pet | null>, Fragmentable {
   id: () => Promise<ID_Output>;
-}
-
-export interface ConnectedMapPreviousValuesSubscription
-  extends Promise<AsyncIterator<ConnectedMapPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<String>;
+  element_one: <T = ElementPromise>() => T;
+  element_one_value: () => Promise<Int>;
+  element_two: <T = ElementPromise>() => T;
+  element_two_value: () => Promise<Int>;
+  talent_cap: () => Promise<Float>;
+  type: () => Promise<PetType>;
+  favorite_food: <T = FoodPromise>() => T;
+  area: <T = MapPromise>() => T;
+  imageurl: () => Promise<String>;
 }
 
 export interface UserSubscriptionPayload {
@@ -4883,13 +5232,106 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
+export interface MapSubscriptionPayload {
+  mutation: MutationType;
+  node: Map;
+  updatedFields: String[];
+  previousValues: MapPreviousValues;
+}
+
+export interface MapSubscriptionPayloadPromise
+  extends Promise<MapSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MapPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MapPreviousValuesPromise>() => T;
+}
+
+export interface MapSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MapSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MapSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MapPreviousValuesSubscription>() => T;
+}
+
+export interface AggregatePet {
+  count: Int;
+}
+
+export interface AggregatePetPromise
+  extends Promise<AggregatePet>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePetSubscription
+  extends Promise<AsyncIterator<AggregatePet>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MapPreviousValues {
+  id: ID_Output;
+  name: String;
+  total_stage?: Int;
+  previous_map?: String;
+  next_map?: String;
+  imageurl?: String;
+}
+
+export interface MapPreviousValuesPromise
+  extends Promise<MapPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  total_stage: () => Promise<Int>;
+  previous_map: () => Promise<String>;
+  next_map: () => Promise<String>;
+  imageurl: () => Promise<String>;
+}
+
+export interface MapPreviousValuesSubscription
+  extends Promise<AsyncIterator<MapPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  total_stage: () => Promise<AsyncIterator<Int>>;
+  previous_map: () => Promise<AsyncIterator<String>>;
+  next_map: () => Promise<AsyncIterator<String>>;
+  imageurl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MapConnection {
+  pageInfo: PageInfo;
+  edges: MapEdge[];
+}
+
+export interface MapConnectionPromise
+  extends Promise<MapConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MapEdge>>() => T;
+  aggregate: <T = AggregateMapPromise>() => T;
+}
+
+export interface MapConnectionSubscription
+  extends Promise<AsyncIterator<MapConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MapEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMapSubscription>() => T;
+}
+
 export interface MonsterSkill {
   id: ID_Output;
   name: String;
   description: String;
-  skill_type?: SkillType;
-  combat_type?: CombatType;
-  energy: Int;
+  skill_type: SkillType[];
+  combat_type: CombatType[];
+  energy?: Int;
 }
 
 export interface MonsterSkillPromise
@@ -4898,8 +5340,8 @@ export interface MonsterSkillPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  skill_type: () => Promise<SkillType>;
-  combat_type: () => Promise<CombatType>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
   energy: () => Promise<Int>;
 }
 
@@ -4909,8 +5351,8 @@ export interface MonsterSkillSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  skill_type: () => Promise<AsyncIterator<SkillType>>;
-  combat_type: () => Promise<AsyncIterator<CombatType>>;
+  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
+  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
   energy: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -4920,241 +5362,9 @@ export interface MonsterSkillNullablePromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  skill_type: () => Promise<SkillType>;
-  combat_type: () => Promise<CombatType>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
   energy: () => Promise<Int>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface ContinentSubscriptionPayload {
-  mutation: MutationType;
-  node: Continent;
-  updatedFields: String[];
-  previousValues: ContinentPreviousValues;
-}
-
-export interface ContinentSubscriptionPayloadPromise
-  extends Promise<ContinentSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ContinentPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ContinentPreviousValuesPromise>() => T;
-}
-
-export interface ContinentSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ContinentSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ContinentSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ContinentPreviousValuesSubscription>() => T;
-}
-
-export interface StageStructConnection {
-  pageInfo: PageInfo;
-  edges: StageStructEdge[];
-}
-
-export interface StageStructConnectionPromise
-  extends Promise<StageStructConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<StageStructEdge>>() => T;
-  aggregate: <T = AggregateStageStructPromise>() => T;
-}
-
-export interface StageStructConnectionSubscription
-  extends Promise<AsyncIterator<StageStructConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<StageStructEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateStageStructSubscription>() => T;
-}
-
-export interface ContinentPreviousValues {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ContinentPreviousValuesPromise
-  extends Promise<ContinentPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ContinentPreviousValuesSubscription
-  extends Promise<AsyncIterator<ContinentPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateMonsterSkill {
-  count: Int;
-}
-
-export interface AggregateMonsterSkillPromise
-  extends Promise<AggregateMonsterSkill>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMonsterSkillSubscription
-  extends Promise<AsyncIterator<AggregateMonsterSkill>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface StageStruct {
-  id: ID_Output;
-  stage_number: Int;
-  base_exp?: Int;
-  gear_level?: Int;
-  base_shell?: Int;
-}
-
-export interface StageStructPromise extends Promise<StageStruct>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  stage_number: () => Promise<Int>;
-  map: <T = MapPromise>() => T;
-  base_exp: () => Promise<Int>;
-  gear_level: () => Promise<Int>;
-  base_shell: () => Promise<Int>;
-  boss_found: <T = BossStructPromise>() => T;
-}
-
-export interface StageStructSubscription
-  extends Promise<AsyncIterator<StageStruct>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  stage_number: () => Promise<AsyncIterator<Int>>;
-  map: <T = MapSubscription>() => T;
-  base_exp: () => Promise<AsyncIterator<Int>>;
-  gear_level: () => Promise<AsyncIterator<Int>>;
-  base_shell: () => Promise<AsyncIterator<Int>>;
-  boss_found: <T = BossStructSubscription>() => T;
-}
-
-export interface StageStructNullablePromise
-  extends Promise<StageStruct | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  stage_number: () => Promise<Int>;
-  map: <T = MapPromise>() => T;
-  base_exp: () => Promise<Int>;
-  gear_level: () => Promise<Int>;
-  base_shell: () => Promise<Int>;
-  boss_found: <T = BossStructPromise>() => T;
-}
-
-export interface MapEdge {
-  node: Map;
-  cursor: String;
-}
-
-export interface MapEdgePromise extends Promise<MapEdge>, Fragmentable {
-  node: <T = MapPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MapEdgeSubscription
-  extends Promise<AsyncIterator<MapEdge>>,
-    Fragmentable {
-  node: <T = MapSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ElementSubscriptionPayload {
-  mutation: MutationType;
-  node: Element;
-  updatedFields: String[];
-  previousValues: ElementPreviousValues;
-}
-
-export interface ElementSubscriptionPayloadPromise
-  extends Promise<ElementSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ElementPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ElementPreviousValuesPromise>() => T;
-}
-
-export interface ElementSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ElementSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ElementSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ElementPreviousValuesSubscription>() => T;
-}
-
-export interface GuideConnection {
-  pageInfo: PageInfo;
-  edges: GuideEdge[];
-}
-
-export interface GuideConnectionPromise
-  extends Promise<GuideConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<GuideEdge>>() => T;
-  aggregate: <T = AggregateGuidePromise>() => T;
-}
-
-export interface GuideConnectionSubscription
-  extends Promise<AsyncIterator<GuideConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<GuideEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateGuideSubscription>() => T;
-}
-
-export interface ElementPreviousValues {
-  id: ID_Output;
-  name: ElementType;
-  weakness?: ElementType;
-  effective?: ElementType;
-}
-
-export interface ElementPreviousValuesPromise
-  extends Promise<ElementPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<ElementType>;
-  weakness: () => Promise<ElementType>;
-  effective: () => Promise<ElementType>;
-}
-
-export interface ElementPreviousValuesSubscription
-  extends Promise<AsyncIterator<ElementPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<ElementType>>;
-  weakness: () => Promise<AsyncIterator<ElementType>>;
-  effective: () => Promise<AsyncIterator<ElementType>>;
 }
 
 export interface Guide {
@@ -5196,25 +5406,61 @@ export interface GuideNullablePromise
   owner: <T = UserPromise>() => T;
 }
 
+export interface ContinentEdge {
+  node: Continent;
+  cursor: String;
+}
+
+export interface ContinentEdgePromise
+  extends Promise<ContinentEdge>,
+    Fragmentable {
+  node: <T = ContinentPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ContinentEdgeSubscription
+  extends Promise<AsyncIterator<ContinentEdge>>,
+    Fragmentable {
+  node: <T = ContinentSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PetSubscriptionPayload {
+  mutation: MutationType;
+  node: Pet;
+  updatedFields: String[];
+  previousValues: PetPreviousValues;
+}
+
+export interface PetSubscriptionPayloadPromise
+  extends Promise<PetSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PetPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PetPreviousValuesPromise>() => T;
+}
+
+export interface PetSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PetSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PetSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PetPreviousValuesSubscription>() => T;
+}
+
 export interface BossStruct {
   id: ID_Output;
-  createdAt: DateTimeOutput;
   minion_present?: Boolean;
-  HP: Int;
-  ATK: Int;
-  Armor: Int;
-  AtkSpd: Float;
+  AtkSpd?: Float;
 }
 
 export interface BossStructPromise extends Promise<BossStruct>, Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  monster_found: <T = BossPromise>() => T;
+  map: <T = MapPromise>() => T;
+  boss: <T = BossPromise>() => T;
   minion_present: () => Promise<Boolean>;
-  location: <T = StageStructPromise>() => T;
-  HP: () => Promise<Int>;
-  ATK: () => Promise<Int>;
-  Armor: () => Promise<Int>;
   AtkSpd: () => Promise<Float>;
   skills: <T = FragmentableArray<MonsterSkill>>(args?: {
     where?: MonsterSkillWhereInput;
@@ -5231,13 +5477,9 @@ export interface BossStructSubscription
   extends Promise<AsyncIterator<BossStruct>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  monster_found: <T = BossSubscription>() => T;
+  map: <T = MapSubscription>() => T;
+  boss: <T = BossSubscription>() => T;
   minion_present: () => Promise<AsyncIterator<Boolean>>;
-  location: <T = StageStructSubscription>() => T;
-  HP: () => Promise<AsyncIterator<Int>>;
-  ATK: () => Promise<AsyncIterator<Int>>;
-  Armor: () => Promise<AsyncIterator<Int>>;
   AtkSpd: () => Promise<AsyncIterator<Float>>;
   skills: <T = Promise<AsyncIterator<MonsterSkillSubscription>>>(args?: {
     where?: MonsterSkillWhereInput;
@@ -5254,13 +5496,9 @@ export interface BossStructNullablePromise
   extends Promise<BossStruct | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  monster_found: <T = BossPromise>() => T;
+  map: <T = MapPromise>() => T;
+  boss: <T = BossPromise>() => T;
   minion_present: () => Promise<Boolean>;
-  location: <T = StageStructPromise>() => T;
-  HP: () => Promise<Int>;
-  ATK: () => Promise<Int>;
-  Armor: () => Promise<Int>;
   AtkSpd: () => Promise<Float>;
   skills: <T = FragmentableArray<MonsterSkill>>(args?: {
     where?: MonsterSkillWhereInput;
@@ -5273,429 +5511,13 @@ export interface BossStructNullablePromise
   }) => T;
 }
 
-export interface AggregateContinent {
-  count: Int;
-}
-
-export interface AggregateContinentPromise
-  extends Promise<AggregateContinent>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateContinentSubscription
-  extends Promise<AsyncIterator<AggregateContinent>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface GuideSubscriptionPayload {
-  mutation: MutationType;
-  node: Guide;
-  updatedFields: String[];
-  previousValues: GuidePreviousValues;
-}
-
-export interface GuideSubscriptionPayloadPromise
-  extends Promise<GuideSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = GuidePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = GuidePreviousValuesPromise>() => T;
-}
-
-export interface GuideSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<GuideSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = GuideSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = GuidePreviousValuesSubscription>() => T;
-}
-
-export interface ConnectedMapEdge {
-  node: ConnectedMap;
-  cursor: String;
-}
-
-export interface ConnectedMapEdgePromise
-  extends Promise<ConnectedMapEdge>,
-    Fragmentable {
-  node: <T = ConnectedMapPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ConnectedMapEdgeSubscription
-  extends Promise<AsyncIterator<ConnectedMapEdge>>,
-    Fragmentable {
-  node: <T = ConnectedMapSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface GuidePreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updateAt?: DateTimeOutput;
-  title: String;
-  body: String;
-}
-
-export interface GuidePreviousValuesPromise
-  extends Promise<GuidePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updateAt: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-  body: () => Promise<String>;
-}
-
-export interface GuidePreviousValuesSubscription
-  extends Promise<AsyncIterator<GuidePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updateAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-  body: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ConnectContinentConnection {
-  pageInfo: PageInfo;
-  edges: ConnectContinentEdge[];
-}
-
-export interface ConnectContinentConnectionPromise
-  extends Promise<ConnectContinentConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ConnectContinentEdge>>() => T;
-  aggregate: <T = AggregateConnectContinentPromise>() => T;
-}
-
-export interface ConnectContinentConnectionSubscription
-  extends Promise<AsyncIterator<ConnectContinentConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ConnectContinentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateConnectContinentSubscription>() => T;
-}
-
-export interface Class {
-  id: ID_Output;
-  name: Hero;
-  description: String;
-  weapon: String;
-}
-
-export interface ClassPromise extends Promise<Class>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<Hero>;
-  description: () => Promise<String>;
-  weapon: () => Promise<String>;
-  skills: <T = FragmentableArray<Skill>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface ClassSubscription
-  extends Promise<AsyncIterator<Class>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<Hero>>;
-  description: () => Promise<AsyncIterator<String>>;
-  weapon: () => Promise<AsyncIterator<String>>;
-  skills: <T = Promise<AsyncIterator<SkillSubscription>>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface ClassNullablePromise
-  extends Promise<Class | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<Hero>;
-  description: () => Promise<String>;
-  weapon: () => Promise<String>;
-  skills: <T = FragmentableArray<Skill>>(args?: {
-    where?: SkillWhereInput;
-    orderBy?: SkillOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface AggregateStageStruct {
-  count: Int;
-}
-
-export interface AggregateStageStructPromise
-  extends Promise<AggregateStageStruct>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateStageStructSubscription
-  extends Promise<AsyncIterator<AggregateStageStruct>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface MapSubscriptionPayload {
-  mutation: MutationType;
-  node: Map;
-  updatedFields: String[];
-  previousValues: MapPreviousValues;
-}
-
-export interface MapSubscriptionPayloadPromise
-  extends Promise<MapSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MapPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MapPreviousValuesPromise>() => T;
-}
-
-export interface MapSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MapSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MapSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MapPreviousValuesSubscription>() => T;
-}
-
-export interface MonsterSkillConnection {
-  pageInfo: PageInfo;
-  edges: MonsterSkillEdge[];
-}
-
-export interface MonsterSkillConnectionPromise
-  extends Promise<MonsterSkillConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MonsterSkillEdge>>() => T;
-  aggregate: <T = AggregateMonsterSkillPromise>() => T;
-}
-
-export interface MonsterSkillConnectionSubscription
-  extends Promise<AsyncIterator<MonsterSkillConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MonsterSkillEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMonsterSkillSubscription>() => T;
-}
-
-export interface MapPreviousValues {
-  id: ID_Output;
-  name: String;
-  total_stage?: Int;
-}
-
-export interface MapPreviousValuesPromise
-  extends Promise<MapPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  total_stage: () => Promise<Int>;
-}
-
-export interface MapPreviousValuesSubscription
-  extends Promise<AsyncIterator<MapPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  total_stage: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface StageStructPreviousValues {
-  id: ID_Output;
-  stage_number: Int;
-  base_exp?: Int;
-  gear_level?: Int;
-  base_shell?: Int;
-}
-
-export interface StageStructPreviousValuesPromise
-  extends Promise<StageStructPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  stage_number: () => Promise<Int>;
-  base_exp: () => Promise<Int>;
-  gear_level: () => Promise<Int>;
-  base_shell: () => Promise<Int>;
-}
-
-export interface StageStructPreviousValuesSubscription
-  extends Promise<AsyncIterator<StageStructPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  stage_number: () => Promise<AsyncIterator<Int>>;
-  base_exp: () => Promise<AsyncIterator<Int>>;
-  gear_level: () => Promise<AsyncIterator<Int>>;
-  base_shell: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Skill {
+export interface MonsterSkillPreviousValues {
   id: ID_Output;
   name: String;
   description: String;
   skill_type: SkillType[];
   combat_type: CombatType[];
-  energy: Int;
-}
-
-export interface SkillPromise extends Promise<Skill>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  skill_type: () => Promise<SkillType[]>;
-  combat_type: () => Promise<CombatType[]>;
-  energy: () => Promise<Int>;
-  location: <T = MapPromise>() => T;
-  class: <T = ClassPromise>() => T;
-}
-
-export interface SkillSubscription
-  extends Promise<AsyncIterator<Skill>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
-  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
-  energy: () => Promise<AsyncIterator<Int>>;
-  location: <T = MapSubscription>() => T;
-  class: <T = ClassSubscription>() => T;
-}
-
-export interface SkillNullablePromise
-  extends Promise<Skill | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  skill_type: () => Promise<SkillType[]>;
-  combat_type: () => Promise<CombatType[]>;
-  energy: () => Promise<Int>;
-  location: <T = MapPromise>() => T;
-  class: <T = ClassPromise>() => T;
-}
-
-export interface ContinentConnection {
-  pageInfo: PageInfo;
-  edges: ContinentEdge[];
-}
-
-export interface ContinentConnectionPromise
-  extends Promise<ContinentConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ContinentEdge>>() => T;
-  aggregate: <T = AggregateContinentPromise>() => T;
-}
-
-export interface ContinentConnectionSubscription
-  extends Promise<AsyncIterator<ContinentConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ContinentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateContinentSubscription>() => T;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface SkillSubscriptionPayload {
-  mutation: MutationType;
-  node: Skill;
-  updatedFields: String[];
-  previousValues: SkillPreviousValues;
-}
-
-export interface SkillSubscriptionPayloadPromise
-  extends Promise<SkillSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = SkillPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = SkillPreviousValuesPromise>() => T;
-}
-
-export interface SkillSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<SkillSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = SkillSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = SkillPreviousValuesSubscription>() => T;
-}
-
-export interface ConnectContinent {
-  id: ID_Output;
-}
-
-export interface ConnectContinentPromise
-  extends Promise<ConnectContinent>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  next_continent: <T = ContinentPromise>() => T;
-  previous_continent: <T = ContinentPromise>() => T;
-}
-
-export interface ConnectContinentSubscription
-  extends Promise<AsyncIterator<ConnectContinent>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  next_continent: <T = ContinentSubscription>() => T;
-  previous_continent: <T = ContinentSubscription>() => T;
-}
-
-export interface ConnectContinentNullablePromise
-  extends Promise<ConnectContinent | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  next_continent: <T = ContinentPromise>() => T;
-  previous_continent: <T = ContinentPromise>() => T;
-}
-
-export interface MonsterSkillPreviousValues {
-  id: ID_Output;
-  name: String;
-  description: String;
-  skill_type?: SkillType;
-  combat_type?: CombatType;
-  energy: Int;
+  energy?: Int;
 }
 
 export interface MonsterSkillPreviousValuesPromise
@@ -5704,8 +5526,8 @@ export interface MonsterSkillPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  skill_type: () => Promise<SkillType>;
-  combat_type: () => Promise<CombatType>;
+  skill_type: () => Promise<SkillType[]>;
+  combat_type: () => Promise<CombatType[]>;
   energy: () => Promise<Int>;
 }
 
@@ -5715,8 +5537,8 @@ export interface MonsterSkillPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  skill_type: () => Promise<AsyncIterator<SkillType>>;
-  combat_type: () => Promise<AsyncIterator<CombatType>>;
+  skill_type: () => Promise<AsyncIterator<SkillType[]>>;
+  combat_type: () => Promise<AsyncIterator<CombatType[]>>;
   energy: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -5745,83 +5567,166 @@ export interface MonsterSkillSubscriptionPayloadSubscription
   previousValues: <T = MonsterSkillPreviousValuesSubscription>() => T;
 }
 
-export interface SkillEdge {
-  node: Skill;
-  cursor: String;
+export interface Boss {
+  id: ID_Output;
+  name: String;
+  element_one_value?: Int;
+  element_two_value?: Int;
 }
 
-export interface SkillEdgePromise extends Promise<SkillEdge>, Fragmentable {
-  node: <T = SkillPromise>() => T;
-  cursor: () => Promise<String>;
+export interface BossPromise extends Promise<Boss>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  element_one: <T = ElementPromise>() => T;
+  element_one_value: () => Promise<Int>;
+  element_two: <T = ElementPromise>() => T;
+  element_two_value: () => Promise<Int>;
+  map_found: <T = FragmentableArray<Map>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent_found: <T = FragmentableArray<Continent>>(args?: {
+    where?: ContinentWhereInput;
+    orderBy?: ContinentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface SkillEdgeSubscription
-  extends Promise<AsyncIterator<SkillEdge>>,
+export interface BossSubscription
+  extends Promise<AsyncIterator<Boss>>,
     Fragmentable {
-  node: <T = SkillSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  element_one: <T = ElementSubscription>() => T;
+  element_one_value: () => Promise<AsyncIterator<Int>>;
+  element_two: <T = ElementSubscription>() => T;
+  element_two_value: () => Promise<AsyncIterator<Int>>;
+  map_found: <T = Promise<AsyncIterator<MapSubscription>>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent_found: <T = Promise<AsyncIterator<ContinentSubscription>>>(args?: {
+    where?: ContinentWhereInput;
+    orderBy?: ContinentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface AggregateConnectContinent {
+export interface BossNullablePromise
+  extends Promise<Boss | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  element_one: <T = ElementPromise>() => T;
+  element_one_value: () => Promise<Int>;
+  element_two: <T = ElementPromise>() => T;
+  element_two_value: () => Promise<Int>;
+  map_found: <T = FragmentableArray<Map>>(args?: {
+    where?: MapWhereInput;
+    orderBy?: MapOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  continent_found: <T = FragmentableArray<Continent>>(args?: {
+    where?: ContinentWhereInput;
+    orderBy?: ContinentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface AggregateElement {
   count: Int;
 }
 
-export interface AggregateConnectContinentPromise
-  extends Promise<AggregateConnectContinent>,
+export interface AggregateElementPromise
+  extends Promise<AggregateElement>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateConnectContinentSubscription
-  extends Promise<AsyncIterator<AggregateConnectContinent>>,
+export interface AggregateElementSubscription
+  extends Promise<AsyncIterator<AggregateElement>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface ElementEdge {
-  node: Element;
+export interface Element {
+  id: ID_Output;
+  name: ElementType;
+  weakness?: ElementType;
+  effective?: ElementType;
+}
+
+export interface ElementPromise extends Promise<Element>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<ElementType>;
+  weakness: () => Promise<ElementType>;
+  effective: () => Promise<ElementType>;
+}
+
+export interface ElementSubscription
+  extends Promise<AsyncIterator<Element>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<ElementType>>;
+  weakness: () => Promise<AsyncIterator<ElementType>>;
+  effective: () => Promise<AsyncIterator<ElementType>>;
+}
+
+export interface ElementNullablePromise
+  extends Promise<Element | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<ElementType>;
+  weakness: () => Promise<ElementType>;
+  effective: () => Promise<ElementType>;
+}
+
+export interface MonsterSkillEdge {
+  node: MonsterSkill;
   cursor: String;
 }
 
-export interface ElementEdgePromise extends Promise<ElementEdge>, Fragmentable {
-  node: <T = ElementPromise>() => T;
+export interface MonsterSkillEdgePromise
+  extends Promise<MonsterSkillEdge>,
+    Fragmentable {
+  node: <T = MonsterSkillPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface ElementEdgeSubscription
-  extends Promise<AsyncIterator<ElementEdge>>,
+export interface MonsterSkillEdgeSubscription
+  extends Promise<AsyncIterator<MonsterSkillEdge>>,
     Fragmentable {
-  node: <T = ElementSubscription>() => T;
+  node: <T = MonsterSkillSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateGuide {
-  count: Int;
-}
-
-export interface AggregateGuidePromise
-  extends Promise<AggregateGuide>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateGuideSubscription
-  extends Promise<AsyncIterator<AggregateGuide>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export type Long = string;
-
-/*
-DateTime scalar input type, allowing Date
-*/
-export type DateTimeInput = Date | string;
-
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
@@ -5835,14 +5740,24 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+DateTime scalar input type, allowing Date
 */
-export type Boolean = boolean;
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -5883,15 +5798,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "StageStruct",
-    embedded: false
-  },
-  {
     name: "Map",
-    embedded: false
-  },
-  {
-    name: "ConnectedMap",
     embedded: false
   },
   {
@@ -5899,7 +5806,11 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "ConnectContinent",
+    name: "Pet",
+    embedded: false
+  },
+  {
+    name: "Food",
     embedded: false
   },
   {
@@ -5907,11 +5818,11 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "CombatType",
+    name: "SkillType",
     embedded: false
   },
   {
-    name: "SkillType",
+    name: "CombatType",
     embedded: false
   },
   {
@@ -5919,7 +5830,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "PetTalent",
+    name: "PetType",
     embedded: false
   },
   {
@@ -5928,6 +5839,10 @@ export const models: Model[] = [
   },
   {
     name: "Hero",
+    embedded: false
+  },
+  {
+    name: "Stat",
     embedded: false
   },
   {
