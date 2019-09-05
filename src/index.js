@@ -7,13 +7,15 @@ const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Guide = require('./resolvers/Guide')
 const Map = require('./resolvers/Map')
+const Element = require('./resolvers/Element')
 
 const resolvers = {
     Query,
     Mutation,
     User,
     Guide,
-    Map
+    Map,
+    Element
 }
 
 const server = new GraphQLServer({

@@ -1,6 +1,7 @@
 type Query {
     info: String!
     guideFeed: [Guide!]!
+    petFeed: [Pet!]!
 }
 
 type Mutation {
@@ -71,7 +72,7 @@ type Boss {
 
 
 type Map {
-    id: ID! @id
+    id: ID!
     name: String
     total_stage: Int
     native_boss: [Boss!]!
@@ -80,7 +81,7 @@ type Map {
     previous_map: String
     next_map: String
     pet_unlock: [Pet!]!
-    continent: Continent! @relation(link: INLINE)
+    continent: Continent!
     imageurl: String
 
 }
@@ -104,7 +105,7 @@ type BossStruct {
 
 type Element {
     id: ID!
-    name: ElementType!
+    name: ElementType
     weakness: ElementType
     effective: ElementType
 }
@@ -124,8 +125,8 @@ type Pet {
 }
 
 type Food {
-  id: ID! @id
-  name: String! @unique
+  id: ID!
+  name: String!
   pet_favorite: [Pet!]!
   buff: Stat
   imageurl: String

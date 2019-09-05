@@ -59,7 +59,4 @@ module.exports = {
     signup,
     login,
     postGuide,
-    stageInsertion,
-    mapInsertion,
-    mapUpdate
 }
