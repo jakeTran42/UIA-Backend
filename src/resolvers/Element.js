@@ -1,7 +1,7 @@
-async function Element(parent, args, context, info) {
-    return await context.prima.elements()
+async function Element_One(parent, args, context, info) {
+    return await context.prima.pet({id: parent.id}).element()
 }
 
 module.exports = {
-    Element,
+    Element_One,
 }

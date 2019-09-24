@@ -15,7 +15,7 @@ const resolvers = {
     User,
     Guide,
     Map,
-    Element
+    // Element
 }
 
 const server = new GraphQLServer({

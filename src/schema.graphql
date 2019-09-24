@@ -12,6 +12,7 @@ type Mutation {
 }
 
 type Guide {
+    id: ID!
     title: String!
     body: String!
     owner: User!
